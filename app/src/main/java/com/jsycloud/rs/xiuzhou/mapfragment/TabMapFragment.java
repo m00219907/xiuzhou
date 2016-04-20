@@ -19,11 +19,12 @@ import com.amap.api.maps2d.MapView;
 import com.amap.api.maps2d.model.BitmapDescriptorFactory;
 import com.amap.api.maps2d.model.MyLocationStyle;
 import com.jsycloud.rs.xiuzhou.R;
+import com.jsycloud.rs.xiuzhou.StartActivity;
 
 public class TabMapFragment extends Fragment implements LocationSource, AMapLocationListener {
 
     private View view;
-    Activity activity;
+    StartActivity activity;
 
     private MapView mapView;
     private AMap aMap;
@@ -33,7 +34,7 @@ public class TabMapFragment extends Fragment implements LocationSource, AMapLoca
 
     @Override
     public void onAttach(Activity activity) {
-        this.activity = activity;
+        this.activity = (StartActivity)activity;
         super.onAttach(activity);
     }
 
@@ -49,6 +50,7 @@ public class TabMapFragment extends Fragment implements LocationSource, AMapLoca
             setUpMap();
         }
 
+        activity.tab_map_toplayout_text.setText("秀洲智慧河道");
         return view;
     }
 
@@ -106,8 +108,8 @@ public class TabMapFragment extends Fragment implements LocationSource, AMapLoca
             if (amapLocation.getErrorCode() == 0) {
                 mListener.onLocationChanged(amapLocation);// 显示系统小蓝点
             } else {
-                String errText = "定位失败," + amapLocation.getErrorCode()+ ": " + amapLocation.getErrorInfo();
-                Toast.makeText(activity, errText, Toast.LENGTH_SHORT).show();
+                //String errText = "定位失败," + amapLocation.getErrorCode()+ ": " + amapLocation.getErrorInfo();
+                //Toast.makeText(activity, errText, Toast.LENGTH_SHORT).show();
             }
         }
     }

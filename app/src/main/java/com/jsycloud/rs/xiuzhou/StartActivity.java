@@ -1,5 +1,6 @@
 package com.jsycloud.rs.xiuzhou;
 
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -29,6 +30,7 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
 
     ImageView tab_map_image, tab_video_image, tab_river_image, tab_data_image;
     TextView tab_map_text, tab_video_text, tab_river_text, tab_data_text;
+    public TextView tab_map_toplayout_text;
 
     private String version = "1.0.0";
 
@@ -47,11 +49,13 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
         tab_video_text = (TextView)findViewById(R.id.tab_video_text);
         tab_river_text = (TextView)findViewById(R.id.tab_river_text);
         tab_data_text = (TextView)findViewById(R.id.tab_data_text);
+        tab_map_toplayout_text = (TextView)findViewById(R.id.tab_map_toplayout_text);
 
         findViewById(R.id.tab_map_layout).setOnClickListener(this);
         findViewById(R.id.tab_video_layout).setOnClickListener(this);
         findViewById(R.id.tab_river_layout).setOnClickListener(this);
         findViewById(R.id.tab_data_layout).setOnClickListener(this);
+        findViewById(R.id.tab_map_toplayout_me).setOnClickListener(this);
 
         try
         {
@@ -89,15 +93,23 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.tab_map_layout:
                 initTopTab(0);
+                tab_map_toplayout_text.setText("秀洲智慧河道");
                 break;
             case R.id.tab_video_layout:
                 initTopTab(1);
+                tab_map_toplayout_text.setText("视频监控");
                 break;
             case R.id.tab_river_layout:
                 initTopTab(2);
+                tab_map_toplayout_text.setText("河长中心");
                 break;
             case R.id.tab_data_layout:
                 initTopTab(3);
+                tab_map_toplayout_text.setText("数据通报");
+                break;
+            case R.id.tab_map_toplayout_me:
+                Intent intent = new Intent(this, MeActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;
@@ -235,4 +247,5 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
             }
         });
     }
+
 }

@@ -6,6 +6,35 @@
     android:layout_height="match_parent"
     android:background="#f4f4f4">
 
+    <RelativeLayout
+        android:id="@+id/tab_map_toplayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#2196f3">
+
+        <TextView
+            android:id="@+id/tab_map_toplayout_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="50dp"
+            android:text="秀洲智慧河道"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/tab_map_toplayout_me"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:padding="10dp"
+            android:layout_marginRight="40dp"
+            android:src="@drawable/ic_person_black_24dp"
+            android:scaleType="center"/>
+
+    </RelativeLayout>
+
     <LinearLayout
         android:id="@+id/tab_menu"
         android:layout_width="match_parent"
@@ -131,6 +160,7 @@
         android:id="@+id/start_mainFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/mainlayoutdivideline"/>
+        android:layout_above="@id/mainlayoutdivideline"
+        android:layout_below="@id/tab_map_toplayout"/>
 
 </RelativeLayout>
