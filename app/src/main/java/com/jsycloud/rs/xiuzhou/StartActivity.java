@@ -1,17 +1,20 @@
 package com.jsycloud.rs.xiuzhou;
 
-import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jsycloud.rs.xiuzhou.datafragment.TabDataFragment;
 import com.jsycloud.rs.xiuzhou.mapfragment.TabMapFragment;
+import com.jsycloud.rs.xiuzhou.mefragment.TabMeFragment;
+import com.jsycloud.rs.xiuzhou.problemfragment.TabProblemFragment;
 import com.jsycloud.rs.xiuzhou.riverfragment.TabRiverFragment;
 import com.jsycloud.rs.xiuzhou.videofragment.TabVideoFragment;
 
@@ -21,6 +24,7 @@ import net.tsz.afinal.http.AjaxParams;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 
 
@@ -28,9 +32,10 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
 
     public ArrayList<Fragment> fragments = new ArrayList<Fragment>();
 
-    ImageView tab_map_image, tab_video_image, tab_river_image, tab_data_image;
-    TextView tab_map_text, tab_video_text, tab_river_text, tab_data_text;
+    ImageView tab_map_image, tab_video_image, tab_river_image, tab_data_image, tab_problem_image, tab_me_image;
+    TextView tab_map_text, tab_video_text, tab_river_text, tab_data_text, tab_problem_text, tab_me_text;
     public TextView tab_map_toplayout_text;
+    View tab_river_layout, tab_data_layout, tab_problem_layout;
 
     private String version = "1.0.0";
 
@@ -44,18 +49,27 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
         tab_video_image = (ImageView)findViewById(R.id.tab_video_image);
         tab_river_image = (ImageView)findViewById(R.id.tab_river_image);
         tab_data_image = (ImageView)findViewById(R.id.tab_data_image);
+        tab_problem_image = (ImageView)findViewById(R.id.tab_problem_image);
+        tab_me_image = (ImageView)findViewById(R.id.tab_me_image);
 
         tab_map_text = (TextView)findViewById(R.id.tab_map_text);
         tab_video_text = (TextView)findViewById(R.id.tab_video_text);
         tab_river_text = (TextView)findViewById(R.id.tab_river_text);
         tab_data_text = (TextView)findViewById(R.id.tab_data_text);
+        tab_problem_text = (TextView)findViewById(R.id.tab_problem_text);
+        tab_me_text = (TextView)findViewById(R.id.tab_me_text);
         tab_map_toplayout_text = (TextView)findViewById(R.id.tab_map_toplayout_text);
+
+        tab_river_layout = findViewById(R.id.tab_river_layout);
+        tab_data_layout = findViewById(R.id.tab_data_layout);
+        tab_problem_layout = findViewById(R.id.tab_problem_layout);
 
         findViewById(R.id.tab_map_layout).setOnClickListener(this);
         findViewById(R.id.tab_video_layout).setOnClickListener(this);
-        findViewById(R.id.tab_river_layout).setOnClickListener(this);
-        findViewById(R.id.tab_data_layout).setOnClickListener(this);
-        findViewById(R.id.tab_map_toplayout_me).setOnClickListener(this);
+        tab_river_layout.setOnClickListener(this);
+        tab_data_layout.setOnClickListener(this);
+        tab_problem_layout.setOnClickListener(this);
+        findViewById(R.id.tab_me_layout).setOnClickListener(this);
 
         try
         {
@@ -67,6 +81,22 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
         sendVersionReq();
         setChangeView();
         initFragmentData(0);
+
+        String username = SharePreferenceDataUtil.getSharedStringData(this, "username");
+        String userpassword = SharePreferenceDataUtil.getSharedStringData(this, "userpassword");
+        login(username, userpassword);
+    }
+
+    public void onLoginChange() {
+        if(Constant.isLogin) {
+            tab_river_layout.setVisibility(View.VISIBLE);
+            tab_data_layout.setVisibility(View.VISIBLE);
+            tab_problem_layout.setVisibility(View.GONE);
+        }else {
+            tab_river_layout.setVisibility(View.GONE);
+            tab_data_layout.setVisibility(View.GONE);
+            tab_problem_layout.setVisibility(View.VISIBLE);
+        }
     }
 
     public void setChangeView() {
@@ -84,6 +114,12 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
 
                 TabDataFragment dataFragment = new TabDataFragment();
                 fragments.add(3, dataFragment);
+
+                TabProblemFragment problemFragment = new TabProblemFragment();
+                fragments.add(4, problemFragment);
+
+                TabMeFragment meFragment = new TabMeFragment();
+                fragments.add(5, meFragment);
             }
         }
     }
@@ -107,9 +143,13 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
                 initTopTab(3);
                 tab_map_toplayout_text.setText("数据通报");
                 break;
-            case R.id.tab_map_toplayout_me:
-                Intent intent = new Intent(this, MeActivity.class);
-                startActivity(intent);
+            case R.id.tab_problem_layout:
+                initTopTab(4);
+                tab_map_toplayout_text.setText("问题上报");
+                break;
+            case R.id.tab_me_layout:
+                initTopTab(5);
+                tab_map_toplayout_text.setText("我的");
                 break;
             default:
                 break;
@@ -127,6 +167,8 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
         tab_video_text.setTextColor(0xff000000);
         tab_river_text.setTextColor(0xff000000);
         tab_data_text.setTextColor(0xff000000);
+        tab_problem_text.setTextColor(0xff000000);
+        tab_me_text.setTextColor(0xff000000);
 
         switch (selectIndex) {
             case 0:
@@ -148,6 +190,16 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
                 //tab_me_image.setImageResource(R.drawable.mepressed);
                 tab_data_text.setTextColor(0xff4abe15);
                 initFragmentData(3);
+                break;
+            case 4:
+                //tab_me_image.setImageResource(R.drawable.mepressed);
+                tab_problem_text.setTextColor(0xff4abe15);
+                initFragmentData(4);
+                break;
+            case 5:
+                //tab_me_image.setImageResource(R.drawable.mepressed);
+                tab_me_text.setTextColor(0xff4abe15);
+                initFragmentData(5);
                 break;
 
             default:
@@ -184,6 +236,10 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
     }
 
     public void sendVersionReq() {
+        File curFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath() + "//秀洲智慧河道.apk");
+        if(curFile.exists()){
+            curFile.delete();
+        }
         String url = "http://websrv.jxtvtech.com/rs/update.php";
         AjaxParams params = new AjaxParams();
         params.put("from", "android");
@@ -221,8 +277,64 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
                     }
                 } catch (JSONException e) {
                 }
-                if (CommonTools.newVersion(serverVersion, "2.0.0")) {
+                if (CommonTools.newVersion(serverVersion, version)) {
                     compareToVersion(updateInfo, bForce, downloadUrl);
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t, int errorNo, String strMsg) {
+                super.onFailure(t, errorNo, strMsg);
+            }
+        });
+    }
+
+    public void login(String username, String userpassword) {
+        String url = "http://websrv.jxtvtech.com/rs/login.php";
+        AjaxParams params = new AjaxParams();
+        params.put("username", username);
+        params.put("userpassword", userpassword);
+        HttpClentLinkNet.getInstance().sendReqFinalHttp_Post(url, params, new AjaxCallBack() {
+            @Override
+            public void onLoading(long count, long current) {
+                super.onLoading(count, current);
+            }
+
+            @Override
+            public void onSuccess(Object t) {
+                String jsStr = "";
+                String success = "";
+
+                if (t != null) {
+                    jsStr = String.valueOf(t);
+                }
+
+                try {
+                    JSONObject jsObj = new JSONObject(jsStr);
+                    if (jsObj.has("success")) {
+                        success = jsObj.getString("success");
+                    }
+                    if(success.equals("1")) {
+                        if (jsObj.has("userid")) {
+                            Constant.userid = jsObj.getString("userid");
+                        }
+                        if (jsObj.has("username")) {
+                            Constant.username = jsObj.getString("username");
+                        }
+                        if (jsObj.has("userfullname")) {
+                            Constant.userfullname = jsObj.getString("userfullname");
+                        }
+                        if (jsObj.has("usermobile")) {
+                            Constant.usermobile = jsObj.getString("usermobile");
+                        }
+                        if (jsObj.has("usergroup")) {
+                            Constant.usergroup = jsObj.getString("usergroup");
+                        }
+                        Constant.isLogin = true;
+                        Toast.makeText(StartActivity.this, "自动登录成功", Toast.LENGTH_SHORT).show();
+                        onLoginChange();
+                    }
+                } catch (JSONException e) {
                 }
             }
 

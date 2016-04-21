@@ -1,6 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.amap.api.maps2d.MapView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/map"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" />
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.amap.api.maps2d.MapView
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ImageView
+        android:id="@+id/map_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:padding="10dp"
+        android:src="@drawable/back_img"/>
+
+    <LinearLayout
+        android:id="@+id/map_regin_choose"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="#ffffff">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="下次再说"
+                android:textColor="#000000" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="立即升级"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/map_regin_blank"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#33000000"/>
+    </LinearLayout>
+
+</RelativeLayout>

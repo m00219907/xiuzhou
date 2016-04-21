@@ -1,4 +1,4 @@
-package com.jsycloud.rs.xiuzhou.riverfragment;
+package com.jsycloud.rs.xiuzhou.problemfragment;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -11,7 +11,7 @@ import com.jsycloud.rs.xiuzhou.R;
 import com.jsycloud.rs.xiuzhou.StartActivity;
 
 
-public class TabRiverFragment extends Fragment {
+public class TabProblemFragment extends Fragment {
 
     private StartActivity activity;
 

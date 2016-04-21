@@ -25,7 +25,6 @@ public class TabDataFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.data_fragment, null);
 
-        activity.tab_map_toplayout_text.setText("数据通报");
         return view;
     }
 }

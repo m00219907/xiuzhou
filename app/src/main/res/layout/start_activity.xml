@@ -9,30 +9,17 @@
     <RelativeLayout
         android:id="@+id/tab_map_toplayout"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="42dp"
         android:background="#2196f3">
 
         <TextView
             android:id="@+id/tab_map_toplayout_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="50dp"
+            android:layout_centerInParent="true"
             android:text="秀洲智慧河道"
             android:textColor="#ffffff"
             android:textSize="20sp" />
-
-        <ImageView
-            android:id="@+id/tab_map_toplayout_me"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:padding="10dp"
-            android:layout_marginRight="40dp"
-            android:src="@drawable/ic_person_black_24dp"
-            android:scaleType="center"/>
-
     </RelativeLayout>
 
     <LinearLayout
@@ -102,7 +89,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/tab_river_image"
@@ -128,7 +116,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/tab_data_image"
@@ -144,6 +133,58 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="数据通报"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tab_problem_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/tab_problem_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_event_note_black_24dp"
+                android:scaleType="center"/>
+
+            <TextView
+                android:id="@+id/tab_problem_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="问题上报"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tab_me_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/tab_me_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_person_black_24dp"
+                android:scaleType="center"/>
+
+            <TextView
+                android:id="@+id/tab_me_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="我的"
                 android:textColor="#000000"
                 android:textSize="16sp" />
         </LinearLayout>

@@ -1,28 +1,35 @@
 package com.jsycloud.rs.xiuzhou.videofragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.hikvision.netsdk.ExceptionCallBack;
 import com.hikvision.netsdk.HCNetSDK;
 import com.hikvision.netsdk.NET_DVR_DEVICEINFO_V30;
 import com.hikvision.netsdk.NET_DVR_PLAYBACK_INFO;
+import com.hikvision.netsdk.NET_DVR_PREVIEWINFO;
 import com.hikvision.netsdk.NET_DVR_TIME;
 import com.hikvision.netsdk.PlaybackCallBack;
 import com.hikvision.netsdk.PlaybackControlCommand;
+import com.hikvision.netsdk.RealPlayCallBack;
 import com.jsycloud.rs.xiuzhou.R;
 import com.jsycloud.rs.xiuzhou.StartActivity;
 
@@ -35,7 +42,7 @@ public class TabVideoFragment extends Fragment implements View.OnClickListener, 
 
     private StartActivity activity;
     EditText video_fragment_ip, video_fragment_port, video_fragment_username, video_fragment_password;
-    Button video_fragment_login, video_fragment_play;
+    Button video_fragment_login, video_fragment_preview,  video_fragment_play;
     SurfaceView video_fragment_sfview;
 
     private NET_DVR_DEVICEINFO_V30 m_oNetDvrDeviceInfoV30 = null;
@@ -46,6 +53,8 @@ public class TabVideoFragment extends Fragment implements View.OnClickListener, 
     private int                m_iPort                    = -1;                // play port
     private int                m_iStartChan             = 0;                // start channel no
     private int                m_iChanNum                = 0;                //channel number
+    private boolean			m_bMultiPlay			= false;
+    private static PlaySurfaceView [] playView = new PlaySurfaceView[4];
 
     @Override
     public void onAttach(Activity activity) {
@@ -65,10 +74,11 @@ public class TabVideoFragment extends Fragment implements View.OnClickListener, 
         video_fragment_sfview.getHolder().addCallback(this);
         video_fragment_login = (Button)view.findViewById(R.id.video_fragment_login);
         video_fragment_login.setOnClickListener(this);
+        video_fragment_preview = (Button)view.findViewById(R.id.video_fragment_preview);
+        video_fragment_preview.setOnClickListener(this);
         video_fragment_play = (Button)view.findViewById(R.id.video_fragment_play);
         video_fragment_play.setOnClickListener(this);
 
-        activity.tab_map_toplayout_text.setText("视频监控");
         return view;
     }
 
@@ -117,6 +127,51 @@ public class TabVideoFragment extends Fragment implements View.OnClickListener, 
                     }
                 }
                 catch (Exception err) {
+                }
+                break;
+            case R.id.video_fragment_preview:
+                try
+                {
+                    //((InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE)).
+                            //hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                    if(m_iLogID < 0)
+                    {
+                        Toast.makeText(activity,"请先登陆设备！",Toast.LENGTH_SHORT).show();
+                        return ;
+                    }
+                    //if(m_bNeedDecode)
+                    {
+                        if(m_iChanNum > 1)//preview more than a channel
+                        {
+                            if(!m_bMultiPlay)
+                            {
+                                startMultiPreview();
+                                m_bMultiPlay = true;
+                                video_fragment_preview.setText("Stop");
+                            }
+                            else
+                            {
+                                stopMultiPreview();
+                                m_bMultiPlay = false;
+                                video_fragment_preview.setText("Preview");
+                            }
+                        }
+                        else    //preivew a channel
+                        {
+                            if(m_iPlayID < 0)
+                            {
+                                startSinglePreview();
+                            }
+                            else
+                            {
+                                stopSinglePreview();
+                                video_fragment_preview.setText("Preview");
+                            }
+                        }
+                    }
+                }
+                catch (Exception err)
+                {
                 }
                 break;
             case R.id.video_fragment_play:
@@ -322,6 +377,67 @@ public class TabVideoFragment extends Fragment implements View.OnClickListener, 
 
     }
 
+    private void startSinglePreview()
+    {
+        if(m_iPlaybackID >= 0)
+        {
+            Toast.makeText(activity,"请先停止录制", Toast.LENGTH_SHORT).show();
+            return ;
+        }
+        RealPlayCallBack fRealDataCallBack = getRealPlayerCbf();
+        if (fRealDataCallBack == null)
+        {
+            return ;
+        }
+
+        NET_DVR_PREVIEWINFO previewInfo = new NET_DVR_PREVIEWINFO();
+        previewInfo.lChannel = m_iStartChan;
+        previewInfo.dwStreamType = 1; //substream
+        previewInfo.bBlocked = 1;
+        // HCNetSDK start preview
+        m_iPlayID = HCNetSDK.getInstance().NET_DVR_RealPlay_V40(m_iLogID, previewInfo, fRealDataCallBack);
+        if (m_iPlayID < 0)
+        {
+            return ;
+        }
+
+        video_fragment_preview.setText("Stop");
+    }
+
+    private void startMultiPreview()
+    {
+        DisplayMetrics metric = new DisplayMetrics();
+        activity.getWindowManager().getDefaultDisplay().getMetrics(metric);
+        int i = 0;
+        for(i = 0; i < 4; i++)
+        {
+            if(playView[i] == null)
+            {
+                playView[i] = new PlaySurfaceView(activity);
+                playView[i].setParam(metric.widthPixels);
+                FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+                        FrameLayout.LayoutParams.WRAP_CONTENT,
+                        FrameLayout.LayoutParams.WRAP_CONTENT);
+                params.bottomMargin = playView[i].getCurHeight() - (i/2) * playView[i].getCurHeight();
+                params.leftMargin = (i%2) * playView[i].getCurWidth();
+                params.gravity = Gravity.BOTTOM | Gravity.LEFT;
+                activity.addContentView(playView[i], params);
+            }
+            playView[i].startPreview(m_iLogID, m_iStartChan + i);
+        }
+        m_iPlayID = playView[0].m_iPreviewHandle;
+    }
+
+    private void stopMultiPreview()
+    {
+        int i = 0;
+        for(i = 0; i < 4;i++)
+        {
+            playView[i].stopPreview();
+        }
+        m_iPlayID = -1;
+    }
+
     private void stopSinglePlayer()
     {
         Player.getInstance().stopSound();
@@ -340,6 +456,37 @@ public class TabVideoFragment extends Fragment implements View.OnClickListener, 
             return;
         }
         m_iPort = -1;
+    }
+
+    private void stopSinglePreview()
+    {
+        if ( m_iPlayID < 0)
+        {
+            return;
+        }
+
+        //  net sdk stop preview
+        if (!HCNetSDK.getInstance().NET_DVR_StopRealPlay(m_iPlayID))
+        {
+            Toast.makeText(activity,"停止播放失败", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        m_iPlayID = -1;
+        stopSinglePlayer();
+    }
+
+    private RealPlayCallBack getRealPlayerCbf()
+    {
+        RealPlayCallBack cbf = new RealPlayCallBack()
+        {
+            public void fRealDataCallBack(int iRealHandle, int iDataType, byte[] pDataBuffer, int iDataSize)
+            {
+                // player channel 1
+                TabVideoFragment.this.processRealData(1, iDataType, pDataBuffer, iDataSize, Player.STREAM_REALTIME);
+            }
+        };
+        return cbf;
     }
 
     @Override

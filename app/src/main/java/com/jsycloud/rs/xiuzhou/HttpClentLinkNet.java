@@ -9,6 +9,8 @@ public class HttpClentLinkNet {
 
     private static HttpClentLinkNet instance = null;
 
+    public static final String SHAREPREFERENCE_FILENAME = "framekelmssp_scyt_200";// sharepreference
+
     private HttpClentLinkNet() {
     }
 
