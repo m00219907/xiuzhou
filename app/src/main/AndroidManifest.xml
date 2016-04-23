@@ -44,6 +44,11 @@
             android:theme="@style/transparent_ui_bg">
         </activity>
 
+        <activity
+            android:name="com.jsycloud.rs.xiuzhou.problemfragment.RiverChooseActivity"
+            android:theme="@style/dialog">
+        </activity>
+
     </application>
 
 </manifest>

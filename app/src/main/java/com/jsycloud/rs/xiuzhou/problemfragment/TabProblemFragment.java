@@ -1,6 +1,7 @@
 package com.jsycloud.rs.xiuzhou.problemfragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
@@ -44,7 +45,7 @@ public class TabProblemFragment extends Fragment implements View.OnClickListener
         problem_fragment_coordinate = (TextView)view.findViewById(R.id.problem_fragment_coordinate);
         problem_fragment_postion = (TextView)view.findViewById(R.id.problem_fragment_postion);
         problem_fragment_chooseriver = (TextView)view.findViewById(R.id.problem_fragment_chooseriver);
-
+        problem_fragment_chooseriver.setOnClickListener(this);
         problem_fragment_name = (EditText)view.findViewById(R.id.problem_fragment_name);
         problem_fragment_phone = (EditText)view.findViewById(R.id.problem_fragment_phone);
 
@@ -57,6 +58,10 @@ public class TabProblemFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.problem_fragment_chooseriver:
+                Intent intent = new Intent(activity, RiverChooseActivity.class);
+                activity.startActivityForResult(intent, 180);
+                break;
             case R.id.problem_fragment_uploadpic:
                 break;
             case R.id.problem_fragment_commit:
@@ -65,6 +70,10 @@ public class TabProblemFragment extends Fragment implements View.OnClickListener
             default:
                 break;
         }
+    }
+
+    public void setRiverName(String riverName) {
+        problem_fragment_chooseriver.setText(riverName);
     }
 
     public void reportProblem() {

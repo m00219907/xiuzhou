@@ -1,5 +1,6 @@
 package com.jsycloud.rs.xiuzhou;
 
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.os.Bundle;
 import android.os.Environment;
@@ -155,6 +156,15 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
                 break;
         }
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(data != null){
+            String riverName = data.getExtras().getString("riverName");
+            TabProblemFragment problemFragment = (TabProblemFragment)fragments.get(4);
+            problemFragment.setRiverName(riverName);
+        }
+    }
+
 
     private void initTopTab(int selectIndex) {
 
