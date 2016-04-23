@@ -55,6 +55,34 @@ public class DialogShow {
         }
     }
 
+    public static void dialogShow2(Context context, String reginInfo) {
+
+        try {
+            if (isShowing){
+                return;
+            }
+
+            final AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+            alertDialog.setCancelable(false);
+            alertDialog.show();
+            Window window = alertDialog.getWindow();
+            window.setContentView(R.layout.regin_click);
+            TextView regin_click_info = (TextView) window.findViewById(R.id.regin_click_info);
+            regin_click_info.setText("Äãµã»÷ÁË:" + reginInfo);
+            View regin_click_iknow = window.findViewById(R.id.regin_click_iknow);
+            regin_click_iknow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    alertDialog.dismiss();
+                    isShowing = false;
+                }
+            });
+
+            isShowing = true;
+        } catch (Exception e) {
+        }
+    }
+
     public interface ICheckedCallBack {
         public void OnCheckedCallBackDispath(boolean bSucceed);
     }

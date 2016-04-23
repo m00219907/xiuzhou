@@ -39,6 +39,11 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="com.jsycloud.rs.xiuzhou.mapfragment.AllRiverActivity"
+            android:theme="@style/transparent_ui_bg">
+        </activity>
+
     </application>
 
 </manifest>

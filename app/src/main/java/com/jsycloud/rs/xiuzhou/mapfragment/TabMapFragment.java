@@ -1,6 +1,7 @@
 package com.jsycloud.rs.xiuzhou.mapfragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,7 +24,7 @@ import com.jsycloud.rs.xiuzhou.StartActivity;
 
 public class TabMapFragment extends Fragment implements LocationSource, AMapLocationListener, View.OnClickListener {
 
-    private View view, map_regin_choose;
+    private View view;
     StartActivity activity;
 
     private MapView mapView;
@@ -50,9 +51,7 @@ public class TabMapFragment extends Fragment implements LocationSource, AMapLoca
             setUpMap();
         }
 
-        map_regin_choose = view.findViewById(R.id.map_regin_choose);
         view.findViewById(R.id.map_left).setOnClickListener(this);
-        view.findViewById(R.id.map_regin_blank).setOnClickListener(this);
 
         return view;
     }
@@ -121,10 +120,8 @@ public class TabMapFragment extends Fragment implements LocationSource, AMapLoca
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.map_left:
-                map_regin_choose.setVisibility(View.VISIBLE);
-                break;
-            case R.id.map_regin_blank:
-                map_regin_choose.setVisibility(View.GONE);
+                Intent intent = new Intent(activity, AllRiverActivity.class);
+                activity.startActivity(intent);
                 break;
         }
     }
