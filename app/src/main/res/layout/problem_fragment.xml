@@ -74,7 +74,8 @@
             android:paddingTop="10dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:text="请选择"/>
+            android:hint="请选择"
+            android:textColor="#000000"/>
 
         <View
             android:layout_width="match_parent"
@@ -171,7 +172,7 @@
         </RelativeLayout>
 
         <ImageView
-            android:id="@+id/tab_map_photo"
+            android:id="@+id/problem_fragment_photo"
             android:layout_width="match_parent"
             android:layout_height="260dp"
             android:layout_marginTop="10dp"

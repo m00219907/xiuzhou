@@ -7,6 +7,7 @@ import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,6 +38,7 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
     TextView tab_map_text, tab_video_text, tab_river_text, tab_data_text, tab_problem_text, tab_me_text;
     public TextView tab_map_toplayout_text;
     View tab_river_layout, tab_data_layout, tab_problem_layout;
+    long touchTime = 0;
 
     private String version = "1.0.0";
 
@@ -81,7 +83,7 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
         }
         sendVersionReq();
         setChangeView();
-        initFragmentData(0);
+        initTopTab(0);
 
         String username = SharePreferenceDataUtil.getSharedStringData(this, "username");
         String userpassword = SharePreferenceDataUtil.getSharedStringData(this, "userpassword");
@@ -156,15 +158,34 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
                 break;
         }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(data != null){
-            String riverName = data.getExtras().getString("riverName");
-            TabProblemFragment problemFragment = (TabProblemFragment)fragments.get(4);
-            problemFragment.setRiverName(riverName);
-        }
+        TabProblemFragment problemFragment = (TabProblemFragment)fragments.get(4);
+        problemFragment.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (event.getAction() == KeyEvent.ACTION_DOWN && KeyEvent.KEYCODE_BACK == keyCode) {
+            long currentTime = System.currentTimeMillis();
+            if ((currentTime - touchTime) >= 2000) {
+                Toast.makeText(this, "再按一次 退出程序", Toast.LENGTH_LONG).show();
+                touchTime = currentTime;
+            } else {
+                android.os.Process.killProcess(android.os.Process.myPid());
+            }
+            return true;
+        }
+
+        if (keyCode == KeyEvent.KEYCODE_MENU) {
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
 
     private void initTopTab(int selectIndex) {
 

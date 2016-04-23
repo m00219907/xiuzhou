@@ -83,6 +83,53 @@ public class DialogShow {
         }
     }
 
+    public static void dialogShow3(Context context, final ICheckedCallBack callBack) {
+
+        try {
+            if (isShowing){
+                return;
+            }
+
+            final AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+            alertDialog.setCancelable(false);
+            alertDialog.show();
+            Window window = alertDialog.getWindow();
+            window.setContentView(R.layout.choose_picture);
+            View choose_picture_gallery = window.findViewById(R.id.choose_picture_gallery);
+            View choose_picture_camera = window.findViewById(R.id.choose_picture_camera);
+            View choose_picture_cancel = window.findViewById(R.id.choose_picture_cancel);
+
+            choose_picture_gallery.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    callBack.OnCheckedCallBackDispath(true);
+                    alertDialog.dismiss();
+                    isShowing = false;
+                }
+            });
+
+            choose_picture_camera.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    callBack.OnCheckedCallBackDispath(false);
+                    alertDialog.dismiss();
+                    isShowing = false;
+                }
+            });
+
+            choose_picture_cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    alertDialog.dismiss();
+                    isShowing = false;
+                }
+            });
+
+            isShowing = true;
+        } catch (Exception e) {
+        }
+    }
+
     public interface ICheckedCallBack {
         public void OnCheckedCallBackDispath(boolean bSucceed);
     }

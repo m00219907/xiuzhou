@@ -18,7 +18,7 @@
         <item name="android:windowFrame">@null</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowNoTitle">true</item><!--Òş²Ø±êÌâÀ¸-->
+        <item name="android:windowNoTitle">true</item><!--éšè—æ ‡é¢˜æ -->
         <item name="android:background">@android:color/transparent</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:backgroundDimEnabled">true</item>
