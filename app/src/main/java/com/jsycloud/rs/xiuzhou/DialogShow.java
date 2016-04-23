@@ -68,7 +68,7 @@ public class DialogShow {
             Window window = alertDialog.getWindow();
             window.setContentView(R.layout.regin_click);
             TextView regin_click_info = (TextView) window.findViewById(R.id.regin_click_info);
-            regin_click_info.setText("Äãµã»÷ÁË:" + reginInfo);
+            regin_click_info.setText("ä½ ç‚¹å‡»äº†:" + reginInfo);
             View regin_click_iknow = window.findViewById(R.id.regin_click_iknow);
             regin_click_iknow.setOnClickListener(new View.OnClickListener() {
                 @Override

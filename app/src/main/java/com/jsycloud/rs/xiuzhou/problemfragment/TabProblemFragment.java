@@ -69,7 +69,7 @@ public class TabProblemFragment extends Fragment implements View.OnClickListener
 
     public void reportProblem() {
         if(problem_fragment_phone.getText().toString().isEmpty()){
-            Toast.makeText(activity, "自动登录成功", Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity, "鑷姩鐧诲綍鎴愬姛", Toast.LENGTH_SHORT).show();
         }
         String url = "http://websrv.jxtvtech.com/rs/report.php";
         AjaxParams params = new AjaxParams();
