@@ -18,6 +18,7 @@ android {
 }
 
 dependencies {
+    compile project(':customwheel')
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:support-v4:21.0.0'
