@@ -19,6 +19,7 @@ import com.amap.api.maps2d.LocationSource;
 import com.amap.api.maps2d.MapView;
 import com.amap.api.maps2d.model.BitmapDescriptorFactory;
 import com.amap.api.maps2d.model.MyLocationStyle;
+import com.jsycloud.rs.xiuzhou.Constant;
 import com.jsycloud.rs.xiuzhou.R;
 import com.jsycloud.rs.xiuzhou.StartActivity;
 
@@ -109,6 +110,7 @@ public class TabMapFragment extends Fragment implements LocationSource, AMapLoca
         if (mListener != null && amapLocation != null) {
             if (amapLocation.getErrorCode() == 0) {
                 mListener.onLocationChanged(amapLocation);// 显示系统小蓝点
+                Constant.curLocation = amapLocation;
             } else {
                 //String errText = "定位失败," + amapLocation.getErrorCode()+ ": " + amapLocation.getErrorInfo();
                 //Toast.makeText(activity, errText, Toast.LENGTH_SHORT).show();

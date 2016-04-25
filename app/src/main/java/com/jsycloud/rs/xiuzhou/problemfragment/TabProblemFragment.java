@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jsycloud.rs.xiuzhou.Constant;
 import com.jsycloud.rs.xiuzhou.DialogShow;
 import com.jsycloud.rs.xiuzhou.HttpClentLinkNet;
 import com.jsycloud.rs.xiuzhou.R;
@@ -70,6 +71,14 @@ public class TabProblemFragment extends Fragment implements View.OnClickListener
 
         view.findViewById(R.id.problem_fragment_uploadpic).setOnClickListener(this);
         view.findViewById(R.id.problem_fragment_commit).setOnClickListener(this);
+
+        if(Constant.curLocation != null){
+            problem_fragment_coordinate.setText(Constant.curLocation.getLatitude() + "," + Constant.curLocation.getLongitude());
+            problem_fragment_postion.setText(Constant.curLocation.getAddress());
+        }else{
+            problem_fragment_coordinate.setText("定位失败");
+            problem_fragment_postion.setText("定位失败");
+        }
 
         return view;
     }

@@ -97,6 +97,13 @@ public class TabMeFragment extends Fragment implements View.OnClickListener{
             case R.id.aboutme_changepassword:
                 break;
             case R.id.aboutme_logout:
+                Constant.isLogin = false;
+                login_layout.setVisibility(View.VISIBLE);
+                aboutme_layout.setVisibility(View.GONE);
+                setUserInfo();
+                activity.onLoginChange();
+                SharePreferenceDataUtil.setSharedStringData(activity, "username", "");
+                SharePreferenceDataUtil.setSharedStringData(activity, "userpassword", "");
                 break;
         }
     }
@@ -107,6 +114,11 @@ public class TabMeFragment extends Fragment implements View.OnClickListener{
             aboutme_username.setText(Constant.username);
             aboutme_phonenum.setText(Constant.usermobile);
             aboutme_nickname.setText(Constant.userfullname);
+        }else{
+            aboutme_welcom.setText("未登录");
+            aboutme_username.setText("");
+            aboutme_phonenum.setText("");
+            aboutme_nickname.setText("");
         }
     }
 
