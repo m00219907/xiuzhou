@@ -1,6 +1,7 @@
 package com.jsycloud.rs.xiuzhou.mefragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -95,6 +96,8 @@ public class TabMeFragment extends Fragment implements View.OnClickListener{
             case R.id.aboutme_changecontent:
                 break;
             case R.id.aboutme_changepassword:
+                Intent intent = new Intent(activity, ChangePasswordActivity.class);
+                startActivity(intent);
                 break;
             case R.id.aboutme_logout:
                 Constant.isLogin = false;
@@ -133,7 +136,7 @@ public class TabMeFragment extends Fragment implements View.OnClickListener{
             Toast.makeText(activity, "密码不能为空", Toast.LENGTH_SHORT).show();
             return;
         }
-        String url = "http://ir.jxtvtech.com/login.php";
+        String url = HttpClentLinkNet.BaseAddr + "login.php";
         AjaxParams params = new AjaxParams();
         params.put("username", username);
         params.put("userpassword", userpassword);
@@ -202,7 +205,7 @@ public class TabMeFragment extends Fragment implements View.OnClickListener{
             Toast.makeText(activity, "委托码不能为空", Toast.LENGTH_SHORT).show();
             return;
         }
-        String url = "http://ir.jxtvtech.com/loginsc.php";
+        String url = HttpClentLinkNet.BaseAddr + "loginsc.php";
         AjaxParams params = new AjaxParams();
         params.put("username", safecode);
         HttpClentLinkNet.getInstance().sendReqFinalHttp_Post(url, params, new AjaxCallBack() {

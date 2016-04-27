@@ -162,7 +162,7 @@ public class TabProblemFragment extends Fragment implements View.OnClickListener
         if(problem_fragment_phone.getText().toString().isEmpty()){
             Toast.makeText(activity, "自动登录成功", Toast.LENGTH_SHORT).show();
         }
-        String url = "http://ir.jxtvtech.com/report.php";
+        String url = HttpClentLinkNet.BaseAddr + "report.php";
         AjaxParams params = new AjaxParams();
         params.put("mobile", "android");
         params.put("riverid", "riverid");

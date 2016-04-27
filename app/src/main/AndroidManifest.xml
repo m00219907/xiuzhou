@@ -54,6 +54,11 @@
             android:theme="@style/dialog">
         </activity>
 
+        <activity
+            android:name="com.jsycloud.rs.xiuzhou.mefragment.ChangePasswordActivity"
+            android:theme="@style/default_ui_bg">
+        </activity>
+
     </application>
 
 </manifest>

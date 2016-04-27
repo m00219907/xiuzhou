@@ -271,7 +271,7 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
         if(curFile.exists()){
             curFile.delete();
         }
-        String url = "http://ir.jxtvtech.com/update.php";
+        String url = HttpClentLinkNet.BaseAddr + "update.php";
         AjaxParams params = new AjaxParams();
         params.put("from", "android");
         params.put("version", version);
@@ -321,7 +321,7 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
     }
 
     public void login(String username, String userpassword) {
-        String url = "http://ir.jxtvtech.com/login.php";
+        String url = HttpClentLinkNet.BaseAddr + "login.php";
         AjaxParams params = new AjaxParams();
         params.put("username", username);
         params.put("userpassword", userpassword);

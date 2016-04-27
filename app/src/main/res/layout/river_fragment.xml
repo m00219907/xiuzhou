@@ -60,32 +60,32 @@
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:background="#4caf50"
-        android:hint="巡河"
+        android:text="巡河"
         android:textSize="16sp"/>
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:background="#2196f3"
-        android:hint="巡河记录"
+        android:text="巡河记录"
         android:textSize="16sp"/>
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:background="#ff0000"
-        android:hint="委托巡河"
+        android:text="委托巡河"
         android:textSize="16sp"/>
 
 </LinearLayout>
