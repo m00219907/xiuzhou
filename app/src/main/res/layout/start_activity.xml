@@ -28,7 +28,7 @@
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        android:background="#eeeeee" >
+        android:background="#fcfcfc" >
 
         <LinearLayout
             android:id="@+id/tab_map_layout"
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="首页"
-                android:textColor="#000000"
+                android:textColor="#9a9a9a"
                 android:textSize="16sp" />
         </LinearLayout>
         <!-- 活动 -->
@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="视频监控"
-                android:textColor="#000000"
+                android:textColor="#9a9a9a"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -106,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="河长中心"
-                android:textColor="#000000"
+                android:textColor="#9a9a9a"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -133,7 +133,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="数据通报"
-                android:textColor="#000000"
+                android:textColor="#9a9a9a"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -159,7 +159,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="问题上报"
-                android:textColor="#000000"
+                android:textColor="#9a9a9a"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -185,7 +185,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="我的"
-                android:textColor="#000000"
+                android:textColor="#9a9a9a"
                 android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>

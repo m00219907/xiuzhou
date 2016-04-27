@@ -133,7 +133,7 @@ public class TabMeFragment extends Fragment implements View.OnClickListener{
             Toast.makeText(activity, "密码不能为空", Toast.LENGTH_SHORT).show();
             return;
         }
-        String url = "http://websrv.jxtvtech.com/rs/login.php";
+        String url = "http://ir.jxtvtech.com/login.php";
         AjaxParams params = new AjaxParams();
         params.put("username", username);
         params.put("userpassword", userpassword);
@@ -202,7 +202,7 @@ public class TabMeFragment extends Fragment implements View.OnClickListener{
             Toast.makeText(activity, "委托码不能为空", Toast.LENGTH_SHORT).show();
             return;
         }
-        String url = "http://websrv.jxtvtech.com/rs/loginsc.php";
+        String url = "http://ir.jxtvtech.com/loginsc.php";
         AjaxParams params = new AjaxParams();
         params.put("username", safecode);
         HttpClentLinkNet.getInstance().sendReqFinalHttp_Post(url, params, new AjaxCallBack() {

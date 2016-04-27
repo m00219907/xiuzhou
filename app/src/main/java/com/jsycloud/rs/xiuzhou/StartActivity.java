@@ -194,42 +194,42 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
         //tab_river_image.setImageResource(R.drawable.clubnormal);
         //tab_data_image.setImageResource(R.drawable.menormal);
 
-        tab_map_text.setTextColor(0xff000000);
-        tab_video_text.setTextColor(0xff000000);
-        tab_river_text.setTextColor(0xff000000);
-        tab_data_text.setTextColor(0xff000000);
-        tab_problem_text.setTextColor(0xff000000);
-        tab_me_text.setTextColor(0xff000000);
+        tab_map_text.setTextColor(0xff9a9a9a);
+        tab_video_text.setTextColor(0xff9a9a9a);
+        tab_river_text.setTextColor(0xff9a9a9a);
+        tab_data_text.setTextColor(0xff9a9a9a);
+        tab_problem_text.setTextColor(0xff9a9a9a);
+        tab_me_text.setTextColor(0xff9a9a9a);
 
         switch (selectIndex) {
             case 0:
                 //tab_map_image.setImageResource(R.drawable.hifmpressed);
-                tab_map_text.setTextColor(0xff4abe15);
+                tab_map_text.setTextColor(0xff45c01a);
                 initFragmentData(0);
                 break;
             case 1:
                 //tab_event_image.setImageResource(R.drawable.eventspressed);
-                tab_video_text.setTextColor(0xff4abe15);
+                tab_video_text.setTextColor(0xff45c01a);
                 initFragmentData(1);
                 break;
             case 2:
                 //tab_club_image.setImageResource(R.drawable.clubpressed);
-                tab_river_text.setTextColor(0xff4abe15);
+                tab_river_text.setTextColor(0xff45c01a);
                 initFragmentData(2);
                 break;
             case 3:
                 //tab_me_image.setImageResource(R.drawable.mepressed);
-                tab_data_text.setTextColor(0xff4abe15);
+                tab_data_text.setTextColor(0xff45c01a);
                 initFragmentData(3);
                 break;
             case 4:
                 //tab_me_image.setImageResource(R.drawable.mepressed);
-                tab_problem_text.setTextColor(0xff4abe15);
+                tab_problem_text.setTextColor(0xff45c01a);
                 initFragmentData(4);
                 break;
             case 5:
                 //tab_me_image.setImageResource(R.drawable.mepressed);
-                tab_me_text.setTextColor(0xff4abe15);
+                tab_me_text.setTextColor(0xff45c01a);
                 initFragmentData(5);
                 break;
 
@@ -271,7 +271,7 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
         if(curFile.exists()){
             curFile.delete();
         }
-        String url = "http://websrv.jxtvtech.com/rs/update.php";
+        String url = "http://ir.jxtvtech.com/update.php";
         AjaxParams params = new AjaxParams();
         params.put("from", "android");
         params.put("version", version);
@@ -321,7 +321,7 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
     }
 
     public void login(String username, String userpassword) {
-        String url = "http://websrv.jxtvtech.com/rs/login.php";
+        String url = "http://ir.jxtvtech.com/login.php";
         AjaxParams params = new AjaxParams();
         params.put("username", username);
         params.put("userpassword", userpassword);

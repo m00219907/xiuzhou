@@ -30,13 +30,18 @@
         </service>
 
         <activity
-            android:name="com.jsycloud.rs.xiuzhou.StartActivity"
+            android:name="com.jsycloud.rs.xiuzhou.StartActivity01"
             android:theme="@style/default_ui_bg" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.jsycloud.rs.xiuzhou.StartActivity"
+            android:theme="@style/default_ui_bg" >
         </activity>
 
         <activity
