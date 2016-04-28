@@ -92,6 +92,19 @@ public class TabMeFragment extends Fragment implements View.OnClickListener{
     }
 
     @Override
+    public void onResume(){
+        super.onResume();
+        if(Constant.isLogin){
+            login_layout.setVisibility(View.GONE);
+            aboutme_layout.setVisibility(View.VISIBLE);
+            setUserInfo();
+        }else{
+            login_layout.setVisibility(View.VISIBLE);
+            aboutme_layout.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.login_pwd_miwen:
@@ -113,6 +126,8 @@ public class TabMeFragment extends Fragment implements View.OnClickListener{
                 loginbycode();
                 break;
             case R.id.aboutme_changecontent:
+                Intent intent1 = new Intent(activity, ChangeInfoActivity.class);
+                startActivity(intent1);
                 break;
             case R.id.aboutme_changepassword:
                 Intent intent = new Intent(activity, ChangePasswordActivity.class);

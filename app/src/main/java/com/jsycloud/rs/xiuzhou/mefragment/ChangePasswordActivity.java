@@ -40,12 +40,16 @@ public class ChangePasswordActivity extends Activity implements View.OnClickList
         change_pwd_miwen2 = (ImageView)findViewById(R.id.change_pwd_miwen2);
         change_pwd_miwen2.setTag("1");
         change_pwd_miwen2.setOnClickListener(this);
+        findViewById(R.id.change_pwd_back).setOnClickListener(this);
         findViewById(R.id.change_pwd_commit).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.change_pwd_back:
+                finish();
+                break;
             case R.id.change_pwd_commit:
                 String oldpwd = change_pwd_input_oldpwd.getText().toString();
                 String newpwd = change_pwd_input_newpwd.getText().toString();

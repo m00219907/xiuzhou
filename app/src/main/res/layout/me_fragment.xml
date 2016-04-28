@@ -245,7 +245,7 @@
         <Button
             android:id="@+id/aboutme_changecontent"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="50dp"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
@@ -256,7 +256,7 @@
         <Button
             android:id="@+id/aboutme_changepassword"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="50dp"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
@@ -267,7 +267,7 @@
         <Button
             android:id="@+id/aboutme_logout"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="50dp"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
