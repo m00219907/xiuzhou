@@ -4,10 +4,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +33,7 @@ public class TabMeFragment extends Fragment implements View.OnClickListener{
     View login_layout, aboutme_layout;
     EditText login_username, login_password, login_code_edit;
     TextView aboutme_welcom, aboutme_username, aboutme_phonenum, aboutme_nickname;
+    ImageView login_pwd_miwen;
 
     @Override
     public void onAttach(Activity activity) {
@@ -51,6 +55,9 @@ public class TabMeFragment extends Fragment implements View.OnClickListener{
         aboutme_username = (TextView)view.findViewById(R.id.aboutme_username);
         aboutme_phonenum = (TextView)view.findViewById(R.id.aboutme_phonenum);
         aboutme_nickname = (TextView)view.findViewById(R.id.aboutme_nickname);
+        login_pwd_miwen = (ImageView)view.findViewById(R.id.login_pwd_miwen);
+        login_pwd_miwen.setTag("1");
+        login_pwd_miwen.setOnClickListener(this);
 
         view.findViewById(R.id.login_login).setOnClickListener(this);
         view.findViewById(R.id.login_use_code).setOnClickListener(this);
@@ -87,6 +94,18 @@ public class TabMeFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.login_pwd_miwen:
+                if(login_pwd_miwen.getTag().equals("1")) {
+                    login_pwd_miwen.setImageResource(R.drawable.miwen);
+                    login_pwd_miwen.setTag("0");
+                    login_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                } else {
+                    login_pwd_miwen.setImageResource(R.drawable.mingwen);
+                    login_pwd_miwen.setTag("1");
+                    login_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }
+                login_password.setSelection(login_password.getText().length());
+                break;
             case R.id.login_login:
                 login();
                 break;
@@ -107,6 +126,8 @@ public class TabMeFragment extends Fragment implements View.OnClickListener{
                 activity.onLoginChange();
                 SharePreferenceDataUtil.setSharedStringData(activity, "username", "");
                 SharePreferenceDataUtil.setSharedStringData(activity, "userpassword", "");
+                break;
+            default:
                 break;
         }
     }
