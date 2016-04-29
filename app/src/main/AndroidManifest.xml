@@ -64,6 +64,16 @@
             android:theme="@style/default_ui_bg">
         </activity>
 
+        <activity
+            android:name="com.jsycloud.rs.xiuzhou.riverfragment.CheckRiverActivity"
+            android:theme="@style/default_ui_bg">
+        </activity>
+
+        <activity
+            android:name="com.jsycloud.rs.xiuzhou.riverfragment.CheckRiverHistory"
+            android:theme="@style/default_ui_bg">
+        </activity>
+
     </application>
 
 </manifest>

@@ -59,6 +59,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/river_fragment_checkriver"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
@@ -69,6 +70,7 @@
         android:textSize="16sp"/>
 
     <Button
+        android:id="@+id/river_fragment_checkriver_history"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
@@ -79,6 +81,7 @@
         android:textSize="16sp"/>
 
     <Button
+        android:id="@+id/river_fragment_entrust_checkriver"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"

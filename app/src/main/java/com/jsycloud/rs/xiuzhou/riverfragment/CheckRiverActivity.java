@@ -1,4 +1,4 @@
-package com.jsycloud.rs.xiuzhou.problemfragment;
+package com.jsycloud.rs.xiuzhou.riverfragment;
 
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -8,12 +8,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,7 +21,7 @@ import com.jsycloud.rs.xiuzhou.Constant;
 import com.jsycloud.rs.xiuzhou.DialogShow;
 import com.jsycloud.rs.xiuzhou.HttpClentLinkNet;
 import com.jsycloud.rs.xiuzhou.R;
-import com.jsycloud.rs.xiuzhou.StartActivity;
+import com.jsycloud.rs.xiuzhou.problemfragment.RiverChooseActivity;
 
 import net.tsz.afinal.http.AjaxCallBack;
 import net.tsz.afinal.http.AjaxParams;
@@ -35,69 +33,97 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
-public class TabProblemFragment extends Fragment implements View.OnClickListener{
+public class CheckRiverActivity extends Activity implements View.OnClickListener {
 
-    private StartActivity activity;
-    TextView problem_fragment_coordinate, problem_fragment_postion, problem_fragment_chooseriver;
-    EditText problem_fragment_name, problem_fragment_phone;
-    ImageView problem_fragment_photo;
+    TextView check_river_coordinate, check_river_postion, check_river_chooseriver;
+    EditText check_river_name, check_river_phone, check_river_problem_discribe;
+    ImageView check_river_photo;
 
     private final int CHOOSE_RIVER = 109;// 选择河流
     private final int PHOTO_REQUEST_CAMERA = 120;// 拍照
     private final int PHOTO_REQUEST_GALLERY = 121;// 从相册中选择
-
     private final String PHOTO_FILE_NAME = "temp_photo.jpg";
-
-    private String photo_abslute_path = "";
+    File uploadFile;
 
     @Override
-    public void onAttach(Activity activity) {
-        this.activity = (StartActivity)activity;
-        super.onAttach(activity);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.check_river);
+
+        check_river_coordinate = (TextView)findViewById(R.id.check_river_coordinate);
+        check_river_postion = (TextView)findViewById(R.id.check_river_postion);
+        check_river_chooseriver = (TextView)findViewById(R.id.check_river_chooseriver);
+        check_river_chooseriver.setOnClickListener(this);
+        check_river_name = (EditText)findViewById(R.id.check_river_name);
+        check_river_name.setText(Constant.userfullname);
+        check_river_phone = (EditText)findViewById(R.id.check_river_phone);
+        check_river_phone.setText(Constant.usermobile);
+        check_river_problem_discribe = (EditText)findViewById(R.id.check_river_problem_discribe);
+        check_river_photo = (ImageView)findViewById(R.id.check_river_photo);
+
+        findViewById(R.id.check_river_back).setOnClickListener(this);
+        findViewById(R.id.check_river_uploadpic).setOnClickListener(this);
+        findViewById(R.id.check_river_commit).setOnClickListener(this);
+
+        if(Constant.curLocation != null){
+            check_river_coordinate.setText(Constant.curLocation.getLatitude() + "," + Constant.curLocation.getLongitude());
+            check_river_postion.setText(Constant.curLocation.getAddress());
+        }else{
+            check_river_coordinate.setText("定位失败");
+            check_river_postion.setText("定位失败");
+        }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.problem_fragment, null);
-
-        problem_fragment_coordinate = (TextView)view.findViewById(R.id.problem_fragment_coordinate);
-        problem_fragment_postion = (TextView)view.findViewById(R.id.problem_fragment_postion);
-        problem_fragment_chooseriver = (TextView)view.findViewById(R.id.problem_fragment_chooseriver);
-        problem_fragment_chooseriver.setOnClickListener(this);
-        problem_fragment_name = (EditText)view.findViewById(R.id.problem_fragment_name);
-        problem_fragment_phone = (EditText)view.findViewById(R.id.problem_fragment_phone);
-        problem_fragment_photo = (ImageView)view.findViewById(R.id.problem_fragment_photo);
-
-        view.findViewById(R.id.problem_fragment_uploadpic).setOnClickListener(this);
-        view.findViewById(R.id.problem_fragment_commit).setOnClickListener(this);
-
-        if(Constant.curLocation != null){
-            problem_fragment_coordinate.setText(Constant.curLocation.getLatitude() + "," + Constant.curLocation.getLongitude());
-            problem_fragment_postion.setText(Constant.curLocation.getAddress());
-        }else{
-            problem_fragment_coordinate.setText("定位失败");
-            problem_fragment_postion.setText("定位失败");
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CHOOSE_RIVER && resultCode == Activity.RESULT_OK) {
+            if (data != null) {
+                String riverName = data.getExtras().getString("riverName");
+                check_river_chooseriver.setText(riverName);
+            }
+        } else if (requestCode == PHOTO_REQUEST_GALLERY && resultCode == Activity.RESULT_OK) {
+            if (data != null) {
+                Uri uri = data.getData();
+                File tempFile = new File(getFilePathFromUrl(uri));
+                uploadFile = saveBitmapToFile(tempFile);
+                if(uploadFile.exists()){
+                    Bitmap myBitmap = BitmapFactory.decodeFile(uploadFile.getAbsolutePath());
+                    check_river_photo.setVisibility(View.VISIBLE);
+                    check_river_photo.setImageBitmap(myBitmap);
+                }
+            }
+        }else if(requestCode == PHOTO_REQUEST_CAMERA && resultCode == Activity.RESULT_OK){
+            File tempFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), PHOTO_FILE_NAME);
+            uploadFile = saveBitmapToFile(tempFile);
+            if(uploadFile.exists()){
+                Bitmap myBitmap = BitmapFactory.decodeFile(uploadFile.getAbsolutePath());
+                check_river_photo.setVisibility(View.VISIBLE);
+                check_river_photo.setImageBitmap(myBitmap);
+            }
         }
-
-        return view;
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.problem_fragment_chooseriver:
-                Intent intent = new Intent(activity, RiverChooseActivity.class);
-                activity.startActivityForResult(intent, CHOOSE_RIVER);
+        switch (v.getId()){
+            case R.id.check_river_back:
+                finish();
                 break;
-            case R.id.problem_fragment_uploadpic:
-                DialogShow.dialogShow3(activity, new DialogShow.ICheckedCallBack(){
+            case R.id.check_river_chooseriver:
+                Intent intent = new Intent(this, RiverChooseActivity.class);
+                startActivityForResult(intent, CHOOSE_RIVER);
+                break;
+            case R.id.check_river_uploadpic:
+                DialogShow.dialogShow3(this, new DialogShow.ICheckedCallBack() {
                     @Override
                     public void OnCheckedCallBackDispath(boolean bSucceed) {
-                        if(bSucceed){
+                        if (bSucceed) {
                             Intent photoIntent = new Intent(Intent.ACTION_PICK);
                             photoIntent.setType("image/*");
-                            activity.startActivityForResult(photoIntent, PHOTO_REQUEST_GALLERY);
-                        }else{
+                            CheckRiverActivity.this.startActivityForResult(photoIntent, PHOTO_REQUEST_GALLERY);
+                        } else {
                             Intent cameraIntent = new Intent("android.media.action.IMAGE_CAPTURE");
                             cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), PHOTO_FILE_NAME)));
                             startActivityForResult(cameraIntent, PHOTO_REQUEST_CAMERA);
@@ -105,7 +131,7 @@ public class TabProblemFragment extends Fragment implements View.OnClickListener
                     }
                 });
                 break;
-            case R.id.problem_fragment_commit:
+            case R.id.check_river_commit:
                 reportProblem();
                 break;
             default:
@@ -113,41 +139,11 @@ public class TabProblemFragment extends Fragment implements View.OnClickListener
         }
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == CHOOSE_RIVER && resultCode == Activity.RESULT_OK) {
-            if (data != null) {
-                String riverName = data.getExtras().getString("riverName");
-                problem_fragment_chooseriver.setText(riverName);
-            }
-        } else if (requestCode == PHOTO_REQUEST_GALLERY && resultCode == Activity.RESULT_OK) {
-            if (data != null) {
-                Uri uri = data.getData();
-                File tempFile = new File(getFilePathFromUrl(uri));
-                photo_abslute_path = tempFile.getAbsolutePath();
-                File uploadFile = saveBitmapToFile(tempFile);
-                if(uploadFile.exists()){
-                    Bitmap myBitmap = BitmapFactory.decodeFile(uploadFile.getAbsolutePath());
-                    problem_fragment_photo.setVisibility(View.VISIBLE);
-                    problem_fragment_photo.setImageBitmap(myBitmap);
-                }
-            }
-        }else if(requestCode == PHOTO_REQUEST_CAMERA && resultCode == Activity.RESULT_OK){
-            File tempFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), PHOTO_FILE_NAME);
-            photo_abslute_path = tempFile.getAbsolutePath();
-            File uploadFile = saveBitmapToFile(tempFile);
-            if(uploadFile.exists()){
-                Bitmap myBitmap = BitmapFactory.decodeFile(uploadFile.getAbsolutePath());
-                problem_fragment_photo.setVisibility(View.VISIBLE);
-                problem_fragment_photo.setImageBitmap(myBitmap);
-            }
-        }
-    }
-
     public String getFilePathFromUrl(Uri uri){
         String filePath;
         String[] filePathColumn = {MediaStore.MediaColumns.DATA};
 
-        ContentResolver contentResolver = activity.getContentResolver();
+        ContentResolver contentResolver = getContentResolver();
         Cursor cursor = contentResolver.query(uri, filePathColumn, null, null, null);
         cursor.moveToFirst();
 
@@ -158,16 +154,25 @@ public class TabProblemFragment extends Fragment implements View.OnClickListener
     }
 
     public void reportProblem() {
-        if(problem_fragment_phone.getText().toString().isEmpty()){
-            Toast.makeText(activity, "自动登录成功", Toast.LENGTH_SHORT).show();
+        if(check_river_problem_discribe.getText().toString().isEmpty()){
+            Toast.makeText(this, "问题描述不能为空", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(!uploadFile.exists()){
+            Toast.makeText(this, "至少上传一张照片", Toast.LENGTH_SHORT).show();
+            return;
         }
         String url = HttpClentLinkNet.BaseAddr + "report.php";
         AjaxParams params = new AjaxParams();
-        params.put("mobile", "android");
+        params.put("userid", Constant.userid);
         params.put("riverid", "riverid");
-        params.put("describe", "describe");
-        params.put("coordinate", "coordinate");
-        params.put("address", "address");
+        params.put("describe", check_river_problem_discribe.getText().toString());
+        params.put("coordinate", check_river_coordinate.getText().toString());
+        params.put("address", check_river_postion.getText().toString());
+        try {
+            params.put("photo1", uploadFile);
+        }catch (Exception e){
+        }
         HttpClentLinkNet.getInstance().sendReqFinalHttp_Post(url, params, new AjaxCallBack() {
             @Override
             public void onLoading(long count, long current) {
@@ -248,4 +253,5 @@ public class TabProblemFragment extends Fragment implements View.OnClickListener
             return null;
         }
     }
+
 }
