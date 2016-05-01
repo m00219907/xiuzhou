@@ -96,7 +96,7 @@ public class CheckRiverHistory extends Activity implements View.OnClickListener 
                         } catch (JSONException e) {
                         }
                     }else{
-                        Toast.makeText(CheckRiverHistory.this, "Ѳ�Ӽ�¼Ϊ��", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CheckRiverHistory.this, "巡河记录为空", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                 }
@@ -104,7 +104,7 @@ public class CheckRiverHistory extends Activity implements View.OnClickListener 
 
             @Override
             public void onFailure(Throwable t, int errorNo, String strMsg) {
-                Toast.makeText(CheckRiverHistory.this, "Ѳ�Ӽ�¼Ϊ��", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CheckRiverHistory.this, "巡河记录为空", Toast.LENGTH_SHORT).show();
                 super.onFailure(t, errorNo, strMsg);
             }
         });
