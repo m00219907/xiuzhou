@@ -5,146 +5,64 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="请选择乡镇"
+        android:textColor="#999999"
+        android:textSize="14sp"/>
+
+    <Spinner
+        android:id="@+id/video_fragment_spinnertown"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginTop="10dp"
-            android:text="IP:"
-            android:textColor="#666666" />
-
-        <EditText
-            android:id="@+id/video_fragment_ip"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_weight="3"
-            android:background="@null"
-            android:text="192.168.1.64"
-            android:textSize="16sp"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:text="端口:"
-            android:textColor="#666666" />
-
-        <EditText
-            android:id="@+id/video_fragment_port"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_weight="3"
-            android:background="@null"
-            android:text="8000"
-            android:textSize="16sp"/>
-
-    </LinearLayout>
+    </Spinner>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:layout_marginTop="5dp"
-        android:background="#666666" />
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="#333333"/>
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="请选择河流"
+        android:textColor="#999999"
+        android:textSize="14sp"/>
+
+    <Spinner
+        android:id="@+id/video_fragment_spinnerriver"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:layout_marginTop="10dp"
-            android:text="username:"
-            android:textColor="#666666" />
-
-        <EditText
-            android:id="@+id/video_fragment_username"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_weight="3"
-            android:background="@null"
-            android:text="admin"
-            android:textSize="16sp"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:text="password:"
-            android:textColor="#666666" />
-
-        <EditText
-            android:id="@+id/video_fragment_password"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_weight="3"
-            android:background="@null"
-            android:textSize="16sp"/>
-
-    </LinearLayout>
+        android:layout_marginLeft="10dp">
+    </Spinner>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:layout_marginTop="5dp"
-        android:background="#666666" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
-        android:orientation="horizontal">
+        android:layout_marginLeft="10dp"
+        android:background="#333333"/>
 
-        <Button
-            android:id="@+id/video_fragment_login"
-            android:layout_width="60dp"
-            android:layout_height="30dp"
-            android:background="#666666"
-            android:text="登陆"
-            android:textSize="16sp"/>
-
-        <Button
-            android:id="@+id/video_fragment_preview"
-            android:layout_width="60dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="60dp"
-            android:background="#666666"
-            android:text="preview"
-            android:textSize="16sp"/>
-
-        <Button
-            android:id="@+id/video_fragment_play"
-            android:layout_width="60dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="60dp"
-            android:background="#666666"
-            android:hint="录制"
-            android:textSize="16sp"/>
-    </LinearLayout>
-
-    <SurfaceView
-        android:id="@+id/video_fragment_sfview"
+    <Button
+        android:id="@+id/video_fragment_startvideo"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
-        android:background="#0000ff00" />
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="#2196f3"
+        android:text="查看视频"
+        android:textSize="16sp"/>
 
 </LinearLayout>

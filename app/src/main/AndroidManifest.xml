@@ -74,6 +74,11 @@
             android:theme="@style/default_ui_bg">
         </activity>
 
+        <activity
+            android:name="com.jsycloud.rs.xiuzhou.videofragment.VideoActivity"
+            android:theme="@style/default_ui_bg">
+        </activity>
+
     </application>
 
 </manifest>
