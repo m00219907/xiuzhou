@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="yuansize">210.0dip</dimen>
+    <dimen name="songnameplay">10.0dip</dimen>
+    <dimen name="con_play">8dip</dimen>  
+    <dimen name="dimen_time">5dip</dimen>
+    <dimen name="playbar_bottom_lly_dimen">8.0dip</dimen>
+    <dimen name="yuan_top">8.0dip</dimen>
+
+    <dimen name="four_dp">4dp</dimen>
+    
+    <!-- 上面为原来的 -->
+    <!-- 公共部分 -->
+    <dimen name="title_size">25sp</dimen>           <!-- 所有的上面的标题文字大小 -->
+    <dimen name="bottom_play_txt_size">15sp</dimen> <!-- 所有底部播放条文字大小 -->    
+    <dimen name="bottom_play_height">57dp</dimen>   <!-- 底部播放高度 -->
+    <dimen name="topbar_height">50dp</dimen>        <!-- 上部title高度 -->
+    
+    <!-- catogery  首页-->
+    <dimen name="catogery_ts">17sp</dimen>  	<!-- 运营商文字大小 -->
+    <dimen name="spacing_top">10dp</dimen>      <!-- 顶部间隔 -->
+    <dimen name="spacing_left">10dp</dimen>     <!-- 左部间隔 -->
+    <dimen name="spacing_right">5dp</dimen>     <!-- 右部间隔 -->
+    <dimen name="spacing_bottom">0dp</dimen>    <!-- 底部间隔 -->
+    
+    <dimen name="spacing_right_r">50dp</dimen>    <!-- 右边坚条宽度 --> 
+    <dimen name="spacing_right_r_but">2dp</dimen><!-- 右边坚条离底部高度 --> 
+    
+    <dimen name="grid_s_h">10dp</dimen>         <!-- 图片间水平间隔 -->
+    <dimen name="grid_s_v">10dp</dimen>         <!-- 图片间垂直间隔 -->
+    
+    <dimen name="page_ts">17sp</dimen>   		<!-- 页码文字大小 -->
+    <dimen name="page_spacing_left">5dp</dimen> <!-- 页码左边间隔 -->
+    
+    <dimen name="img_w">90dp</dimen>			<!-- 运营商图片宽 -->
+    <dimen name="img_h">90dp</dimen>			<!-- 运营商图片高-->
+    <dimen name="img_top">2dp</dimen>			<!-- 运营商图片离背景顶部距离-->
+    
+    <dimen name="but_01">35dp</dimen>           <!-- 右边控制中心按钮-->
+    <dimen name="but_02">35dp</dimen>			<!-- 右边订越按钮-->
+    <dimen name="but_03">35dp</dimen>			<!-- 右边关于按钮-->
+    
+    <dimen name="zhibo_grid_item_width">210dp</dimen>           <!-- 直播九宫格图片宽度-->
+    <dimen name="zhibo_grid_item_height">210dp</dimen>			<!-- 直播九宫格图片高度-->
+    
+    
+    
+     <!-- 播放页面 -->
+    
+    <dimen name="zhibo_pic_width">240dp</dimen>          <!-- 直播图片控件宽度 --> 
+    <dimen name="zhibo_pic_height">240dp</dimen>         <!-- 直播图片控件高度 -->
+    
+    <dimen name="img_icon_w">294px</dimen>        		 <!-- 运营商logo宽度  CanvasImageTask1类中用到-->
+    <dimen name="img_icon_h">294px</dimen>         		 <!-- 运营商logo高度  -->
+    
+    <dimen name="start_x">62dp</dimen>
+    <dimen name="start_y">62dp</dimen>
+    <dimen name="fifty">50dp</dimen>
+    <dimen name="sixty_five">65dp</dimen>
+    <dimen name="fifty_five">55dp</dimen>
+    <dimen name="threety_three">20dp</dimen>
+    <dimen name="offset">55dp</dimen>
+    <dimen name="twenty_two_dp">22dp</dimen>
+    
+    <dimen name="sbut_w">30dp</dimen>                  <!-- 音量，上曲，下曲，模式4个按钮的宽高 -->
+    
+     <!-- 网趣宝贝       悦耳听书     精品栏目-->
+    <!-- 四宫格 -->
+    <dimen name="grid4_item_width">150dp</dimen>           <!-- gridview item 图片宽度 -->
+    <dimen name="grid4_item_height">150dp</dimen>          <!-- gridview item 图片高度 -->   
+    <dimen name="grid4_item_txt_size">15sp</dimen>         <!-- gridview item 文字大小 -->  
+    <dimen name="grid4_item_num_txt_size">12sp</dimen>     <!-- gridview item 歌单数量文字大小 -->  
+    
+    <!-- 九宫格 -->
+    <dimen name="grid9_item_width">100dp</dimen>           <!-- gridview item 图片宽度 -->
+    <dimen name="grid9_item_height">100dp</dimen>          <!-- gridview item 图片高度 -->   
+    <dimen name="grid9_item_txt_size">12sp</dimen>        <!-- gridview item 文字大小 -->  
+    
+    <!-- 天天动听 -->
+    <dimen name="grid_2_item_width">150dp</dimen>           <!-- gridview item 图片宽度 -->
+    <dimen name="grid_4_item_width">60dp</dimen>  
+    
+    <dimen name="grid_item_top">8dp</dimen>               <!-- gridview item 上边距 -->  
+    <dimen name="grid_item_bottom">8dp</dimen>            <!-- gridview item 下边距 --> 
+    <dimen name="grid_item_right">8dp</dimen>             <!-- gridview item 右边距 --> 
+    <dimen name="grid_item_left">8dp</dimen>              <!-- gridview item 左边距 --> 
+    
+    
+    <!-- 订阅频道 -->
+    <dimen name="dingyue_search_txt_size">12sp</dimen>    <!-- 订阅搜索文字大小 -->
+    <dimen name="dingyue_list_txt_size">20sp</dimen>      <!-- 订阅列表文字大小 --> 
+    <dimen name="dingyue_search_lly_height">50dp</dimen>  <!-- 订阅搜索的高度 -->    
+    
+    <!-- 专辑详情 -->
+    <dimen name="s_item_h">50dp</dimen>   				  <!-- 播放列表和专辑详情中listView中每个item的高度 -->
+	
+	
+	<!-- 标准字体大小 -->
+	<dimen name="twentyfive_text_size">25sp</dimen>    <!-- 36px -->
+	<dimen name="twenty_text_size">20sp</dimen>    <!-- 36px -->
+    <dimen name="eighteen_text_size">18sp</dimen>  <!-- 28px --> 
+    <dimen name="fourteen_text_size">14sp</dimen>  <!-- 24px -->    
+    <dimen name="sixteen_text_size">16sp</dimen> 
+    
+    
+    <dimen name="twelve_text_size">12sp</dimen>    <!-- 18px -->    
+    <dimen name="ten_text_size">10sp</dimen> 
+    
+    <!-- 首页瀑布流间距 -->
+    <dimen name="main_waterfall_top">0dp</dimen>
+    <dimen name="main_waterfall_left">12dp</dimen>
+    <dimen name="main_waterfall_right">12dp</dimen>
+    <dimen name="main_waterfall_bottom">8dp</dimen>
+
+	
+<!-- 	<dimen name="tuijian_size_bh">256dp</dimen>
+    <dimen name="tuijian_size_mh">100dp</dimen> -->
+    
+    
+    <!-- 播放器图片压缩 -->
+	<dimen name="play_w">294px</dimen>
+    <dimen name="play_h">294px</dimen>
+    
+    <!-- 播放器中间页面高度 -->
+    <dimen name="play_middle_h">400px</dimen>
+    
+    <!-- 导航字体大小 -->
+    <dimen name="navigation_txt_size">16sp</dimen>
+    
+    <!-- 测滑菜单属性 -->
+    <dimen name="shadow_width">15.0dip</dimen>
+    <dimen name="slidingmenu_offset">50.0dip</dimen>
+    <dimen name="dm_item_height">48dp</dimen>
+    
+    <!-- 专辑详情用到 -->
+    <dimen name="single_interval">170px</dimen>
+    
+    <!-- 天天用到 -->
+    <dimen name="tt_interval">170px</dimen>
+    
+    <!-- 直播九宫格用到 -->
+    <dimen name="zb_interval_x">130px</dimen>
+    <dimen name="zb_interval_y">140px</dimen>
+    
+    <!-- banner 高度 -->
+    <dimen name="banner_height">182dp</dimen>
+    <dimen name="banner_width">453dp</dimen>
+    
+    <!-- 提示信息框 -->
+	<dimen name="msg_box_width">280dp</dimen>
+	<dimen name="msg_box_height">160dp</dimen>
+	<dimen name="msg_button_width">80dp</dimen>
+	<dimen name="msg_button_height">32dp</dimen>
+	
+	<dimen name="toast_size">160dp</dimen>
+	
+	 <dimen name="banner_left">6dp</dimen>
+	 
+	 <dimen name="main_banner_height">182px</dimen>
+	 <dimen name="main_banner_width">453px</dimen>
+	 
+	<dimen name="mb_height">122dp</dimen>
+	<dimen name="mb_width">302dp</dimen>
+	
+	<!--  main_activity_layout -->
+	<dimen name="tab_h">40dp</dimen>
+	 
+	<!-- ClassifyDataAdapter -->
+	<dimen name="classify_icon_wh">20dp</dimen>
+	
+	<!-- mymsg_layout -->
+	<dimen name="msg_item_h">45dp</dimen>
+	
+	<dimen name="filter_h">250px</dimen>
+	
+	<!-- 设置页面 -->
+	<dimen name="setting_margin_left">40dp</dimen>
+	<dimen name="setting_item_padding">4dp</dimen>
+	<dimen name="setting_padding_left">10dp</dimen>
+	<dimen name="setting_bar_height">48dp</dimen>
+	
+	<!-- 订时播放页面底按钮间间隔 -->
+	<dimen name="timing_but_interval">12dp</dimen>
+	
+	<dimen name="header_height">40dp</dimen>
+    <dimen name="footer_height">40dp</dimen>
+    <dimen name="footer_padding">5dp</dimen>
+        <!-- View的属性 -->
+    <dimen name="view_height">1dp</dimen>
+    <dimen name="view_margin_top">10dp</dimen>
+    <dimen name="weixin_margin_top">74dp</dimen>
+    <dimen name="view_text_size">18sp</dimen>
+    <dimen name="weixin_margin_right">168dp</dimen>
+    
+     <!-- recodeUserInfo的属性配置 -->
+    <dimen name="img_margintop">24dp</dimen>
+    <dimen name="uname_margintop">12dp</dimen>
+    <dimen name="uname_marginbottom">24dp</dimen>
+    <dimen name="margin_left_tv">6dp</dimen>
+    <dimen name="v_height">24dp</dimen>
+    <dimen name="text_size">21sp</dimen>
+    
+    <!-- 4.24 cll -->
+    <dimen name="topic_text_size">21sp</dimen>
+    
+         	<!-- 首页列表展示头像大小 -->
+	<dimen name="main_list_head">55dp</dimen>
+	<dimen name="main_list_heads">67dp</dimen>
+	
+	<!-- loginActivity -->
+	<dimen name="use_pass_padleft">76dp</dimen>
+	<dimen name="use_pass_marginleft">16dp</dimen>
+	<dimen name="use_pass_tishileft">26dp</dimen>
+	
+	<!-- hitFm -->
+	<dimen name="vip_mar_top">38dp</dimen>
+	<dimen name="wx_mar_top">40dp</dimen>
+	<dimen name="view_mar_top">16dp</dimen>
+	
+	<!-- 底部播放器 -->
+	<dimen name="play_bottom_high">65dp</dimen>
+	<dimen name="play_bottom_text1">19sp</dimen>
+	<dimen name="play_bottom_text2">15sp</dimen>
+	<dimen name="play_bottom_text_head">74dp</dimen>
+	
+	<!-- wifi setting -->
+	<dimen name="ed_layout_height">48dp</dimen>
+	<dimen name="ed_paddingLeft">56dp</dimen>
+	<dimen name="ed_four_paddingLeft">100dp</dimen>
+	
+	<dimen name="tv_marginLeft">10dp</dimen>
+	
+	<dimen name="item_height">49dp</dimen>
+	<dimen name="set_dev_tv_h">43dp</dimen>
+</resources>

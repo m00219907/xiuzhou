@@ -10,14 +10,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp">
+        android:layout_marginLeft="20dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="提醒"
-            android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textColor="#333333"
+            android:textSize="18sp" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -27,68 +27,82 @@
 
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#666666"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="20dp"
         android:text="距离您下次巡河还有3天。"
-        android:textColor="#000000"
+        android:textColor="#333333"
         android:textSize="16sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#666666"/>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp">
+        android:layout_marginLeft="20dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="巡河"
-            android:textColor="#000000"
-            android:textSize="20sp" />
+            android:textColor="#333333"
+            android:textSize="18sp" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:src="@drawable/ic_notifications_active_black_24dp"/>
-
     </LinearLayout>
 
-    <Button
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#666666"/>
+
+    <com.jsycloud.rs.xiuzhou.MyRectangleView
         android:id="@+id/river_fragment_checkriver"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:background="#4caf50"
-        android:text="巡河"
-        android:textSize="16sp"/>
+        android:layout_marginRight="30dp"/>
 
-    <Button
+    <com.jsycloud.rs.xiuzhou.MyRectangleView
         android:id="@+id/river_fragment_checkriver_history"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:background="#2196f3"
-        android:text="巡河记录"
-        android:textSize="16sp"/>
+        android:layout_marginRight="30dp"/>
 
-    <Button
+    <com.jsycloud.rs.xiuzhou.MyRectangleView
         android:id="@+id/river_fragment_entrust_checkriver"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:background="#ff0000"
-        android:text="委托巡河"
-        android:textSize="16sp"/>
+        android:layout_marginRight="30dp"/>
 
 </LinearLayout>

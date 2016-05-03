@@ -189,10 +189,12 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
 
     private void initTopTab(int selectIndex) {
 
-        //tab_map_image.setImageResource(R.drawable.hifmnormal);
-        //tab_video_image.setImageResource(R.drawable.eventsnormal);
-        //tab_river_image.setImageResource(R.drawable.clubnormal);
-        //tab_data_image.setImageResource(R.drawable.menormal);
+        tab_map_image.setImageResource(R.drawable.ic_home_black_24dp);
+        tab_video_image.setImageResource(R.drawable.ic_videocam_black_24dp);
+        tab_river_image.setImageResource(R.drawable.ic_person_black_24dp);
+        tab_data_image.setImageResource(R.drawable.ic_event_note_black_24dp);
+        tab_problem_image.setImageResource(R.drawable.ic_event_note_black_24dp);
+        tab_me_image.setImageResource(R.drawable.ic_person_black_24dp);
 
         tab_map_text.setTextColor(0xff9a9a9a);
         tab_video_text.setTextColor(0xff9a9a9a);
@@ -203,32 +205,32 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
 
         switch (selectIndex) {
             case 0:
-                //tab_map_image.setImageResource(R.drawable.hifmpressed);
+                tab_map_image.setImageResource(R.drawable.ic_home_blue_24dp);
                 tab_map_text.setTextColor(0xff45c01a);
                 initFragmentData(0);
                 break;
             case 1:
-                //tab_event_image.setImageResource(R.drawable.eventspressed);
+                tab_video_image.setImageResource(R.drawable.ic_videocam_blue_24dp);
                 tab_video_text.setTextColor(0xff45c01a);
                 initFragmentData(1);
                 break;
             case 2:
-                //tab_club_image.setImageResource(R.drawable.clubpressed);
+                tab_river_image.setImageResource(R.drawable.ic_person_blue_24dp);
                 tab_river_text.setTextColor(0xff45c01a);
                 initFragmentData(2);
                 break;
             case 3:
-                //tab_me_image.setImageResource(R.drawable.mepressed);
+                tab_data_image.setImageResource(R.drawable.ic_event_note_blue_24dp);
                 tab_data_text.setTextColor(0xff45c01a);
                 initFragmentData(3);
                 break;
             case 4:
-                //tab_me_image.setImageResource(R.drawable.mepressed);
+                tab_problem_image.setImageResource(R.drawable.ic_event_note_blue_24dp);
                 tab_problem_text.setTextColor(0xff45c01a);
                 initFragmentData(4);
                 break;
             case 5:
-                //tab_me_image.setImageResource(R.drawable.mepressed);
+                tab_me_image.setImageResource(R.drawable.ic_person_blue_24dp);
                 tab_me_text.setTextColor(0xff45c01a);
                 initFragmentData(5);
                 break;
