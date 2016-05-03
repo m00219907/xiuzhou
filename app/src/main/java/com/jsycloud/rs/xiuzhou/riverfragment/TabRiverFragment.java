@@ -29,17 +29,17 @@ public class TabRiverFragment extends Fragment implements View.OnClickListener{
 
         river_fragment_checkriver = (MyRectangleView)view.findViewById(R.id.river_fragment_checkriver);
         river_fragment_checkriver.setRectangleColor(0xff4caf50);
-        river_fragment_checkriver.settextStr("Ѳ��");
+        river_fragment_checkriver.settextStr("巡河");
         river_fragment_checkriver.setOnClickListener(this);
 
         river_fragment_checkriver_history = (MyRectangleView)view.findViewById(R.id.river_fragment_checkriver_history);
         river_fragment_checkriver_history.setRectangleColor(0xff2196f3);
-        river_fragment_checkriver_history.settextStr("Ѳ�Ӽ�¼");
+        river_fragment_checkriver_history.settextStr("巡河记录");
         river_fragment_checkriver_history.setOnClickListener(this);
 
         river_fragment_entrust_checkriver = (MyRectangleView)view.findViewById(R.id.river_fragment_entrust_checkriver);
         river_fragment_entrust_checkriver.setRectangleColor(0xffff0000);
-        river_fragment_entrust_checkriver.settextStr("ί��Ѳ��");
+        river_fragment_entrust_checkriver.settextStr("委托巡河");
         river_fragment_entrust_checkriver.setOnClickListener(this);
 
         return view;

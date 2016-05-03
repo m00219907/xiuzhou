@@ -144,16 +144,17 @@ public class TabProblemFragment extends Fragment implements View.OnClickListener
     }
 
     public String getFilePathFromUrl(Uri uri){
-        String filePath;
-        String[] filePathColumn = {MediaStore.MediaColumns.DATA};
+        String filePath = "";
+        String[] filePathColumn = {MediaStore.Images.Media.DATA};
 
         ContentResolver contentResolver = activity.getContentResolver();
         Cursor cursor = contentResolver.query(uri, filePathColumn, null, null, null);
-        cursor.moveToFirst();
-
-        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-        filePath = cursor.getString(columnIndex);
-        cursor.close();
+        if(cursor != null && cursor.getCount()>0) {
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            filePath = cursor.getString(columnIndex);
+            cursor.close();
+        }
         return filePath;
     }
 
