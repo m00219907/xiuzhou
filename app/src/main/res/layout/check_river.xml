@@ -182,20 +182,13 @@
             </LinearLayout>
         </LinearLayout>
 
-        <RelativeLayout
+        <com.jsycloud.rs.xiuzhou.MyRectangleView
+            android:id="@+id/check_river_uploadpic"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp">
-
-            <Button
-                android:id="@+id/check_river_uploadpic"
-                android:layout_width="80dp"
-                android:layout_height="30dp"
-                android:background="#666666"
-                android:text="上传照片"/>
-        </RelativeLayout>
+            android:layout_height="@dimen/button_height"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
 
         <ImageView
             android:id="@+id/check_river_photo"
@@ -206,13 +199,13 @@
             android:layout_marginRight="30dp"
             android:visibility="gone"/>
 
-        <Button
+        <com.jsycloud.rs.xiuzhou.MyRectangleView
             android:id="@+id/check_river_commit"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_margin="30dp"
-            android:background="#666666"
-            android:text="提交"/>
+            android:layout_height="@dimen/button_height"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
 
     </LinearLayout>
 </ScrollView>

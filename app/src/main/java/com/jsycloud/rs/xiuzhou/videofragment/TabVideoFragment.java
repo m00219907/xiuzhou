@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
 
+import com.jsycloud.rs.xiuzhou.MyRectangleView;
 import com.jsycloud.rs.xiuzhou.R;
 import com.jsycloud.rs.xiuzhou.StartActivity;
 
@@ -82,7 +82,10 @@ public class TabVideoFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-        view.findViewById(R.id.video_fragment_startvideo).setOnClickListener(this);
+        MyRectangleView video_fragment_startvideo = (MyRectangleView)view.findViewById(R.id.video_fragment_startvideo);
+        video_fragment_startvideo.setRectangleColor(0xff2196f3);
+        video_fragment_startvideo.settextStr("查看视频");
+        video_fragment_startvideo.setOnClickListener(this);
         return view;
     }
 

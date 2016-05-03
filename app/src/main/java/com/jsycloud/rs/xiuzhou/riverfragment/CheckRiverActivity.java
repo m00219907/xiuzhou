@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.jsycloud.rs.xiuzhou.Constant;
 import com.jsycloud.rs.xiuzhou.DialogShow;
 import com.jsycloud.rs.xiuzhou.HttpClentLinkNet;
+import com.jsycloud.rs.xiuzhou.MyRectangleView;
 import com.jsycloud.rs.xiuzhou.R;
 import com.jsycloud.rs.xiuzhou.problemfragment.RiverChooseActivity;
 
@@ -63,8 +64,17 @@ public class CheckRiverActivity extends Activity implements View.OnClickListener
         check_river_photo = (ImageView)findViewById(R.id.check_river_photo);
 
         findViewById(R.id.check_river_back).setOnClickListener(this);
-        findViewById(R.id.check_river_uploadpic).setOnClickListener(this);
         findViewById(R.id.check_river_commit).setOnClickListener(this);
+
+        MyRectangleView check_river_uploadpic = (MyRectangleView)findViewById(R.id.check_river_uploadpic);
+        check_river_uploadpic.setRectangleColor(0xff2196f3);
+        check_river_uploadpic.settextStr("上传照片");
+        check_river_uploadpic.setOnClickListener(this);
+
+        MyRectangleView check_river_commit = (MyRectangleView)findViewById(R.id.check_river_commit);
+        check_river_commit.setRectangleColor(0xff2196f3);
+        check_river_commit.settextStr("提交");
+        check_river_commit.setOnClickListener(this);
 
         if(Constant.curLocation != null){
             check_river_coordinate.setText(Constant.curLocation.getLatitude() + "," + Constant.curLocation.getLongitude());
@@ -87,7 +97,7 @@ public class CheckRiverActivity extends Activity implements View.OnClickListener
                 Uri uri = data.getData();
                 File tempFile = new File(getFilePathFromUrl(uri));
                 uploadFile = saveBitmapToFile(tempFile);
-                if(uploadFile.exists()){
+                if(uploadFile!= null && uploadFile.exists()){
                     Bitmap myBitmap = BitmapFactory.decodeFile(uploadFile.getAbsolutePath());
                     check_river_photo.setVisibility(View.VISIBLE);
                     check_river_photo.setImageBitmap(myBitmap);
@@ -159,7 +169,7 @@ public class CheckRiverActivity extends Activity implements View.OnClickListener
             Toast.makeText(this, "问题描述不能为空", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(!uploadFile.exists()){
+        if(uploadFile == null || !uploadFile.exists()){
             Toast.makeText(this, "至少上传一张照片", Toast.LENGTH_SHORT).show();
             return;
         }

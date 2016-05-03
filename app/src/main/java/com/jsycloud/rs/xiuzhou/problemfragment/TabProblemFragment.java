@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.jsycloud.rs.xiuzhou.Constant;
 import com.jsycloud.rs.xiuzhou.DialogShow;
 import com.jsycloud.rs.xiuzhou.HttpClentLinkNet;
+import com.jsycloud.rs.xiuzhou.MyRectangleView;
 import com.jsycloud.rs.xiuzhou.R;
 import com.jsycloud.rs.xiuzhou.StartActivity;
 
@@ -39,7 +40,7 @@ public class TabProblemFragment extends Fragment implements View.OnClickListener
 
     private StartActivity activity;
     TextView problem_fragment_coordinate, problem_fragment_postion, problem_fragment_chooseriver;
-    EditText problem_fragment_name, problem_fragment_phone;
+    EditText problem_fragment_discribe, problem_fragment_name, problem_fragment_phone;
     ImageView problem_fragment_photo;
 
     private final int CHOOSE_RIVER = 109;// 选择河流
@@ -48,7 +49,7 @@ public class TabProblemFragment extends Fragment implements View.OnClickListener
 
     private final String PHOTO_FILE_NAME = "temp_photo.jpg";
 
-    private String photo_abslute_path = "";
+    File uploadFile;
 
     @Override
     public void onAttach(Activity activity) {
@@ -64,12 +65,20 @@ public class TabProblemFragment extends Fragment implements View.OnClickListener
         problem_fragment_postion = (TextView)view.findViewById(R.id.problem_fragment_postion);
         problem_fragment_chooseriver = (TextView)view.findViewById(R.id.problem_fragment_chooseriver);
         problem_fragment_chooseriver.setOnClickListener(this);
+        problem_fragment_discribe = (EditText)view.findViewById(R.id.problem_fragment_discribe);
         problem_fragment_name = (EditText)view.findViewById(R.id.problem_fragment_name);
         problem_fragment_phone = (EditText)view.findViewById(R.id.problem_fragment_phone);
         problem_fragment_photo = (ImageView)view.findViewById(R.id.problem_fragment_photo);
 
-        view.findViewById(R.id.problem_fragment_uploadpic).setOnClickListener(this);
-        view.findViewById(R.id.problem_fragment_commit).setOnClickListener(this);
+        MyRectangleView problem_fragment_uploadpic = (MyRectangleView)view.findViewById(R.id.problem_fragment_uploadpic);
+        problem_fragment_uploadpic.setRectangleColor(0xff2196f3);
+        problem_fragment_uploadpic.settextStr("上传照片");
+        problem_fragment_uploadpic.setOnClickListener(this);
+
+        MyRectangleView problem_fragment_commit = (MyRectangleView)view.findViewById(R.id.problem_fragment_commit);
+        problem_fragment_commit.setRectangleColor(0xff2196f3);
+        problem_fragment_commit.settextStr("提交");
+        problem_fragment_commit.setOnClickListener(this);
 
         if(Constant.curLocation != null){
             problem_fragment_coordinate.setText(Constant.curLocation.getLatitude() + "," + Constant.curLocation.getLongitude());
@@ -123,9 +132,8 @@ public class TabProblemFragment extends Fragment implements View.OnClickListener
             if (data != null) {
                 Uri uri = data.getData();
                 File tempFile = new File(getFilePathFromUrl(uri));
-                photo_abslute_path = tempFile.getAbsolutePath();
-                File uploadFile = saveBitmapToFile(tempFile);
-                if(uploadFile.exists()){
+                uploadFile = saveBitmapToFile(tempFile);
+                if(uploadFile != null && uploadFile.exists()){
                     Bitmap myBitmap = BitmapFactory.decodeFile(uploadFile.getAbsolutePath());
                     problem_fragment_photo.setVisibility(View.VISIBLE);
                     problem_fragment_photo.setImageBitmap(myBitmap);
@@ -133,8 +141,7 @@ public class TabProblemFragment extends Fragment implements View.OnClickListener
             }
         }else if(requestCode == PHOTO_REQUEST_CAMERA && resultCode == Activity.RESULT_OK){
             File tempFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), PHOTO_FILE_NAME);
-            photo_abslute_path = tempFile.getAbsolutePath();
-            File uploadFile = saveBitmapToFile(tempFile);
+            uploadFile = saveBitmapToFile(tempFile);
             if(uploadFile.exists()){
                 Bitmap myBitmap = BitmapFactory.decodeFile(uploadFile.getAbsolutePath());
                 problem_fragment_photo.setVisibility(View.VISIBLE);
@@ -159,16 +166,25 @@ public class TabProblemFragment extends Fragment implements View.OnClickListener
     }
 
     public void reportProblem() {
-        if(problem_fragment_phone.getText().toString().isEmpty()){
-            Toast.makeText(activity, "自动登录成功", Toast.LENGTH_SHORT).show();
+        if(problem_fragment_discribe.getText().toString().isEmpty()){
+            Toast.makeText(activity, "问题描述不能为空", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(uploadFile == null || !uploadFile.exists()){
+            Toast.makeText(activity, "至少上传一张照片", Toast.LENGTH_SHORT).show();
+            return;
         }
         String url = HttpClentLinkNet.BaseAddr + "report.php";
         AjaxParams params = new AjaxParams();
-        params.put("mobile", "android");
+        params.put("userid", Constant.userid);
         params.put("riverid", "riverid");
-        params.put("describe", "describe");
-        params.put("coordinate", "coordinate");
-        params.put("address", "address");
+        params.put("describe", problem_fragment_discribe.getText().toString());
+        params.put("coordinate", problem_fragment_coordinate.getText().toString());
+        params.put("address", problem_fragment_postion.getText().toString());
+        try {
+            params.put("photo1", uploadFile);
+        }catch (Exception e){
+        }
         HttpClentLinkNet.getInstance().sendReqFinalHttp_Post(url, params, new AjaxCallBack() {
             @Override
             public void onLoading(long count, long current) {

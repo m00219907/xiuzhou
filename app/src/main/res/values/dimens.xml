@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="yuansize">210.0dip</dimen>
+    <dimen name="button_height">35dp</dimen>
     <dimen name="songnameplay">10.0dip</dimen>
     <dimen name="con_play">8dip</dimen>  
     <dimen name="dimen_time">5dip</dimen>

@@ -23,7 +23,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:src="@drawable/ic_notifications_active_black_24dp"/>
+            android:src="@drawable/ic_notifications_active_black_24dp"
+            android:visibility="gone"/>
 
     </LinearLayout>
 
@@ -70,7 +71,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:src="@drawable/ic_notifications_active_black_24dp"/>
+            android:src="@drawable/ic_notifications_active_black_24dp"
+            android:visibility="gone"/>
     </LinearLayout>
 
     <View
@@ -84,25 +86,25 @@
     <com.jsycloud.rs.xiuzhou.MyRectangleView
         android:id="@+id/river_fragment_checkriver"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/button_height"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"/>
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
 
     <com.jsycloud.rs.xiuzhou.MyRectangleView
         android:id="@+id/river_fragment_checkriver_history"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/button_height"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"/>
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
 
     <com.jsycloud.rs.xiuzhou.MyRectangleView
         android:id="@+id/river_fragment_entrust_checkriver"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/button_height"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"/>
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
 
 </LinearLayout>

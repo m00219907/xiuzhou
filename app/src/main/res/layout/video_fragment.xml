@@ -54,15 +54,13 @@
         android:layout_marginLeft="10dp"
         android:background="#333333"/>
 
-    <Button
+
+    <com.jsycloud.rs.xiuzhou.MyRectangleView
         android:id="@+id/video_fragment_startvideo"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/button_height"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:background="#2196f3"
-        android:text="查看视频"
-        android:textSize="16sp"/>
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
 
 </LinearLayout>

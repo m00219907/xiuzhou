@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.jsycloud.rs.xiuzhou.Constant;
 import com.jsycloud.rs.xiuzhou.HttpClentLinkNet;
+import com.jsycloud.rs.xiuzhou.MyRectangleView;
 import com.jsycloud.rs.xiuzhou.R;
 import com.jsycloud.rs.xiuzhou.SharePreferenceDataUtil;
 import com.jsycloud.rs.xiuzhou.StartActivity;
@@ -59,11 +60,30 @@ public class TabMeFragment extends Fragment implements View.OnClickListener{
         login_pwd_miwen.setTag("1");
         login_pwd_miwen.setOnClickListener(this);
 
-        view.findViewById(R.id.login_login).setOnClickListener(this);
         view.findViewById(R.id.login_use_code).setOnClickListener(this);
         view.findViewById(R.id.aboutme_changecontent).setOnClickListener(this);
         view.findViewById(R.id.aboutme_changepassword).setOnClickListener(this);
         view.findViewById(R.id.aboutme_logout).setOnClickListener(this);
+
+        MyRectangleView me_fragment_login = (MyRectangleView)view.findViewById(R.id.me_fragment_login);
+        me_fragment_login.setRectangleColor(0xff2196f3);
+        me_fragment_login.settextStr("登录");
+        me_fragment_login.setOnClickListener(this);
+
+        MyRectangleView aboutme_changecontent = (MyRectangleView)view.findViewById(R.id.aboutme_changecontent);
+        aboutme_changecontent.setRectangleColor(0xff2196f3);
+        aboutme_changecontent.settextStr("修改资料");
+        aboutme_changecontent.setOnClickListener(this);
+
+        MyRectangleView aboutme_changepassword = (MyRectangleView)view.findViewById(R.id.aboutme_changepassword);
+        aboutme_changepassword.setRectangleColor(0xff4caf50);
+        aboutme_changepassword.settextStr("修改密码");
+        aboutme_changepassword.setOnClickListener(this);
+
+        MyRectangleView aboutme_logout = (MyRectangleView)view.findViewById(R.id.aboutme_logout);
+        aboutme_logout.setRectangleColor(0xffff0000);
+        aboutme_logout.settextStr("注销");
+        aboutme_logout.setOnClickListener(this);
 
         if(Constant.isLogin){
             login_layout.setVisibility(View.GONE);
@@ -119,7 +139,7 @@ public class TabMeFragment extends Fragment implements View.OnClickListener{
                 }
                 login_password.setSelection(login_password.getText().length());
                 break;
-            case R.id.login_login:
+            case R.id.me_fragment_login:
                 login();
                 break;
             case R.id.login_use_code:

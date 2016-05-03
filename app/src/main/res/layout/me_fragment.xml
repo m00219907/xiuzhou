@@ -93,16 +93,13 @@
             android:layout_marginTop="10dp"
             android:background="#555555"/>
 
-        <Button
-            android:id="@+id/login_login"
+        <com.jsycloud.rs.xiuzhou.MyRectangleView
+            android:id="@+id/me_fragment_login"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="@dimen/button_height"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:background="#2196f3"
-            android:text="登录"
-            android:textSize="16sp"/>
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
 
         <EditText
             android:id="@+id/login_code_edit"
@@ -242,39 +239,29 @@
             android:layout_marginTop="10dp"
             android:background="#666666"/>
 
-        <Button
+        <com.jsycloud.rs.xiuzhou.MyRectangleView
             android:id="@+id/aboutme_changecontent"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/button_height"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:background="#2196f3"
-            android:text="修改资料"
-            android:textSize="16sp"/>
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
 
-        <Button
+        <com.jsycloud.rs.xiuzhou.MyRectangleView
             android:id="@+id/aboutme_changepassword"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/button_height"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:background="#4caf50"
-            android:text="修改密码"
-            android:textSize="16sp"/>
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
 
-        <Button
+        <com.jsycloud.rs.xiuzhou.MyRectangleView
             android:id="@+id/aboutme_logout"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/button_height"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:background="#ff0000"
-            android:text="注销"
-            android:textSize="16sp"/>
-
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
     </LinearLayout>
 
 </FrameLayout>
