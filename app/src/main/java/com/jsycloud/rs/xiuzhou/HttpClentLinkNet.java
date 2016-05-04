@@ -21,7 +21,7 @@ public class HttpClentLinkNet {
         return instance;
     }
 
-    public static  String BaseAddr = "http://ir.jxtvtech.com/app/";
+    public static  String BaseAddr = "http://ir.jsycloud.com/app/";
 
     public void sendReqFinalHttp_Get(String url, AjaxCallBack callBack) {
         FinalHttp fh = new FinalHttp();
