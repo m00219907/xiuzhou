@@ -55,7 +55,7 @@
         android:background="#333333"/>
 
 
-    <com.jsycloud.rs.xiuzhou.MyRectangleView
+    <Button
         android:id="@+id/video_fragment_startvideo"
         android:layout_width="match_parent"
         android:layout_height="@dimen/button_height"

@@ -20,6 +20,18 @@
             android:text="秀洲智慧河道"
             android:textColor="#ffffff"
             android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tab_map_tipoff_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:text="投诉举报查询"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:visibility="gone"/>
     </RelativeLayout>
 
     <LinearLayout
@@ -78,7 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="视频监控"
+                android:text="河道在线"
                 android:textColor="#9a9a9a"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -97,7 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/ic_person_black_24dp"
+                android:src="@drawable/tab_river_image_balck"
                 android:scaleType="center"/>
 
             <TextView
@@ -150,7 +162,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/ic_event_note_black_24dp"
+                android:src="@drawable/tab_problem_image_black"
                 android:scaleType="center"/>
 
             <TextView
@@ -158,7 +170,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="问题上报"
+                android:text="投诉举报"
                 android:textColor="#9a9a9a"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -184,7 +196,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="我的"
+                android:text="个人中心"
                 android:textColor="#9a9a9a"
                 android:textSize="16sp" />
         </LinearLayout>

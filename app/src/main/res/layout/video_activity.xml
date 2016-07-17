@@ -6,7 +6,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp">
+        android:layout_height="42dp">
 
         <ImageView
             android:id="@+id/video_activity_back"
@@ -20,16 +20,168 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="视频监控"
+            android:text="实时监控"
             android:textColor="#2196f3"
             android:textSize="20sp"/>
     </RelativeLayout>
 
-    <SurfaceView
-        android:id="@+id/video_activity_sfview"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="240dp">
+
+        <SurfaceView
+            android:id="@+id/video_activity_sfview"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:background="#0000ff00" />
+
+        <LinearLayout
+            android:id="@+id/video_activity_videolevel"
+            android:layout_width="60dp"
+            android:layout_height="90dp"
+            android:orientation="vertical"
+            android:background="#e2e2e2"
+            android:visibility="invisible"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentStart="false"
+            android:baselineAligned="false"
+            android:layout_alignParentBottom="true"
+            android:layout_alignWithParentIfMissing="false"
+            android:layout_alignParentRight="false"
+            android:gravity="center"
+            android:layout_alignParentTop="false"
+            android:layout_alignParentEnd="false"
+            android:layout_centerInParent="true">
+
+            <TextView
+                android:id="@+id/video_activity_hd"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:text="高清"
+                android:textColor="#666666"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/video_activity_balanced"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:text="标清"
+                android:textColor="#666666"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/video_activity_flunet"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:text="流畅"
+                android:textColor="#666666"
+                android:textSize="18sp"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/video_activity_fullscreen"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/fullscreen"
+            android:scaleType="fitXY"
+            android:visibility="invisible"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/video_activity_layout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <ImageView
+            android:id="@+id/video_activity_capture"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/preview_screenshot"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/video_activity_capture"
+            android:layout_centerVertical="true"
+            android:text="截图"
+            android:textColor="#666666"
+            android:textSize="18sp"
+            android:id="@+id/textView" />
+
+        <TextView
+            android:id="@+id/video_activity_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="标清"
+            android:textColor="#666666"
+            android:textSize="18sp"
+            android:layout_centerInParent="true" />
+
+        <TextView
+            android:id="@+id/video_activity_recordtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="录像"
+            android:textColor="#666666"
+            android:textSize="18sp"/>
+
+        <ImageView
+            android:id="@+id/video_activity_record"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_toLeftOf="@id/video_activity_recordtext"
+            android:src="@drawable/preview_recording"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/video_activity_layout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="30dp"
-        android:background="#0000ff00" />
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone">
 
+        <ImageView
+            android:id="@+id/video_activity_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/top_normal"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/video_activity_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/left_normal"/>
+
+                <ImageView
+                    android:id="@+id/video_activity_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:src="@drawable/right_normal"/>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/video_activity_down"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/bottom_normal"/>
+        </LinearLayout>
 </LinearLayout>

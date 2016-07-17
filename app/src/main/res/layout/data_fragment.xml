@@ -24,18 +24,18 @@
             android:layout_alignParentLeft="true"
             android:layout_toLeftOf="@id/data_fragment_line"
             android:gravity="center"
-            android:text="治水办通知"
+            android:text="区治水办通知"
             android:textColor="#2196f3"
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/data_fragment_criticism"
+            android:id="@+id/data_fragment_waterreport"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:layout_toRightOf="@id/data_fragment_line"
             android:gravity="center"
-            android:text="逾期通报"
+            android:text="水质报告"
             android:textColor="#666666"
             android:textSize="18sp" />
     </RelativeLayout>

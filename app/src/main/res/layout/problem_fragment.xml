@@ -12,56 +12,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="30dp"
-            android:text="当前坐标"
-            android:textColor="#666666" />
-
-        <TextView
-            android:id="@+id/problem_fragment_coordinate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="30dp"
-            android:hint="正在获取当前坐标"
-            android:textColor="#000000" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:background="#000000"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="30dp"
-            android:text="当前位置"
-            android:textColor="#666666" />
-
-        <TextView
-            android:id="@+id/problem_fragment_postion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="30dp"
-            android:hint="正在获取当前位置"
-            android:textColor="#000000" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:background="#000000"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:layout_marginLeft="30dp"
             android:text="请选择河流"
@@ -164,7 +114,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <com.jsycloud.rs.xiuzhou.MyRectangleView
+        <com.jsycloud.ir.xiuzhou.MyRectangleView
             android:id="@+id/problem_fragment_uploadpic"
             android:layout_width="match_parent"
             android:layout_height="@dimen/button_height"
@@ -172,16 +122,49 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"/>
 
-        <ImageView
-            android:id="@+id/problem_fragment_photo"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="260dp"
+            android:layout_height="80dp"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:visibility="gone"/>
+            android:orientation="horizontal">
 
-        <com.jsycloud.rs.xiuzhou.MyRectangleView
+            <ImageView
+                android:id="@+id/problem_fragment_photo1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="fitXY"/>
+
+            <ImageView
+                android:id="@+id/problem_fragment_photo2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="fitXY"/>
+
+            <ImageView
+                android:id="@+id/problem_fragment_photo3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="fitXY"/>
+
+            <ImageView
+                android:id="@+id/problem_fragment_photo4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="fitXY"/>
+
+            <ImageView
+                android:id="@+id/problem_fragment_photo5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="fitXY"/>
+        </LinearLayout>
+
+        <com.jsycloud.ir.xiuzhou.MyRectangleView
             android:id="@+id/problem_fragment_commit"
             android:layout_width="match_parent"
             android:layout_height="@dimen/button_height"

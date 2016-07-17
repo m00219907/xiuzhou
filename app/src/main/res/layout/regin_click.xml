@@ -1,41 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="260dp"
-    android:layout_height="150dp"
+    android:layout_height="135dp"
     android:background="@drawable/round_corner"
     android:orientation="vertical">
 
     <TextView
         style="@style/DialogText.Title"
+        android:id="@+id/login_code_tittle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:text="提示"/>
+        android:text="请输入8位委托码"/>
 
-    <TextView
-        android:id="@+id/regin_click_info"
+    <EditText
+        android:id="@+id/login_code_edit"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:singleLine="true"
+        android:background="@null"
         android:textColor="#000000"
-        android:gravity="center"
+        android:textColorHint="#909090"
         android:textSize="14sp" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.67dp"
         android:layout_marginTop="8dp"
-        android:background="#333333"/>
+        android:background="#999999"/>
 
-    <TextView
-        android:id="@+id/regin_click_iknow"
+    <LinearLayout
+        android:id="@+id/but_layout"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_weight="160"
-        android:gravity="center"
-        android:text="知道了"
-        android:textColor="#ff0000" />
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/login_code_cancel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="160"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="#2196f3" />
+
+        <View
+            android:id="@+id/update_divide_line"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#999999"/>
+
+        <TextView
+            android:id="@+id/login_code_postive"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="160"
+            android:gravity="center"
+            android:text="登录"
+            android:textColor="#2196f3" />
+    </LinearLayout>
 </LinearLayout>

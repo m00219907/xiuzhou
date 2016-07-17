@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "com.jsycloud.rs.xiuzhou"
+        applicationId "com.jsycloud.ir.xiuzhou"
         minSdkVersion 14
         targetSdkVersion 21
     }
@@ -25,7 +25,8 @@ dependencies {
     compile files('libs/AMap_2DMap_V2.8.1_20160202.jar')
     compile files('libs/AMap_Location_v2.3.0_20160112.jar')
     compile files('libs/afinal_0.5_bin.jar')
-    compile files('libs/AudioEngineSDK.jar')
-    compile files('libs/PlayerSDK.jar')
-    compile files('libs/HCNetSDK.jar')
+    compile files('libs/EZOpenSDK.jar')
+    compile files('libs/gcm.jar')
+    compile files('libs/zxing.jar')
+    compile files('libs/jpush-android-2.1.5.jar')
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/camera_item_rl"
+    android:layout_width="fill_parent"
+    android:layout_height="73dp"
+    android:background="@drawable/display_frame"
+    android:clickable="true"
+    android:orientation="horizontal"
+    android:gravity="center_vertical">
+
+    <ImageView
+        android:id="@+id/item_icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/player"
+        android:scaleType="fitXY" />
+
+    <TextView
+        android:id="@+id/camera_name_tv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="5dp"
+        android:textSize="@dimen/sixteen_text_size"
+        android:textColor="#000000"/>
+
+</LinearLayout>
