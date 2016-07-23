@@ -24,7 +24,6 @@ import com.jsycloud.ir.xiuzhou.Constant;
 import com.jsycloud.ir.xiuzhou.DialogShow;
 import com.jsycloud.ir.xiuzhou.DialogUtils;
 import com.jsycloud.ir.xiuzhou.HttpClentLinkNet;
-import com.jsycloud.ir.xiuzhou.MyRectangleView;
 import com.jsycloud.ir.xiuzhou.R;
 import com.jsycloud.ir.xiuzhou.mapfragment.riverInfo;
 
@@ -261,24 +260,12 @@ public class CheckRiverActivity extends Activity implements View.OnClickListener
                     DialogShow.dialogShow4(this, true, new DialogShow.IhigherChoosed() {
                         @Override
                         public void OnChoose(int index) {
-                            if(index == -1){
-                                check_river_touptext.setText(depart.get(0).getUserfullname());
-                                report = depart.get(0).getUserid();
-                            }else  if(index == -2){
-                                check_river_touptext.setText(depart.get(1).getUserfullname());
-                                report = depart.get(1).getUserid();
-                            }else  if(index == -3){
-                                check_river_touptext.setText(depart.get(2).getUserfullname());
-                                report = depart.get(2).getUserid();
-                            }else  if(index == -4){
-                                check_river_touptext.setText(depart.get(3).getUserfullname());
-                                report = depart.get(3).getUserid();
-                            }else  if(index == -5){
-                                check_river_touptext.setText(depart.get(4).getUserfullname());
-                                report = depart.get(4).getUserid();
-                            }else if(index >= 0 && index < higherList.size()){
-                                check_river_touptext.setText(higherList.get(index).getUserfullname());
-                                report = higherList.get(index).getUserid();
+                            if(index >= 0 && index < depart.size()){
+                                check_river_touptext.setText(depart.get(index).getUserfullname());
+                                report = depart.get(index).getUserid();
+                            }else if(index >= depart.size() && index < depart.size() + higherList.size()){
+                                check_river_touptext.setText(higherList.get(index - depart.size()).getUserfullname());
+                                report = higherList.get(index - depart.size()).getUserid();
                             }else if(index == -100){
                                 check_river_toup.setImageResource(R.drawable.setting_network_close);
                                 check_river_toup.setTag("0");

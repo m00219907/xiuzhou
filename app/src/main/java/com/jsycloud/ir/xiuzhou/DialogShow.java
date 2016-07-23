@@ -151,7 +151,7 @@ public class DialogShow {
             Window window = alertDialog.getWindow();
             window.setContentView(R.layout.choose_higher);
             ListView choose_higher_list = (ListView)window.findViewById(R.id.choose_higher_list);
-            View choose_department = LayoutInflater.from(context).inflate(R.layout.choose_department, null);
+            /*View choose_department = LayoutInflater.from(context).inflate(R.layout.choose_department, null);
             TextView choose_department_text1 = (TextView)choose_department.findViewById(R.id.choose_department_text1);
             TextView choose_department_text2 = (TextView)choose_department.findViewById(R.id.choose_department_text2);
             TextView choose_department_text3 = (TextView)choose_department.findViewById(R.id.choose_department_text3);
@@ -160,17 +160,13 @@ public class DialogShow {
 
             if(bHigher) {
                 choose_higher_list.addHeaderView(choose_department);
-            }
+            }*/
             ChooseHigherAdapter chooseHigherAdapter = new ChooseHigherAdapter(context, bHigher);
             choose_higher_list.setAdapter(chooseHigherAdapter);
             choose_higher_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    if (bHigher) {
-                        callBack.OnChoose(position - 1);
-                    } else {
-                        callBack.OnChoose(position);
-                    }
+                    callBack.OnChoose(position);
                     alertDialog.dismiss();
                 }
             });
@@ -181,57 +177,6 @@ public class DialogShow {
                      callBack.OnChoose(-100);
                  }
              });
-
-            if(CheckRiverActivity.depart.size()>0){
-                choose_department_text1.setText(CheckRiverActivity.depart.get(0).getUserfullname());
-            }
-            choose_department_text1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    callBack.OnChoose(-1);
-                    alertDialog.dismiss();
-                }
-            });
-            if(CheckRiverActivity.depart.size()>1){
-                choose_department_text2.setText(CheckRiverActivity.depart.get(1).getUserfullname());
-            }
-            choose_department_text2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    callBack.OnChoose(-2);
-                    alertDialog.dismiss();
-                }
-            });
-            if(CheckRiverActivity.depart.size()>2){
-                choose_department_text3.setText(CheckRiverActivity.depart.get(2).getUserfullname());
-            }
-            choose_department_text3.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    callBack.OnChoose(-3);
-                    alertDialog.dismiss();
-                }
-            });
-            if(CheckRiverActivity.depart.size()>3){
-                choose_department_text4.setText(CheckRiverActivity.depart.get(3).getUserfullname());
-            }
-            choose_department_text4.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    callBack.OnChoose(-4);
-                    alertDialog.dismiss();
-                }
-            });
-            if(CheckRiverActivity.depart.size()>4){
-                choose_department_text5.setText(CheckRiverActivity.depart.get(4).getUserfullname());
-            }
-            choose_department_text5.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    callBack.OnChoose(-5);
-                    alertDialog.dismiss();
-                }
-            });
 
         } catch (Exception e) {
         }

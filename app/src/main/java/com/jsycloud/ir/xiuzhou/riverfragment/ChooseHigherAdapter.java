@@ -23,7 +23,7 @@ public class ChooseHigherAdapter extends BaseAdapter{
     @Override
     public int getCount() {
         if(bHigher) {
-            return CheckRiverActivity.higherList.size();
+            return CheckRiverActivity.depart.size() + CheckRiverActivity.higherList.size();
         }else{
             return CheckRiverActivity.lowerList.size();
         }
@@ -44,7 +44,11 @@ public class ChooseHigherAdapter extends BaseAdapter{
         View curView = LayoutInflater.from(context).inflate(R.layout.choose_higher_item, parent, false);
         TextView assign_text = (TextView) curView.findViewById(R.id.choose_higher_text);
         if(bHigher) {
-            assign_text.setText(CheckRiverActivity.higherList.get(position).getUserfullname());
+            if(position < CheckRiverActivity.depart.size()) {
+                assign_text.setText(CheckRiverActivity.depart.get(position).getUserfullname());
+            }else{
+                assign_text.setText(CheckRiverActivity.higherList.get(position - CheckRiverActivity.depart.size()).getUserfullname());
+            }
         }else{
             assign_text.setText(CheckRiverActivity.lowerList.get(position).getUserfullname());
         }
