@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <ImageView
+        android:id="@+id/left"
+        android:layout_width="@dimen/common_title_icon_size"
+        android:layout_height="@dimen/common_title_icon_size"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:drawable="@drawable/backbtn_selector"
+        android:layout_marginLeft="@dimen/common_title_margin_big"
+        android:scaleType="centerInside" />
+
+    <ImageView
+        android:id="@+id/right"
+        android:layout_width="@dimen/common_title_icon_size"
+        android:layout_height="@dimen/common_title_icon_size"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/common_title_margin_big"
+        android:scaleType="centerInside" />
+
+    <TextView
+        android:id="@+id/title_center"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_toLeftOf="@id/right"
+        android:layout_toRightOf="@id/left"
+        android:text="@string/tab_group_tv"
+        android:gravity="center"
+        android:singleLine="true" />
+
+</merge>

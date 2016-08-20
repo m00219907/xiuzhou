@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+	<EditText
+	    android:id="@+id/editText_server_password"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignBaseline="@+id/Passwd"
+	    android:layout_alignBottom="@+id/Passwd"
+	    android:layout_alignParentRight="true"
+	    android:layout_marginRight="19dp"
+	    android:ems="10"
+	    android:text="123456" />
+
+	<EditText
+	    android:id="@+id/editText_server_user"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignBaseline="@+id/UserName"
+	    android:layout_alignBottom="@+id/UserName"
+	    android:layout_alignLeft="@+id/editText_server_password"
+	    android:ems="10"
+	    android:text="hyd" />
+
+	<EditText
+	    android:id="@+id/editText_server_Port"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignBaseline="@+id/server_port_text"
+	    android:layout_alignBottom="@+id/server_port_text"
+	    android:layout_alignLeft="@+id/editText_server_user"
+	    android:ems="10"
+	    android:text="9000" />
+
+	<TextView
+	    android:id="@+id/UserName"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_above="@+id/editText_server_password"
+	    android:layout_alignParentLeft="true"
+	    android:layout_marginBottom="26dp"
+	    android:layout_marginLeft="10dp"
+	    android:text="@string/login_activity_user" />
+
+	<TextView
+	    android:id="@+id/server_port_text"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_above="@+id/editText_server_user"
+	    android:layout_alignParentLeft="true"
+	    android:layout_marginBottom="21dp"
+	    android:layout_marginLeft="10dp"
+	    android:text="@string/login_activity_port" />
+
+	<TextView
+	    android:id="@+id/server_name_text"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_above="@+id/editText_server_Port"
+	    android:layout_alignParentLeft="true"
+	    android:layout_marginBottom="18dp"
+	    android:layout_marginLeft="10dp"
+	    android:text="@string/login_activity_ip" 
+	    />
+
+	<EditText
+	    android:id="@+id/editText_server"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignBaseline="@+id/server_name_text"
+	    android:layout_alignBottom="@+id/server_name_text"
+	    android:layout_alignLeft="@+id/editText_server_Port"
+	    android:ems="10"
+	    android:text="172.7.3.200" >
+
+	    <requestFocus />
+	</EditText>
+
+	<TextView
+	    android:id="@+id/Passwd"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_above="@+id/buttonLogin"
+	    android:layout_alignParentLeft="true"
+	    android:layout_marginBottom="86dp"
+	    android:layout_marginLeft="10dp"
+	    android:text="@string/login_activity_password" />
+
+	<Button
+	    android:id="@+id/buttonLogin"
+	    android:layout_width="80dp"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentBottom="true"
+	    android:layout_centerHorizontal="true"
+	    android:layout_marginBottom="83dp"
+	    android:layout_marginLeft="10dp"
+	    android:text="@string/login_activity_login" />
+
+	<!-- <Button
+	    android:id="@+id/buttonLogout"
+	    android:layout_width="80dp"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentBottom="true"
+	   	android:layout_alignParentRight="true"
+	    android:layout_centerHorizontal="true"
+	    android:layout_marginBottom="83dp"
+	    android:layout_marginRight="10dp"
+	    android:text="@string/login_activity_logout" /> -->
+	    
+</RelativeLayout>

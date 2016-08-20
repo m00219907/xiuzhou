@@ -2,11 +2,15 @@ package com.jsycloud.ir.xiuzhou;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.dh.DpsdkCore.IDpsdkCore;
+import com.dh.DpsdkCore.Login_Info_t;
 import com.jsycloud.ir.xiuzhou.mapfragment.riverInfo;
 import com.jsycloud.ir.xiuzhou.mefragment.ChangePasswordActivity;
 
@@ -24,6 +28,8 @@ import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
 
 public class StartActivity01 extends Activity{
+
+    private AppApplication mAPP = AppApplication.get();
 
     private Handler mHandler = new Handler()
     {
@@ -66,6 +72,9 @@ public class StartActivity01 extends Activity{
         String username = SharePreferenceDataUtil.getSharedStringData(this, "username");
         String userpassword = SharePreferenceDataUtil.getSharedStringData(this, "userpassword");
         login(username, userpassword);
+
+        //new LoginTask().execute();
+        new LoginTask2().execute();
     }
 
     public void login(String username, String userpassword) {
@@ -198,5 +207,66 @@ public class StartActivity01 extends Activity{
                 super.onFailure(t, errorNo, strMsg);
             }
         });
+    }
+
+    class LoginTask extends AsyncTask<Void, Integer, Integer> {
+
+        @Override
+        protected Integer doInBackground(Void... arg0) {
+            Login_Info_t loginInfo = new Login_Info_t();
+            loginInfo.szIp = "111.1.31.147".getBytes();
+            String strPort = "9000";
+            loginInfo.nPort = Integer.parseInt(strPort);
+            loginInfo.szUsername = "xzzsb".getBytes();
+            loginInfo.szPassword = "abcd1234".getBytes();
+            loginInfo.nProtocol = 2;
+            return IDpsdkCore.DPSDK_Login(mAPP.getDpsdkCreatHandle(), loginInfo, 30000);
+        }
+
+        @Override
+        protected void onPostExecute(Integer result) {
+
+            super.onPostExecute(result);
+            if (result == 0) {
+                Log.d("DpsdkLogin success:", result + "");
+                IDpsdkCore.DPSDK_SetCompressType(mAPP.getDpsdkCreatHandle(), 0);
+                mAPP.setLoginHandler(1);
+            } else {
+                Log.d("DpsdkLogin failed:",result+"");
+                Toast.makeText(getApplicationContext(), "login failed" + result, Toast.LENGTH_SHORT).show();
+                mAPP.setLoginHandler(0);
+            }
+        }
+
+    }
+
+    class LoginTask2 extends AsyncTask<Void, Integer, Integer> {
+
+        @Override
+        protected Integer doInBackground(Void... arg0) {
+            Login_Info_t loginInfo = new Login_Info_t();
+            loginInfo.szIp = "122.225.61.100".getBytes();
+            String strPort = "8001";
+            loginInfo.nPort = Integer.parseInt(strPort);
+            loginInfo.szUsername = "admin".getBytes();
+            loginInfo.szPassword = "jsy2016.2".getBytes();
+            loginInfo.nProtocol = 2;
+            return IDpsdkCore.DPSDK_Login(mAPP.getDpsdkCreatHandle(), loginInfo, 30000);
+        }
+
+        @Override
+        protected void onPostExecute(Integer result) {
+
+            super.onPostExecute(result);
+            if (result == 0) {
+                Log.d("DpsdkLogin success:", result + "");
+                IDpsdkCore.DPSDK_SetCompressType(mAPP.getDpsdkCreatHandle(), 0);
+                mAPP.setLoginHandler(1);
+            } else {
+                Log.d("DpsdkLogin failed:",result+"");
+                Toast.makeText(getApplicationContext(), "login failed" + result, Toast.LENGTH_SHORT).show();
+                mAPP.setLoginHandler(0);
+            }
+        }
     }
 }

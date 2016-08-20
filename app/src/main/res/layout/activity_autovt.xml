@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/pick_up_call_lay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/video_intercom_default_bg" >
+
+        <ImageView
+            android:id="@+id/refuse_img"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="400dp"
+            android:background="@drawable/video_intercom_refuse" />
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/refuse_img"
+            android:layout_below="@+id/refuse_img"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@string/visabletalk_refusecall"
+            android:textColor="@color/white" />
+
+        <ImageView
+            android:id="@+id/pickup_img"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignBottom="@+id/refuse_img"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="25dp"
+            android:background="@drawable/video_intercom_open_door" />
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/pickup_img"
+            android:layout_below="@+id/pickup_img"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@string/visabletalk_pickcall"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/vtc_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="@dimen/vt_name_txt" />
+
+        <TextView
+            android:id="@+id/vtc_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/vtc_name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="@string/visabletalk_calling_txt"
+            android:textColor="@color/white"
+            android:textSize="@dimen/vt_time_txt" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/open_door_lay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" >
+
+
+        <SurfaceView
+            android:id="@+id/sv_player"
+            android:layout_width="fill_parent"
+            android:layout_height="320dp"
+            android:layout_marginTop="20dp" 
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_below="@+id/vt_name"
+             />
+
+        <ImageView
+            android:id="@+id/video_intercom_confirm"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/video_intercom_confirm"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/offline_img"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/sv_player"
+            android:background="@drawable/video_intercom_refuse" />
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/offline_img"
+            android:layout_below="@+id/offline_img"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@string/visabletalk_offcall"
+            android:textColor="@color/white" />
+
+        <ImageView
+            android:id="@+id/open_door_img"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignBottom="@+id/offline_img"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="25dp"
+            android:background="@drawable/video_intercom_close_door" />
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/open_door_img"
+            android:layout_below="@+id/open_door_img"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@string/visabletalk_opendoorl"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/vt_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="@dimen/vt_name_txt" />
+
+        <TextView
+            android:id="@+id/vt_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/vt_name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="@dimen/vt_time_txt" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -46,4 +46,8 @@
         <item name="android:height">40dp</item>
     </style>
 
+    <style name="text_color" >
+        <item name="android:textColor">@color/black_txt</item>
+    </style>
+
 </resources>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <!-- Common Title -->
+    <declare-styleable name="CommonTitle">
+        <attr name="drawableLeft" format="reference" />
+        <attr name="drawableRight" format="reference" />
+        <attr name="textCenter" format="string" />
+        <attr name="textMidLeft" format="string" />
+        <attr name="textMidRight" format="string" />
+        <attr name="textCenterColor" format="color" />
+        <attr name="textCenterSize" format="dimension" />
+    </declare-styleable>
+    <!-- 控件名称 -->
+    <declare-styleable name="liveScreenChangeImage">
+
+        <!-- 属性名称，类型 -->
+        <attr name="selectStateBg" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="SwitchButton">
+        <attr name="onBg" format="reference"></attr>
+        <attr name="onStayBg" format="reference"></attr>
+        <attr name="offBg" format="reference"></attr>
+        <attr name="offStayBg" format="reference"></attr>
+        <attr name="buttonState" format="boolean"></attr>
+        <attr name="disableBg" format="reference"></attr>
+    </declare-styleable>
+    <declare-styleable name="SelectItemView">
+        <attr name="Text" format="string"/>
+        <attr name="TextColor" format="color"/>
+        <attr name="TextSelectColor" format="color"/>
+        <attr name="TextSize" format="dimension"/>
+        <attr name="TextStyle">
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+            <enum name="italic" value="2" />
+        </attr>
+        <attr name="TextPaddingLeft" format="dimension"/>
+        <attr name="TextPaddingTop" format="dimension"/>
+        <attr name="TextPaddingGravity">
+            <enum name="Center_vertical" value="0" />
+            <enum name="Center_horizontal" value="1" />
+        </attr>
+        <attr name="RadioBtnBg" format="reference"/>
+        <attr name="RadioBtnSelectBg" format="reference"/>
+        <attr name="RadioBtnPaddingLeft" format="dimension"/>
+        <attr name="RadioBtnPaddingTop" format="dimension"/>
+        <attr name="RadioBtnHeight" format="dimension"/>
+        <attr name="RadioBtnWidth" format="dimension"/>
+        <attr name="SelectState" format="boolean"/>
+
+         <attr name="RadioBtnGravity">
+            <enum name="Center_vertical" value="0" />
+            <enum name="Center_horizontal" value="1" />
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="TimeLineView">
+        <attr name="TimeScaleTextPaddingTop" format="dimension"></attr>
+        <attr name="TimeScaleDateText" format="string"></attr>
+        <attr name="TimeScaleTimeText" format="string"></attr>
+        <attr name="TimeScaleTextSize" format="dimension"></attr>
+        <attr name="TimeScaleTextColor" format="reference|color"></attr>
+        <attr name="TimeScaleTextStyle">
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+            <enum name="italic" value="2" />
+        </attr>
+        <attr name="TimeScaleLineColor" format="reference|color"></attr>
+        <attr name="TimeScaleLineWidth" format="dimension"></attr>
+        <attr name="TimeScaleLinePaddingLeft" format="dimension"></attr>
+        <attr name="TimeScaleLinePaddingRight" format="dimension"></attr>
+        <attr name="TimeScaleLinePaddingTop" format="dimension"></attr>
+        <attr name="TimeScaleLinePaddingBottom" format="dimension"></attr>
+        <attr name="TimeScaleUnitValue" format="dimension"></attr>
+        <attr name="TimeScaleUnitTextSize" format="dimension"></attr>
+        <attr name="TimeScaleUnitTextColor" format="reference|color"></attr>
+        <attr name="TimeScaleUnitTextStyle">
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+            <enum name="italic" value="2" />
+        </attr>
+        <attr name="TimeScaleUnitPaddingLeft" format="dimension"></attr>
+        <attr name="TimeScaleUnitPaddingRight" format="dimension"></attr>
+        <attr name="TimeScaleUnitPaddingTop" format="dimension"></attr>
+        <attr name="TimeScaleUnitPaddingBottom" format="dimension"></attr>
+        <attr name="TimeScaleUnitMarkHeight" format="dimension"></attr>
+        <attr name="TimeScaleUnitMarkWidth" format="dimension"></attr>
+        <attr name="TimeScaleUnitMarkColor" format="reference|color"></attr>
+        <attr name="TimeScaleContentWidth" format="dimension"></attr>
+    </declare-styleable>
+    
+    
+</resources>

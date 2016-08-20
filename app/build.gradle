@@ -22,6 +22,10 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:support-v4:21.0.0'
+    compile 'com.google.code.gson:gson:2.2.4'
+    compile files('libs/core_api.jar')
+    compile files('libs/IDpsdkCore.jar')
+    compile files('libs/IPlaySDK.jar')
     compile files('libs/AMap_2DMap_V2.8.1_20160202.jar')
     compile files('libs/AMap_Location_v2.3.0_20160112.jar')
     compile files('libs/afinal_0.5_bin.jar')

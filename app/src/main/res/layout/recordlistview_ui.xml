@@ -1,0 +1,46 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="?android:attr/textAppearanceLarge"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="3dp"
+    android:textIsSelectable="true"
+    android:orientation="horizontal"
+    android:id="@+id/ll_widget" >
+    <TextView android:id="@+id/tv_record_info_id"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        />
+    <TextView android:id="@+id/tv_record_id"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:gravity="right"/>
+    
+<!--<TextView android:id="@+id/tv_record_start_time"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:gravity="right"/>
+    <TextView android:id="@+id/tv_record_end_time"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:gravity="right"/> -->
+    
+    <TextView android:id="@+id/tv_record_file_index"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:gravity="right"/>
+    <TextView android:id="@+id/tv_record_file_size"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:gravity="right"/>
+    <TextView android:id="@+id/tv_record_source"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:gravity="right"/>
+    <TextView android:id="@+id/tv_record_type"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:gravity="right"/>
+</LinearLayout>
+

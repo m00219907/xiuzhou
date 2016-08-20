@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <color name="white">#FFFFFF</color>
+    <color name="black_txt">#000000</color>
+    <color name="black_text">#333333</color>
+    <color name="black">#333333</color>
+    <color name="blue">#1d76d9</color>
+    <color name="gray">#e0e0e0</color>
+    <color name="black_gray">#6D6D6D</color>
+    <color name="input_gray">#b5b5b8</color>
+    <color name="gray_level1">#cccccc</color>
+    <color name="gray_level2">#dadadd</color>
+    <color name="gray_level3">#f0eff5</color>
+    <color name="gray_level_4">#f4f4f4</color>
+    <color name="cameralist_gray">#e3e3e3</color>
+    <color name="page_change_gray">#8f8f8f</color>
+    <color name="gray_text">#adadad</color>
+    <color name="transparent_black">#99000000</color>
+    <color name="transparent_background">#50000000</color> 
+
+    <!-- background color -->
+    <color name="background_light">#FFFFFF</color>
+    <color name="background_gray_light">#F0EFF5</color>
+    <color name="background_gray">#D7D9E0</color>
+    <color name="background_gray_dark">#747F8E</color>
+    <color name="background_blue_light">#4D9CF4</color>
+    <color name="background_blue">#1D76D9</color>
+    <color name="background_blue_dark">#145297</color>
+    <color name="background_red">#D91D1D</color>
+    <color name="background_red_dark">#971414</color>
+
+    <!-- divider color -->
+    <color name="divider_gray">#C6C6C6</color>
+
+    <!-- text color -->
+    <color name="text_color_dark">#2E2E2E</color>
+    <color name="text_color_light">#FFFFFF</color>
+    <color name="text_color_hint">#B3B3B3</color>
+    <color name="text_color_blue">#1D76D9</color>
+
+    <!-- JazzyViewPager -->
+    <color name="holo_blue">#FF33E5B5</color>
+    
+    <!-- timebar -->
+    <color name="greenYellow">#ffffcc00</color>
+</resources>

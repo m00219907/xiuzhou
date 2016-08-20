@@ -1,0 +1,322 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_detail"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="com.dh.Demo.ItemDetailFragment" >
+
+    <LinearLayout
+        android:id="@+id/main_fragment_playback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_excute_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:gravity="center"
+                android:text="@string/tongdao_mc" />
+
+            <TextView
+                android:id="@+id/et_cam_id"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:maxEms="15"
+                android:minEms="10"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <SurfaceView
+            android:id="@+id/sv_player"
+            android:layout_width="315dp"
+            android:layout_height="272dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp" />
+
+        <!-- control bar -->
+
+        <com.jsycloud.playback.controlbar.RemotePortaitControlBar
+            android:id="@+id/portait_control"
+            android:layout_marginTop="10dp"
+            android:layout_width="fill_parent"
+            android:layout_height="128dip"
+            android:background="@color/gray" />
+        
+    <!--     <Button
+            android:id="@+id/btn_play_moveset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="@string/play_moveset" /> -->
+
+        <Button
+            android:id="@+id/bt_query_video"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="查询录像" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_weight="0.1"
+                android:text="来源：" />
+
+            <Spinner
+                android:id="@+id/sp_source"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_weight="0.4" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_weight="0.1"
+                android:text="类型：" />
+
+            <Spinner
+                android:id="@+id/sp_video_type"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_weight="0.4" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/bt_playback_by_file"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="@string/file_play_back" />
+
+            <Button
+                android:id="@+id/bt_playback_by_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="@string/time_play_back" />
+
+            <Button
+                android:id="@+id/bt_close_playback"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="@string/close_play_back" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/choose_start_time_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="开始时间：" />
+
+            <TextView
+                android:id="@+id/choose_start_time_txt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:singleLine="true"
+                android:text="@string/choose_start_time" />
+
+         
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/choose_end_time_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="结束时间：" />
+
+            <TextView
+                android:id="@+id/choose_end_time_txt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:singleLine="true"
+                android:text="@string/choose_end_time" />
+
+        </LinearLayout>
+
+        <!--
+            <LinearLayout android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="回放进度"/>
+                <SeekBar android:id="@+id/sb_process_bar"
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"/>
+            </LinearLayout>
+            <SurfaceView android:id="@+id/sv_player"
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"/>
+            
+            <LinearLayout android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button android:id="@+id/bt_local_playback"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="本地录像回放"/>
+                <Button android:id="@+id/bt_open_audio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="打开音频"/>
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="进度："/>
+                <TextView android:id="@+id/tv_playback_process"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button android:id="@+id/bt_current_play_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="当前的播放时间"/>
+                <Button android:id="@+id/bt_close_audio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="关闭音频"/>
+            </LinearLayout>
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="音量"/>
+            <LinearLayout android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="音量"/>
+                <EditText android:id="@+id/et_audio_d"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:minEms="5"
+                    android:maxEms="7"/>
+                <Button android:id="@+id/bt_get_audio_d"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="获取音量"/>
+                <Button android:id="@+id/bt_set_audio_d"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="设置音量"/>
+            </LinearLayout>
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="视频属性"/>
+            <LinearLayout android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="亮度"/>
+                <EditText android:id="@+id/et_light_d"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:minEms="5"
+                    android:maxEms="7"
+                    android:text="64"/>
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="饱和度"/>
+                <EditText android:id="@+id/et_fill_d"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:minEms="5"
+                    android:maxEms="7"
+                    android:text="64"/>
+                <Button android:id="@+id/bt_get_vedio_d"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="获取"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="对比度"/>
+                <EditText android:id="@+id/et_compare_d"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:minEms="5"
+                    android:maxEms="7"
+                    android:text="64"/>
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="色调"/>
+                <EditText android:id="@+id/et_color_d"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:minEms="5"
+                    android:maxEms="7"
+                    android:text="64"/>
+                <Button android:id="@+id/bt_set_vedio_d"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="调整"/>
+            </LinearLayout>
+        -->
+
+        <Button
+            android:id="@+id/capture_bitmap"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/str_capture_bitmap" />
+    </LinearLayout>
+
+</ScrollView>

@@ -233,4 +233,34 @@
 	
 	<dimen name="item_height">49dp</dimen>
 	<dimen name="set_dev_tv_h">43dp</dimen>
+
+
+    <dimen name="button_text_size">14dp</dimen>
+    <!-- 下拉刷新 -->
+    <dimen name="updatebar_height">72.0dip</dimen>
+    <dimen name="updatebar_content_height">70.0dip</dimen>
+    <dimen name="updatebar_padding">20.0dip</dimen>
+    <dimen name="sub_button_text_size">14dp</dimen>
+    <!-- common title -->
+    <dimen name="common_title_height">48dp</dimen>
+    <dimen name="common_title_icon_size">32dp</dimen>
+    <dimen name="common_title_tab_width">120dp</dimen>
+    <dimen name="common_title_margin">8dp</dimen>
+    <dimen name="common_title_margin_big">16dp</dimen>
+    <dimen name="tab_text_size">16dp</dimen>
+    <dimen name="text_size_large">18sp</dimen>
+    <dimen name="playback_ctrolBar_megin">20dp</dimen>
+    <dimen name="playback_title_text_font_size">20sp</dimen>
+    <dimen name="playback_TimeScale_TextSize">19sp</dimen>
+    <dimen name="playback_TimeUnit_TextSize">14sp</dimen>
+    <dimen name="playback_Fullscreen_TimeScale_TextSize">12sp</dimen>
+    <dimen name="playback_Fullscreen_TimeUnit_TextSize">8sp</dimen>
+    <dimen name="playback_Fullscreen_ControlBar_Left_Margins">16dp</dimen>
+    <dimen name="playback_Fullscreen_TimeLine_Left_Margins">8dp</dimen>
+    <dimen name="playback_Fullscreen_Camera_Name_Height">18dp</dimen>
+    <dimen name="playback_Fullscreen_TimeScaleUnitPaddingBottom">0dp</dimen>
+    <dimen name="playback_Fullscreen_TimeScaleUnitMarkHeight">1dp</dimen>
+
+    <dimen name="vt_name_txt">26sp</dimen>
+    <dimen name="vt_time_txt">18sp</dimen>
 </resources>

@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dh.DpsdkCore.IDpsdkCore;
 import com.jsycloud.ir.xiuzhou.datafragment.TabDataFragment;
 import com.jsycloud.ir.xiuzhou.datafragment.TabDataFragment1;
 import com.jsycloud.ir.xiuzhou.mapfragment.TabMapFragment;
@@ -22,6 +23,7 @@ import com.jsycloud.ir.xiuzhou.problemfragment.TabProblemFragment;
 import com.jsycloud.ir.xiuzhou.riverfragment.TabRiverFragment;
 import com.jsycloud.ir.xiuzhou.riverfragment.WebviewActivity;
 import com.jsycloud.ir.xiuzhou.videofragment.TabVideoFragment;
+import com.jsycloud.ir.xiuzhou.videofragment.TabVideoFragment2;
 
 import net.tsz.afinal.http.AjaxCallBack;
 import net.tsz.afinal.http.AjaxParams;
@@ -116,7 +118,7 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
                 TabMapFragment mapFragment = new TabMapFragment();
                 fragments.add(0, mapFragment);
 
-                TabVideoFragment videoFragment = new TabVideoFragment();
+                TabVideoFragment2 videoFragment = new TabVideoFragment2();
                 fragments.add(1, videoFragment);
 
                 TabRiverFragment riverFragment = new TabRiverFragment();
@@ -190,6 +192,7 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
                 Toast.makeText(this, "再按一次 退出程序", Toast.LENGTH_LONG).show();
                 touchTime = currentTime;
             } else {
+                IDpsdkCore.DPSDK_Logout(AppApplication.get().getDpsdkCreatHandle(), 30000);
                 android.os.Process.killProcess(android.os.Process.myPid());
             }
             return true;

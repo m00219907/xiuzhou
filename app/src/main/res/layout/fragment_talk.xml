@@ -1,0 +1,56 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_detail"
+    style="?android:attr/textAppearanceLarge"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="1dp"
+    android:scrollbarAlwaysDrawVerticalTrack="false"
+    tools:context="com.dh.Demo.ItemDetailFragment" >
+
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="执行结果" />
+
+            <TextView
+                android:id="@+id/tv_excute_result"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="" />
+
+            <EditText
+                    android:id="@+id/et_cam_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxEms="15"
+                    android:minEms="10"
+                    android:singleLine="true"
+                    android:text="1000096$1$0$0" />
+            <Button android:id="@+id/bt_get_talk_stream"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="GetTalkStream"/>
+            <Button android:id="@+id/bt_close_stream_by_seq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CloseStreamBySeq"/>
+            <Button android:id="@+id/bt_close_stream_by_camid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CloseStreamByCamId"/>
+            
+        </LinearLayout>
+            
+    </HorizontalScrollView>
+
+</ScrollView>

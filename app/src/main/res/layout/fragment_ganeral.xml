@@ -1,0 +1,66 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_detail_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.dh.Demo.ItemDetailActivity" >
+
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="执行结果" />
+
+            <TextView
+                android:id="@+id/tv_excute_result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/bt_load_all_organs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="加载所有组织结构" />
+
+            <Button
+                android:id="@+id/bt_get_all_organs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="获取组织结构串" />
+
+            <Button
+                android:id="@+id/bt_get_organs_by_rank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="分级获取组织结构" />
+			<!-- 
+            <Button
+                android:id="@+id/bt_change_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="修改密码" />
+            <Button android:id="@+id/bt_set_callback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="设置callback"/>
+            <Button android:id="@+id/bt_get_dev_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="GetDeviceList"/>
+            <Button android:id="@+id/bt_get_dev_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="GetDevicesInfo"/>
+             -->    
+        </LinearLayout>
+    </HorizontalScrollView>
+
+</ScrollView>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:TimeLineView="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <com.jsycloud.timebar.TimeBarHorizontalScrollView
+        android:id="@+id/TimeBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="#18222a"
+            android:orientation="horizontal" >
+
+            <com.jsycloud.timebar.TimeLineView
+                android:id="@+id/TimeLineBar"
+                android:layout_width="320dp"
+                android:layout_height="80dp"
+                TimeLineView:TimeScaleContentWidth="8dp"
+                TimeLineView:TimeScaleDateText="2013-1-9"
+                TimeLineView:TimeScaleLineColor="@color/greenYellow"
+                TimeLineView:TimeScaleLinePaddingBottom="1dp"
+                TimeLineView:TimeScaleLinePaddingLeft="5dp"
+                TimeLineView:TimeScaleLinePaddingRight="5dp"
+                TimeLineView:TimeScaleLinePaddingTop="1dp"
+                TimeLineView:TimeScaleLineWidth="2dp"
+                TimeLineView:TimeScaleTextColor="@color/white"
+                TimeLineView:TimeScaleTextPaddingTop="2dp"
+                TimeLineView:TimeScaleTextSize="@dimen/playback_TimeScale_TextSize"
+                TimeLineView:TimeScaleTextStyle="normal"
+                TimeLineView:TimeScaleTimeText="00:00:00"
+                TimeLineView:TimeScaleUnitMarkColor="#ffffff"
+                TimeLineView:TimeScaleUnitMarkHeight="2dp"
+                TimeLineView:TimeScaleUnitMarkWidth="1dp"
+                TimeLineView:TimeScaleUnitPaddingBottom="10dp"
+                TimeLineView:TimeScaleUnitPaddingTop="30dp"
+                TimeLineView:TimeScaleUnitTextColor="#ffffff"
+                TimeLineView:TimeScaleUnitTextSize="@dimen/playback_TimeUnit_TextSize"
+                TimeLineView:TimeScaleUnitTextStyle="normal"
+                TimeLineView:TimeScaleUnitValue="120px" />
+        </LinearLayout>
+    </com.jsycloud.timebar.TimeBarHorizontalScrollView>
+
+  <!--   <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="48dip"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/camera"
+            android:layout_width="32dip"
+            android:layout_height="32dip"
+            android:layout_weight="1"
+            android:src="@drawable/common_softkey_camera" />
+
+        <ImageView
+            android:id="@+id/play"
+            android:layout_width="32dip"
+            android:layout_height="32dip"
+            android:layout_weight="1"
+            android:src="@drawable/common_softkey_play" />
+
+        <ImageView
+            android:id="@+id/sound"
+            android:layout_width="32dip"
+            android:layout_height="32dip"
+            android:layout_weight="1"
+            android:src="@drawable/common_softkey_sound" />
+
+        <ImageView
+            android:id="@+id/close"
+            android:layout_width="32dip"
+            android:layout_height="32dip"
+            android:layout_weight="1"
+            android:src="@drawable/playback_softkey_close" />
+    </LinearLayout> -->
+    <!-- <Button 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        
+        /> -->
+
+</LinearLayout>

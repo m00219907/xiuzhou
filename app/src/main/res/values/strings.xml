@@ -1,3 +1,178 @@
 <resources>
     <string name="app_name">秀洲智慧河道</string>
+
+    <string name="hello">Hello World, TestDpsdkCoreActivity!</string>
+    <string name="login_activity_user">用户:</string>
+    <string name="login_activity_port">端口:</string>
+    <string name="login_activity_ip">IP:</string>
+    <string name="login_activity_password">密码:</string>
+    <string name="login_activity_login">登录</string>
+    <string name="login_activity_logout">登出</string>
+
+    <!-- Functions activity -->
+    <string name="fun_activity_title">Functions</string>
+    <string name="RealPlay">Real play</string>
+    <string name="Talk">Talk</string>
+    <string name="FilePlayBack">Play back by record</string>
+    <string name="TimePlayBack">Play back by time</string>
+    <string name="Comm">COM Setting</string>
+    <string name="CANBus">CAN Setting</string>
+    <string name="DevKeepLive">Keep alive setting</string>
+    <string name="Alarm">Alarm</string>
+    <string name="TestInterface">Interface testing</string>
+    <string name="title_item_list">Items</string>
+    <string name="title_item_detail">Item Detail</string>
+
+    <!-- add -->
+    <string name="login">正在登录</string>
+    <string name="progress_content">正在登录</string>
+    <string name="seen_more">更多</string>
+    <string name="refresh_bar_last_update">上次更新</string>
+    <string name="drop_dowm">下拉可以刷新</string>
+    <string name="release_update">松开可以刷新</string>
+    <string name="loading">载入中...</string>
+    <string name="header_last_time">最近更新：</string>
+    <string name="common_connect">正在连接</string>
+    <string name="tab_group_tv">组织</string>
+    <string name="grouplist_getgroup_fail">获取组织列表失败，异常代码：</string>
+    <string name="select_channel_limit_tv">打开通道上限为32路</string>
+    <string name="select_channel_tv">请先选择预览通道</string>
+    <string name="select_channel_already_open">通道已打开</string>
+    <string name="common_msg_title">提示</string>
+    <string name="common_confirm">确定</string>
+    <string name="tongdao_mc">通道名称:</string>
+
+    <!-- popwindow -->
+    <string name="play_real">实时</string>
+    <string name="play_back">回放</string>
+    <string name="pop_content">点击跳转到实时或者回放？</string>
+    <string name="file_play_back">按文件回放</string>
+    <string name="choose_start_time">选择开始时间</string>
+    <string name="choose_end_time">选择关闭时间</string>
+    <string name="time_play_back">按时间回放</string>
+    <string name="close_play_back">关闭回放</string>
+
+    <string name="bukong">布控:</string>
+    <string name="sakong">撒控:</string>
+    <string name="bumeng_code">部门code:</string>
+    <string name="according_department_bukong">根据部门布控:</string>
+    <string name="edit_department_code">001</string>
+    <string name="event_type_cs">产生</string>
+    <string name="event_type_xs">消失</string>
+
+    <string name="str_capture_bitmap">抓图</string>
+    <string name="capture_success">保存成功</string>
+    <string name="capture_fail">保存失败</string>
+
+    <string name="bufang">布防</string>
+    <string name="cefang">撤防</string>
+    <string name="cancel_alarm">清除报警</string>
+
+    <string name="logout">退出</string>
+    <string name="logout_fail">退出失败</string>
+    <string name="play_moveset">播放定位</string>
+    <string name="playback_query_success_no_record">没有录像文件</string>
+    <string name="playback_seek_success">回放录像成功</string>
+    <string name="playback_seek_fail">没有录像文件</string>
+
+    <!-- VTtalk -->
+    <string name="visabletalk_allcalls">所有通话</string>
+    <string name="visabletalk_missedcalls">未接来电</string>
+    <string name="visabletalk_center_title">来电留言</string>
+    <string name="visabletalk_right_edite">编辑</string>
+    <string name="visabletalk_right_complete">完成</string>
+    <string name="visabletalk_leave_messages">所有通话</string>
+    <string name="visabletalk_edit">未接来电</string>
+    <string name="visabletalk_pickcall">接听</string>
+    <string name="visabletalk_refusecall">拒绝</string>
+    <string name="visabletalk_offcall">挂断</string>
+    <string name="visabletalk_opendoorl">开门</string>
+    <string name="visabletalk_error">返回参数null</string>
+    <string name="visabletalk_calling_txt">正在呼叫...</string>
+    <string name="call_offline">通话结束</string>
+
+    <string-array name="alarm_type">
+        <item>视频丢失</item>
+        <item>外部报警</item>
+        <item>移动侦测</item>
+        <item>视频遮挡</item>
+        <item>硬盘满</item>
+        <item>硬盘故障</item>
+    </string-array>
+
+    <string-array name="alarm_type_num">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+
+    <string-array name="title_listview">
+        <item>设备名：</item>
+        <item>通道名：</item>
+        <item>事件：</item>
+        <item>类型：</item>
+        <item>时间：</item>
+    </string-array>
+
+    <string name="device_name">设备名：</string>
+    <string name="channel_name">通道名：</string>
+    <string name="event">事件：</string>
+    <string name="type">类型：</string>
+    <string name="date">时间：</string>
+
+    <string-array name="tag_layout">
+        <item>通用</item>
+        <item>实时</item>
+        <item>回放</item>
+    </string-array>
+
+    <string-array name="video_source">
+        <item>2 设备录像</item>
+        <item>3 平台录像</item>
+    </string-array>
+
+    <string-array name="grouplist_spinner">
+        <item>1 实时</item>
+        <item>2 回放</item>
+    </string-array>
+
+    <string-array name="video_type">
+        <item>0 全部录像</item>
+        <item>1 手动录像</item>
+        <item>2 报警录像</item>
+        <item>3 移动侦测</item>
+        <item>4 视频丢失</item>
+        <item>5 视频遮挡</item>
+        <item>6 定时录像</item>
+        <item>7 全天录像</item>
+        <item>25 卡号录像</item>
+    </string-array>
+    <string-array name="video_size">
+        <item>1 1/8倍</item>
+        <item>2 1/4倍</item>
+        <item>4 1/2倍</item>
+        <item>8 1倍</item>
+        <item>16 2倍</item>
+        <item>32 4倍</item>
+        <item>48 6倍</item>
+        <item>64 8倍</item>
+    </string-array>
+    <string name="sound">sound</string>
+    <string name="talk">talk</string>
+    <string name="live_sound_warning">打开声音将导致对讲关闭，是否继续？</string>
+    <string name="common_cancel">取消</string>
+    <string name="live_talk_warning">打开对讲将导致声音关闭，是否继续？</string>
+    <string name="common_wait">请稍等</string>
+    <string name="live_talk_fail">关闭对讲失败</string>
+    <string name="live_talk_open_fail">打开对讲失败</string>
+    <string name="operate_talk_open">打开对讲</string>
+    <string name="operate_sound_on">打开声音</string>
+    <string name="operate_talk_close">关闭对讲</string>
+    <string name="operate_sound_down">关闭声音</string>
+    <string name="operate_sound_success">打开对讲成功</string>
+    <string name="operate_sound_stop_success">关闭对讲成功</string>
+
 </resources>
