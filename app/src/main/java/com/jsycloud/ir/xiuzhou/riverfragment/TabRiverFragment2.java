@@ -1,18 +1,14 @@
-package com.jsycloud.ir.xiuzhou.mefragment;
+package com.jsycloud.ir.xiuzhou.riverfragment;
+
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,10 +16,10 @@ import com.jsycloud.ir.xiuzhou.CommonTools;
 import com.jsycloud.ir.xiuzhou.Constant;
 import com.jsycloud.ir.xiuzhou.DialogShow;
 import com.jsycloud.ir.xiuzhou.HttpClentLinkNet;
-import com.jsycloud.ir.xiuzhou.MyRectangleView;
 import com.jsycloud.ir.xiuzhou.R;
 import com.jsycloud.ir.xiuzhou.SharePreferenceDataUtil;
 import com.jsycloud.ir.xiuzhou.StartActivity;
+import com.jsycloud.ir.xiuzhou.mefragment.ChangePasswordActivity;
 
 import net.tsz.afinal.http.AjaxCallBack;
 import net.tsz.afinal.http.AjaxParams;
@@ -37,16 +33,12 @@ import java.util.Set;
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
 
-public class TabMeFragment extends Fragment implements View.OnClickListener{
+public class TabRiverFragment2 extends Fragment implements View.OnClickListener{
 
-    private StartActivity activity;
-    View login_layout, aboutme_layout;
-    EditText login_username, login_password;
-    TextView aboutme_welcom, aboutme_username, aboutme_phonenum, aboutme_nickname;
-    MyRectangleView aboutme_changepassword;
-    ImageView login_pwd_miwen;
-    TextView aboutme_version;
-
+    StartActivity activity;
+    View river_fragment_login, river_fragment_unlogin;
+    TextView river_fragment_username;
+    EditText river_fragment_user, river_fragment_password;
 
     @Override
     public void onAttach(Activity activity) {
@@ -56,112 +48,104 @@ public class TabMeFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.me_fragment, null);
-        login_layout = view.findViewById(R.id.login_layout);
-        aboutme_layout = view.findViewById(R.id.aboutme_layout);
-
-        login_username = (EditText)view.findViewById(R.id.login_username);
-        login_password = (EditText)view.findViewById(R.id.login_password);
-
-        aboutme_welcom = (TextView)view.findViewById(R.id.aboutme_welcom);
-        aboutme_username = (TextView)view.findViewById(R.id.aboutme_username);
-        aboutme_phonenum = (TextView)view.findViewById(R.id.aboutme_phonenum);
-        aboutme_nickname = (TextView)view.findViewById(R.id.aboutme_nickname);
-        login_pwd_miwen = (ImageView)view.findViewById(R.id.login_pwd_miwen);
-        login_pwd_miwen.setTag("1");
-        login_pwd_miwen.setOnClickListener(this);
-        aboutme_version = (TextView)view.findViewById(R.id.aboutme_version);
-        try {
-            PackageInfo info = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0);
-            if (info != null) {
-                aboutme_version.setText("秀洲智慧河道 v" + info.versionName);
-            }
-        } catch (Exception e) {
+        View view = inflater.inflate(R.layout.river_fragment2, null);
+        river_fragment_username = (TextView)view.findViewById(R.id.river_fragment_username);
+        if(Constant.userfullname != null){
+            river_fragment_username.setText(Constant.userfullname);
         }
 
-        view.findViewById(R.id.login_use_code).setOnClickListener(this);
-        //view.findViewById(R.id.aboutme_changecontent).setOnClickListener(this);
-        view.findViewById(R.id.aboutme_changepassword).setOnClickListener(this);
-        view.findViewById(R.id.aboutme_logout).setOnClickListener(this);
+        river_fragment_login = view.findViewById(R.id.river_fragment_login);
+        river_fragment_unlogin = view.findViewById(R.id.river_fragment_unlogin);
+        river_fragment_user = (EditText)view.findViewById(R.id.river_fragment_user);
+        river_fragment_password = (EditText)view.findViewById(R.id.river_fragment_password);
 
-        MyRectangleView me_fragment_login = (MyRectangleView)view.findViewById(R.id.me_fragment_login);
-        me_fragment_login.setRectangleColor(0xff2196f3);
-        me_fragment_login.settextStr("登录");
-        me_fragment_login.setOnClickListener(this);
-
-        //aboutme_changecontent = (MyRectangleView)view.findViewById(R.id.aboutme_changecontent);
-        //aboutme_changecontent.setRectangleColor(0xff2196f3);
-        //aboutme_changecontent.settextStr("修改资料");
-        //aboutme_changecontent.setOnClickListener(this);
-
-        aboutme_changepassword = (MyRectangleView)view.findViewById(R.id.aboutme_changepassword);
-        aboutme_changepassword.setRectangleColor(0xff4caf50);
-        aboutme_changepassword.settextStr("修改密码");
-        aboutme_changepassword.setOnClickListener(this);
-
-        MyRectangleView aboutme_logout = (MyRectangleView)view.findViewById(R.id.aboutme_logout);
-        aboutme_logout.setRectangleColor(0xffff0000);
-        aboutme_logout.settextStr("注销");
-        aboutme_logout.setOnClickListener(this);
+        view.findViewById(R.id.river_fragment_logout).setOnClickListener(this);
+        view.findViewById(R.id.change_password).setOnClickListener(this);
+        view.findViewById(R.id.river_fragment_remind).setOnClickListener(this);
+        view.findViewById(R.id.river_fragment_notice).setOnClickListener(this);
+        view.findViewById(R.id.river_fragment_assign).setOnClickListener(this);
+        view.findViewById(R.id.river_fragment_check_river).setOnClickListener(this);
+        view.findViewById(R.id.river_fragment_history).setOnClickListener(this);
+        view.findViewById(R.id.river_fragment_entrust).setOnClickListener(this);
+        view.findViewById(R.id.river_fragment_report).setOnClickListener(this);
+        view.findViewById(R.id.river_fragment_water_report).setOnClickListener(this);
+        view.findViewById(R.id.river_fragment_word).setOnClickListener(this);
+        view.findViewById(R.id.river_fragment_log).setOnClickListener(this);
+        view.findViewById(R.id.river_fragment_logwithcode).setOnClickListener(this);
 
         if(Constant.isLogin){
-            login_layout.setVisibility(View.GONE);
-            aboutme_layout.setVisibility(View.VISIBLE);
-            setUserInfo();
+            river_fragment_login.setVisibility(View.VISIBLE);
+            river_fragment_unlogin.setVisibility(View.GONE);
         }else{
-            login_layout.setVisibility(View.VISIBLE);
-            aboutme_layout.setVisibility(View.GONE);
+            river_fragment_login.setVisibility(View.GONE);
+            river_fragment_unlogin.setVisibility(View.VISIBLE);
         }
 
-        //getaccessToken();
         return view;
-    }
-
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        if(!hidden) {
-            if(Constant.isLogin){
-                login_layout.setVisibility(View.GONE);
-                aboutme_layout.setVisibility(View.VISIBLE);
-                setUserInfo();
-            }else{
-                login_layout.setVisibility(View.VISIBLE);
-                aboutme_layout.setVisibility(View.GONE);
-            }
-        }
-    }
-
-    @Override
-    public void onResume(){
-        super.onResume();
-        if(Constant.isLogin){
-            login_layout.setVisibility(View.GONE);
-            aboutme_layout.setVisibility(View.VISIBLE);
-            setUserInfo();
-        }else{
-            login_layout.setVisibility(View.VISIBLE);
-            aboutme_layout.setVisibility(View.GONE);
-        }
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.login_pwd_miwen:
-                if(login_pwd_miwen.getTag().equals("1")) {
-                    login_pwd_miwen.setImageResource(R.drawable.miwen);
-                    login_pwd_miwen.setTag("0");
-                    login_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                } else {
-                    login_pwd_miwen.setImageResource(R.drawable.mingwen);
-                    login_pwd_miwen.setTag("1");
-                    login_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                }
-                login_password.setSelection(login_password.getText().length());
+            case R.id.river_fragment_logout:
+                Constant.isLogin = false;
+                Constant.isLogByCode = false;
+                Constant.username = "";
+                Constant.usermobile = "";
+                Constant.userfullname = "";
+                SharePreferenceDataUtil.setSharedStringData(activity, "username", "");
+                SharePreferenceDataUtil.setSharedStringData(activity, "userpassword", "");
+                Constant.bReloadUrl = true;
+                river_fragment_login.setVisibility(View.GONE);
+                river_fragment_unlogin.setVisibility(View.VISIBLE);
                 break;
-            case R.id.me_fragment_login:
+            case R.id.change_password:
+                Intent intent1 = new Intent(activity, ChangePasswordActivity.class);
+                intent1.putExtra("bForce", false);
+                startActivity(intent1);
+                break;
+            case R.id.river_fragment_remind://提醒
+                Intent intent2 = new Intent(activity, WebviewActivity.class);
+                intent2.putExtra("url", HttpClentLinkNet.BaseAddr + "pages/remind.php");
+                startActivity(intent2);
+                break;
+            case R.id.river_fragment_notice://治水办通知
+                Intent intent3 = new Intent(activity, WebviewActivity.class);
+                intent3.putExtra("url", HttpClentLinkNet.BaseAddr + "pages/notify.php");
+                startActivity(intent3);
+                break;
+            case R.id.river_fragment_assign://交办
+                Intent intent4 = new Intent(activity, WebviewActivity.class);
+                intent4.putExtra("url", HttpClentLinkNet.BaseAddr + "pages/assign.php");
+                startActivity(intent4);
+                break;
+            case R.id.river_fragment_check_river://巡河
+                Intent intent5 = new Intent(activity, CheckRiverActivity.class);
+                startActivity(intent5);
+                break;
+            case R.id.river_fragment_history://巡河记录
+                Intent intent6 = new Intent(activity, CheckRiverHistory.class);
+                startActivity(intent6);
+                break;
+            case R.id.river_fragment_entrust://委托巡河
+                getauthcode(false);
+                break;
+            case R.id.river_fragment_report://上报
+                Intent intent7 = new Intent(activity, WebviewActivity.class);
+                intent7.putExtra("url", HttpClentLinkNet.BaseAddr + "pages/report.php");
+                startActivity(intent7);
+                break;
+            case R.id.river_fragment_water_report://水质报告
+                Intent intent8 = new Intent(activity, WebviewActivity.class);
+                intent8.putExtra("url", HttpClentLinkNet.BaseAddr + "pages/waterquality.php");
+                startActivity(intent8);
+                break;
+            case R.id.river_fragment_word://更多
+                break;
+            case R.id.river_fragment_log://登录
                 login();
                 break;
+            case R.id.river_fragment_logwithcode://委托码登录
             case R.id.login_use_code:
                 DialogShow.dialogShow2(activity, "请输入8位委托码", "登录", new DialogShow.IloginClick() {
                     @Override
@@ -170,52 +154,72 @@ public class TabMeFragment extends Fragment implements View.OnClickListener{
                     }
                 });
                 break;
-            //case R.id.aboutme_changecontent:
-                //Intent intent1 = new Intent(activity, ChangeInfoActivity.class);
-                //startActivity(intent1);
-                //break;
-            case R.id.aboutme_changepassword:
-                Intent intent = new Intent(activity, ChangePasswordActivity.class);
-                intent.putExtra("bForce", false);
-                startActivity(intent);
-                break;
-            case R.id.aboutme_logout:
-                Constant.isLogin = false;
-                Constant.isLogByCode = false;
-                Constant.username = "";
-                Constant.usermobile = "";
-                Constant.userfullname = "";
-                login_layout.setVisibility(View.VISIBLE);
-                aboutme_layout.setVisibility(View.GONE);
-                setUserInfo();
-                activity.onLoginChange();
-                SharePreferenceDataUtil.setSharedStringData(activity, "username", "");
-                SharePreferenceDataUtil.setSharedStringData(activity, "userpassword", "");
-                Constant.bReloadUrl = true;
-                break;
-            default:
-                break;
         }
     }
 
-    public void setUserInfo() {
-        if(Constant.isLogin) {
-            aboutme_welcom.setText("欢迎您！" + Constant.userfullname);
-        }else{
-            aboutme_welcom.setText("未登录");
+
+    public void getauthcode(final boolean bNew) {
+        String url = HttpClentLinkNet.BaseAddr + "getauthcode.php";
+        AjaxParams params = new AjaxParams();
+        params.put("userid", Constant.userid);
+        if(bNew){
+            params.put("isnew", "1");
         }
-        aboutme_username.setText(Constant.username);
-        aboutme_phonenum.setText(Constant.usermobile);
-        aboutme_nickname.setText(Constant.userfullname);
+        HttpClentLinkNet.getInstance().sendReqFinalHttp_Post(url, params, new AjaxCallBack() {
+            @Override
+            public void onLoading(long count, long current) {
+                super.onLoading(count, current);
+            }
+
+            @Override
+            public void onSuccess(Object t) {
+                String jsStr = "";
+                String success = "";
+
+                if (t != null) {
+                    jsStr = String.valueOf(t);
+                }
+
+                try {
+                    JSONObject jsObj = new JSONObject(jsStr);
+                    if (jsObj.has("success")) {
+                        success = jsObj.getString("success");
+                    }
+                    if(success.equals("1")) {
+                        if(bNew){
+                            Toast.makeText(activity, "重新获取到的委托码是：" + jsObj.getString("authcode"), Toast.LENGTH_SHORT).show();
+                        }else {
+                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                            intent.putExtra("sms_body", "巡河委托码：" + jsObj.getString("authcode"));
+                            intent.setType("vnd.android-dir/mms-sms");
+                            activity.startActivity(intent);
+                        }
+                    }else if(success.equals("2")){
+                        if(bNew){
+                            Toast.makeText(activity, "重新获取委托码失败", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(activity, "当前无委托码", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                } catch (JSONException e) {
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t, int errorNo, String strMsg) {
+                super.onFailure(t, errorNo, strMsg);
+            }
+        });
     }
+
 
     public void login() {
-        final String username = login_username.getText().toString();
+        final String username = river_fragment_user.getText().toString();
         if(username.isEmpty()){
             Toast.makeText(activity, "用户名不能为空", Toast.LENGTH_SHORT).show();
             return;
         }
-        final String userpassword = login_password.getText().toString();
+        final String userpassword = river_fragment_password.getText().toString();
         if(userpassword.isEmpty()){
             Toast.makeText(activity, "密码不能为空", Toast.LENGTH_SHORT).show();
             return;
@@ -278,11 +282,8 @@ public class TabMeFragment extends Fragment implements View.OnClickListener{
                         Constant.isLogin = true;
                         Constant.isLogByCode = false;
                         Toast.makeText(activity, "登录成功", Toast.LENGTH_SHORT).show();
-                        login_layout.setVisibility(View.GONE);
-                        aboutme_layout.setVisibility(View.VISIBLE);
-                        //aboutme_changecontent.setVisibility(View.VISIBLE);
-                        aboutme_changepassword.setVisibility(View.VISIBLE);
-                        setUserInfo();
+                        river_fragment_login.setVisibility(View.VISIBLE);
+                        river_fragment_unlogin.setVisibility(View.GONE);
                         activity.onLoginChange();
                         SharePreferenceDataUtil.setSharedStringData(activity, "username", username);
                         SharePreferenceDataUtil.setSharedStringData(activity, "userpassword", userpassword);
@@ -354,11 +355,8 @@ public class TabMeFragment extends Fragment implements View.OnClickListener{
                         Constant.isLogin = true;
                         Constant.isLogByCode = true;
                         Toast.makeText(activity, "登录成功", Toast.LENGTH_SHORT).show();
-                        login_layout.setVisibility(View.GONE);
-                        aboutme_layout.setVisibility(View.VISIBLE);
-                        //aboutme_changecontent.setVisibility(View.GONE);
-                        aboutme_changepassword.setVisibility(View.GONE);
-                        setUserInfo();
+                        river_fragment_login.setVisibility(View.VISIBLE);
+                        river_fragment_unlogin.setVisibility(View.GONE);
                         activity.onLoginChange();
                     }else{
                         Toast.makeText(activity, "登录失败", Toast.LENGTH_SHORT).show();
@@ -386,4 +384,5 @@ public class TabMeFragment extends Fragment implements View.OnClickListener{
             }
         }
     };
+
 }

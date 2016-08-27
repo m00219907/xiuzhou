@@ -3,17 +3,39 @@ package com.jsycloud.ir.xiuzhou.riverfragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.KeyEvent;
 import android.view.View;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.jsycloud.ir.xiuzhou.Constant;
+import com.jsycloud.ir.xiuzhou.DialogUtils;
 import com.jsycloud.ir.xiuzhou.R;
 
 public class WebviewActivity extends Activity{
 
     WebView webview_activity_webview;
+
+    private Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1068:
+                    if (!DialogUtils.isShowWaitDialog()) {
+                        DialogUtils.showWaitDialog(WebviewActivity.this, "加载中...", -1);
+                    }
+                    break;
+                case 1069:
+                    if (DialogUtils.isShowWaitDialog()) {
+                        DialogUtils.dismissDialog();
+                    }
+                    break;
+            }
+        }
+    };
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +67,20 @@ public class WebviewActivity extends Activity{
         setting.setDomStorageEnabled(true);
         setting.setGeolocationEnabled(true);
         webview_activity_webview.setWebViewClient(new GeoWebViewClient());
+        if(Constant.isLogin) {
+            url = url + "?uid=" + Constant.userid;
+        }
+        webview_activity_webview.setWebChromeClient(new WebChromeClient() {
+
+            public void onProgressChanged(WebView view, int progress) {
+                if (progress == 100) {
+                    handler.sendEmptyMessageDelayed(1069, 500);
+                }
+                super.onProgressChanged(view, progress);
+            }
+        });
         webview_activity_webview.loadUrl(url);
+        handler.sendEmptyMessage(1068);
     }
 
     @Override
@@ -69,4 +104,5 @@ public class WebviewActivity extends Activity{
             return false;
         }
     }
+
 }

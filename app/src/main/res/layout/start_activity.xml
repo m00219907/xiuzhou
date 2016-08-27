@@ -67,7 +67,6 @@
                 android:textColor="#9a9a9a"
                 android:textSize="16sp" />
         </LinearLayout>
-        <!-- 活动 -->
 
         <LinearLayout
             android:id="@+id/tab_video_layout"
@@ -91,60 +90,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="河道在线"
-                android:textColor="#9a9a9a"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/tab_river_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <ImageView
-                android:id="@+id/tab_river_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/tab_river_image_balck"
-                android:scaleType="center"/>
-
-            <TextView
-                android:id="@+id/tab_river_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="河长中心"
-                android:textColor="#9a9a9a"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/tab_data_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <ImageView
-                android:id="@+id/tab_data_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/ic_event_note_black_24dp"
-                android:scaleType="center"/>
-
-            <TextView
-                android:id="@+id/tab_data_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="数据通报"
                 android:textColor="#9a9a9a"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -188,7 +133,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/ic_person_black_24dp"
+                android:src="@drawable/tab_river_image_balck"
                 android:scaleType="center"/>
 
             <TextView
@@ -196,7 +141,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="个人中心"
+                android:text="河长中心"
                 android:textColor="#9a9a9a"
                 android:textSize="16sp" />
         </LinearLayout>

@@ -74,9 +74,9 @@ public class TabMapFragment extends Fragment implements AMapLocationListener{
         map_webview.setWebChromeClient(new GeoWebChromeClient());
 
         if(Constant.isLogin){
-            map_webview.loadUrl(HttpClentLinkNet.BaseAddr + "page_map.php" + "?userid=" + Constant.userid);
+            map_webview.loadUrl(HttpClentLinkNet.BaseAddr + "pages/map.php" + "?uid=" + Constant.userid);
         }else{
-            map_webview.loadUrl(HttpClentLinkNet.BaseAddr + "page_map.php");
+            map_webview.loadUrl(HttpClentLinkNet.BaseAddr + "pages/map.php" + "?uid=0");
         }
 
         AMapLocationClientOption mLocationOption = null;

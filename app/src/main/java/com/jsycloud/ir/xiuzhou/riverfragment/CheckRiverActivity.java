@@ -137,15 +137,15 @@ public class CheckRiverActivity extends Activity implements View.OnClickListener
         //check_river_uploadpic.invalidate();
         findViewById(R.id.check_river_uploadpic).setOnClickListener(this);
 
-        if(Constant.isLogByCode){
-            check_river_todownlayout.setVisibility(View.GONE);
-            check_river_touplayout.setVisibility(View.GONE);
-            check_river_togertherlayout.setVisibility(View.GONE);
-        }else{
-            check_river_todownlayout.setVisibility(View.VISIBLE);
-            check_river_touplayout.setVisibility(View.VISIBLE);
-            check_river_togertherlayout.setVisibility(View.VISIBLE);
-        }
+//        if(Constant.isLogByCode){
+//            check_river_todownlayout.setVisibility(View.GONE);
+//            check_river_touplayout.setVisibility(View.GONE);
+//            check_river_togertherlayout.setVisibility(View.GONE);
+//        }else{
+//            check_river_todownlayout.setVisibility(View.VISIBLE);
+//            check_river_touplayout.setVisibility(View.VISIBLE);
+//            check_river_togertherlayout.setVisibility(View.VISIBLE);
+//        }
 
         getriverpatrol();
     }
