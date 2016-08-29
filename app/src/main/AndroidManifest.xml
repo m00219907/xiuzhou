@@ -144,6 +144,11 @@
         </activity>
 
         <activity
+            android:name="com.jsycloud.ir.xiuzhou.riverfragment.LoginActivity"
+            android:theme="@style/default_ui_bg">
+        </activity>
+
+        <activity
             android:name="com.jsycloud.ir.xiuzhou.riverfragment.WebviewActivity"
             android:theme="@style/default_ui_bg"
             android:hardwareAccelerated="false">

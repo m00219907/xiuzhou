@@ -35,12 +35,20 @@ public class GroupListAdapter3 extends BaseAdapter {
     }
 
     public void addNode(TreeNode node) {
-        if (node == null)
+        if (node == null) {
             return;
-        for (int i = 0; i < node.getChildren().size(); i++) {
-            if(node.getChildren().get(i).getChildren().size() > 0) {
-                alls.add(node.getChildren().get(i).getChildren().get(0));
+        }
+        if (node.getType() == 3) {
+            TreeNode tempNode = node;
+            while (tempNode.getParent() != null) {
+                if (tempNode.getParent().getText().equals("嘉兴智慧河道")) {
+                    alls.add(node);
+                }
+                tempNode = tempNode.getParent();
             }
+        }
+        for (int i = 0; i < node.getChildren().size(); i++) {
+            addNode(node.getChildren().get(i));
         }
     }
 

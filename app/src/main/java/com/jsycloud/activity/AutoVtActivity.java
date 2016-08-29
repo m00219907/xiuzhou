@@ -22,22 +22,24 @@ import android.widget.Toast;
 
 import com.company.PlaySDK.IPlaySDK;
 import com.company.PlaySDK.IPlaySDKCallBack.pCallFunction;
-import com.jsycloud.ir.xiuzhou.R;
 import com.dh.DpsdkCore.Audio_Fun_Info_t;
 import com.dh.DpsdkCore.Enc_Channel_Info_Ex_t;
 import com.dh.DpsdkCore.Get_RealStream_Info_t;
 import com.dh.DpsdkCore.IDpsdkCore;
 import com.dh.DpsdkCore.InviteVtCallParam_t;
 import com.dh.DpsdkCore.Return_Value_Info_t;
+import com.dh.DpsdkCore.RingInfo_t;
 import com.dh.DpsdkCore.Send_Audio_Data_Info_t;
 import com.dh.DpsdkCore.SetDoorCmd_Request_t;
 import com.dh.DpsdkCore.dpsdk_SetDoorCmd_e;
+import com.dh.DpsdkCore.dpsdk_call_type_e;
 import com.dh.DpsdkCore.fDPSDKGeneralJsonTransportCallback;
 import com.dh.DpsdkCore.fDPSDKPecDoorStarusCallBack;
 import com.dh.DpsdkCore.fMediaDataCallback;
 import com.jsycloud.ir.xiuzhou.AppApplication;
 import com.jsycloud.entity.NotifyEntity;
 import com.jsycloud.groupTree.GroupListActivity;
+import com.jsycloud.ir.xiuzhou.R;
 import com.jsycloud.util.MusicTool;
 import com.jsycloud.util.Utils;
 import com.google.gson.Gson;
@@ -244,6 +246,11 @@ public class AutoVtActivity extends Activity {
 		openDoorImg.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				
+				if(Utils.isFastDoubleClick()) {
+					return;
+				}
+				
 			  	long start = 0;
 		    	long end = 0;
 		    	// 注意 channelId 是不是获取的门禁信息里面的codeChannel 还是编码信息里面的codeChannel
@@ -274,8 +281,13 @@ public class AutoVtActivity extends Activity {
 		
 		//主动结束通话
 		offlineImg.setOnClickListener(new OnClickListener() {  
+						
 			@Override
 			public void onClick(View v) {
+				
+				if(Utils.isFastDoubleClick()) {
+					return;
+				}
 		
 				if (timer != null) {
 					timerTask.cancel();
@@ -343,15 +355,26 @@ public class AutoVtActivity extends Activity {
 						}
 					}, delayMillis);
 					
+				}else if(mMethod.equals("Scs.NotifyCancel")) {//设备未接通时，主动取消拨号，或者拨号超时
+
+					Log.e(TAG, "------------ get Scs.NotifyCancel");
+					gotoGroupListActivity();
+					
 				} 
-			}
-			
+			}			
 		});
-		
+	    		
 	}
+    
+    private void gotoGroupListActivity() {
+		Intent intent = new Intent();
+		intent.setClass(AutoVtActivity.this, GroupListActivity.class); 
+		startActivity(intent);
+		finish();   	
+    }
 	
     public NotifyEntity fromJSON(String json) {
-
+    	
 		Gson gson = new Gson();
 		NotifyEntity mNotify = gson.fromJson(json, NotifyEntity.class);
 		return mNotify;

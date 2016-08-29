@@ -11,7 +11,7 @@ import com.jsycloud.ir.xiuzhou.R;
 
 import java.util.List;
 
-public class CheckRiverAdapter  extends BaseAdapter {
+public class CheckRiverAdapter extends BaseAdapter {
 
     LayoutInflater mInflater;
     List<CheckRiverHistory.HistoryItem> allHistory;

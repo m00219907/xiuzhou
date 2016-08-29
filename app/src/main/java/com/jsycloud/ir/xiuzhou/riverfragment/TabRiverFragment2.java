@@ -1,6 +1,5 @@
 package com.jsycloud.ir.xiuzhou.riverfragment;
 
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,13 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.jsycloud.ir.xiuzhou.CommonTools;
 import com.jsycloud.ir.xiuzhou.Constant;
-import com.jsycloud.ir.xiuzhou.DialogShow;
 import com.jsycloud.ir.xiuzhou.HttpClentLinkNet;
 import com.jsycloud.ir.xiuzhou.R;
 import com.jsycloud.ir.xiuzhou.SharePreferenceDataUtil;
@@ -27,18 +23,11 @@ import net.tsz.afinal.http.AjaxParams;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import cn.jpush.android.api.JPushInterface;
-import cn.jpush.android.api.TagAliasCallback;
-
 public class TabRiverFragment2 extends Fragment implements View.OnClickListener{
 
     StartActivity activity;
-    View river_fragment_login, river_fragment_unlogin;
     TextView river_fragment_username;
-    EditText river_fragment_user, river_fragment_password;
+    View river_fragment_logout, change_password;
 
     @Override
     public void onAttach(Activity activity) {
@@ -53,14 +42,18 @@ public class TabRiverFragment2 extends Fragment implements View.OnClickListener{
         if(Constant.userfullname != null){
             river_fragment_username.setText(Constant.userfullname);
         }
+        river_fragment_logout = view.findViewById(R.id.river_fragment_logout);
+        change_password = view.findViewById(R.id.change_password);
+        if(!Constant.isLogin){
+            river_fragment_logout.setVisibility(View.GONE);
+            change_password.setVisibility(View.GONE);
+            startLoginActivity();
+        }else {
+            river_fragment_logout.setOnClickListener(this);
+            change_password.setOnClickListener(this);
+        }
 
-        river_fragment_login = view.findViewById(R.id.river_fragment_login);
-        river_fragment_unlogin = view.findViewById(R.id.river_fragment_unlogin);
-        river_fragment_user = (EditText)view.findViewById(R.id.river_fragment_user);
-        river_fragment_password = (EditText)view.findViewById(R.id.river_fragment_password);
-
-        view.findViewById(R.id.river_fragment_logout).setOnClickListener(this);
-        view.findViewById(R.id.change_password).setOnClickListener(this);
+        view.findViewById(R.id.river_fragment_about).setOnClickListener(this);
         view.findViewById(R.id.river_fragment_remind).setOnClickListener(this);
         view.findViewById(R.id.river_fragment_notice).setOnClickListener(this);
         view.findViewById(R.id.river_fragment_assign).setOnClickListener(this);
@@ -70,23 +63,44 @@ public class TabRiverFragment2 extends Fragment implements View.OnClickListener{
         view.findViewById(R.id.river_fragment_report).setOnClickListener(this);
         view.findViewById(R.id.river_fragment_water_report).setOnClickListener(this);
         view.findViewById(R.id.river_fragment_word).setOnClickListener(this);
-        view.findViewById(R.id.river_fragment_log).setOnClickListener(this);
-        view.findViewById(R.id.river_fragment_logwithcode).setOnClickListener(this);
-
-        if(Constant.isLogin){
-            river_fragment_login.setVisibility(View.VISIBLE);
-            river_fragment_unlogin.setVisibility(View.GONE);
-        }else{
-            river_fragment_login.setVisibility(View.GONE);
-            river_fragment_unlogin.setVisibility(View.VISIBLE);
-        }
 
         return view;
     }
 
     @Override
+    public void onResume() {
+        reloadData();
+        super.onResume();
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        if (!hidden) {
+            reloadData();
+        }
+    }
+
+    public void reloadData(){
+        if(!Constant.isLogin){
+            river_fragment_logout.setVisibility(View.GONE);
+            change_password.setVisibility(View.GONE);
+        }else {
+            river_fragment_logout.setVisibility(View.VISIBLE);
+            change_password.setVisibility(View.VISIBLE);
+            if(Constant.userfullname != null){
+                river_fragment_username.setText(Constant.userfullname);
+            }
+        }
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.river_fragment_about:
+                Intent intent0 = new Intent(activity, WebviewActivity.class);
+                intent0.putExtra("url", HttpClentLinkNet.BaseAddr + "pages/about.php");
+                startActivity(intent0);
+                break;
             case R.id.river_fragment_logout:
                 Constant.isLogin = false;
                 Constant.isLogByCode = false;
@@ -96,8 +110,7 @@ public class TabRiverFragment2 extends Fragment implements View.OnClickListener{
                 SharePreferenceDataUtil.setSharedStringData(activity, "username", "");
                 SharePreferenceDataUtil.setSharedStringData(activity, "userpassword", "");
                 Constant.bReloadUrl = true;
-                river_fragment_login.setVisibility(View.GONE);
-                river_fragment_unlogin.setVisibility(View.VISIBLE);
+                startLoginActivity();
                 break;
             case R.id.change_password:
                 Intent intent1 = new Intent(activity, ChangePasswordActivity.class);
@@ -105,9 +118,13 @@ public class TabRiverFragment2 extends Fragment implements View.OnClickListener{
                 startActivity(intent1);
                 break;
             case R.id.river_fragment_remind://提醒
-                Intent intent2 = new Intent(activity, WebviewActivity.class);
-                intent2.putExtra("url", HttpClentLinkNet.BaseAddr + "pages/remind.php");
-                startActivity(intent2);
+                if(Constant.isLogin) {
+                    Intent intent2 = new Intent(activity, WebviewActivity.class);
+                    intent2.putExtra("url", HttpClentLinkNet.BaseAddr + "pages/remind.php");
+                    startActivity(intent2);
+                }else{
+                    startLoginActivity();
+                }
                 break;
             case R.id.river_fragment_notice://治水办通知
                 Intent intent3 = new Intent(activity, WebviewActivity.class);
@@ -115,46 +132,65 @@ public class TabRiverFragment2 extends Fragment implements View.OnClickListener{
                 startActivity(intent3);
                 break;
             case R.id.river_fragment_assign://交办
-                Intent intent4 = new Intent(activity, WebviewActivity.class);
-                intent4.putExtra("url", HttpClentLinkNet.BaseAddr + "pages/assign.php");
-                startActivity(intent4);
+                if(Constant.isLogin) {
+                    Intent intent4 = new Intent(activity, WebviewActivity.class);
+                    intent4.putExtra("url", HttpClentLinkNet.BaseAddr + "pages/assign.php");
+                    startActivity(intent4);
+                }else{
+                    startLoginActivity();
+                }
                 break;
             case R.id.river_fragment_check_river://巡河
-                Intent intent5 = new Intent(activity, CheckRiverActivity.class);
-                startActivity(intent5);
+                if(Constant.isLogin) {
+                    Intent intent5 = new Intent(activity, CheckRiverActivity.class);
+                    startActivity(intent5);
+                }else{
+                    startLoginActivity();
+                }
                 break;
             case R.id.river_fragment_history://巡河记录
-                Intent intent6 = new Intent(activity, CheckRiverHistory.class);
-                startActivity(intent6);
+                if(Constant.isLogin) {
+                    Intent intent6 = new Intent(activity, CheckRiverHistory.class);
+                    startActivity(intent6);
+                }else{
+                    startLoginActivity();
+                }
                 break;
             case R.id.river_fragment_entrust://委托巡河
-                getauthcode(false);
+                if(Constant.isLogin) {
+                    getauthcode(false);
+                }else{
+                    startLoginActivity();
+                }
                 break;
             case R.id.river_fragment_report://上报
-                Intent intent7 = new Intent(activity, WebviewActivity.class);
-                intent7.putExtra("url", HttpClentLinkNet.BaseAddr + "pages/report.php");
-                startActivity(intent7);
+                if(Constant.isLogin) {
+                    Intent intent7 = new Intent(activity, WebviewActivity.class);
+                    intent7.putExtra("url", HttpClentLinkNet.BaseAddr + "pages/report.php");
+                    startActivity(intent7);
+                }else{
+                    startLoginActivity();
+                }
                 break;
             case R.id.river_fragment_water_report://水质报告
-                Intent intent8 = new Intent(activity, WebviewActivity.class);
-                intent8.putExtra("url", HttpClentLinkNet.BaseAddr + "pages/waterquality.php");
-                startActivity(intent8);
+                if(Constant.isLogin) {
+                    Intent intent8 = new Intent(activity, WebviewActivity.class);
+                    intent8.putExtra("url", HttpClentLinkNet.BaseAddr + "pages/waterquality.php");
+                    startActivity(intent8);
+                }else{
+                    startLoginActivity();
+                }
                 break;
             case R.id.river_fragment_word://更多
                 break;
-            case R.id.river_fragment_log://登录
-                login();
-                break;
-            case R.id.river_fragment_logwithcode://委托码登录
-            case R.id.login_use_code:
-                DialogShow.dialogShow2(activity, "请输入8位委托码", "登录", new DialogShow.IloginClick() {
-                    @Override
-                    public void OnClick(String passcode) {
-                        loginbycode(passcode);
-                    }
-                });
+            default:
                 break;
         }
+    }
+
+    public void startLoginActivity(){
+        Intent intent = new Intent(activity, LoginActivity.class);
+        startActivity(intent);
     }
 
 
@@ -211,178 +247,5 @@ public class TabRiverFragment2 extends Fragment implements View.OnClickListener{
             }
         });
     }
-
-
-    public void login() {
-        final String username = river_fragment_user.getText().toString();
-        if(username.isEmpty()){
-            Toast.makeText(activity, "用户名不能为空", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        final String userpassword = river_fragment_password.getText().toString();
-        if(userpassword.isEmpty()){
-            Toast.makeText(activity, "密码不能为空", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        String url = HttpClentLinkNet.BaseAddr + "login.php";
-        AjaxParams params = new AjaxParams();
-        params.put("username", username);
-        params.put("userpassword", userpassword);
-        params.put("from", android.os.Build.MODEL);
-        params.put("deviceid", CommonTools.getMacAddress(activity));
-        HttpClentLinkNet.getInstance().sendReqFinalHttp_Post(url, params, new AjaxCallBack() {
-            @Override
-            public void onLoading(long count, long current) {
-                super.onLoading(count, current);
-            }
-
-            @Override
-            public void onSuccess(Object t) {
-                String jsStr = "";
-                String success = "";
-
-                if (t != null) {
-                    jsStr = String.valueOf(t);
-                }
-
-                try {
-                    JSONObject jsObj = new JSONObject(jsStr);
-                    if (jsObj.has("success")) {
-                        success = jsObj.getString("success");
-                    }
-                    if(success.equals("1")) {
-                        if (jsObj.has("userid")) {
-                            Constant.userid = jsObj.getString("userid");
-                        }
-                        if (jsObj.has("username")) {
-                            Constant.username = jsObj.getString("username");
-                        }
-                        if (jsObj.has("userfullname")) {
-                            Constant.userfullname = jsObj.getString("userfullname");
-                        }
-                        if (jsObj.has("usermobile")) {
-                            Constant.usermobile = jsObj.getString("usermobile");
-                        }
-                        if (jsObj.has("usergroup")) {
-                            Constant.usergroup = jsObj.getString("usergroup");
-                        }
-                        if (jsObj.has("videorights")) {
-                            Constant.videorights = jsObj.getString("videorights");
-                        }
-                        boolean setAliasAndTags = SharePreferenceDataUtil.getSharedBooleanData(activity, "setAliasAndTags");
-                        if(!setAliasAndTags) {
-                            String alias = jsObj.getString("alias");
-                            Set<String> tags = new HashSet<String>();
-                            tags.add(jsObj.getString("tagcity"));
-                            tags.add(jsObj.getString("tagdistrict"));
-                            tags.add(jsObj.getString("tagtown"));
-                            tags.add(jsObj.getString("taglevel"));
-                            JPushInterface.setAliasAndTags(activity.getApplicationContext(), alias, JPushInterface.filterValidTags(tags), callback);
-                        }
-                        Constant.isLogin = true;
-                        Constant.isLogByCode = false;
-                        Toast.makeText(activity, "登录成功", Toast.LENGTH_SHORT).show();
-                        river_fragment_login.setVisibility(View.VISIBLE);
-                        river_fragment_unlogin.setVisibility(View.GONE);
-                        activity.onLoginChange();
-                        SharePreferenceDataUtil.setSharedStringData(activity, "username", username);
-                        SharePreferenceDataUtil.setSharedStringData(activity, "userpassword", userpassword);
-                        Constant.bReloadUrl = true;
-                        if(jsObj.getString("firstlogin").equals("1")){
-                            Toast.makeText(activity, "你的密码为初始密码，请修改密码", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(activity, ChangePasswordActivity.class);
-                            intent.putExtra("bForce", true);
-                            activity.startActivity(intent);
-                        }
-                    }else if(success.equals("2")){
-                        Toast.makeText(activity, "手机号码不存在", Toast.LENGTH_LONG).show();
-                    }else if(success.equals("3")){
-                        Toast.makeText(activity, "密码错误", Toast.LENGTH_LONG).show();
-                    }else if(success.equals("4")){
-                        Toast.makeText(activity, "请允许App获取设备识别码", Toast.LENGTH_LONG).show();
-                    }else if(success.equals("5")){
-                        Toast.makeText(activity, "您的账号禁止在该设备登录", Toast.LENGTH_LONG).show();
-                    } else{
-                        Toast.makeText(activity, "登录失败", Toast.LENGTH_LONG).show();
-                    }
-                } catch (JSONException e) {
-                }
-            }
-
-            @Override
-            public void onFailure(Throwable t, int errorNo, String strMsg) {
-                Toast.makeText(activity, "登录失败", Toast.LENGTH_SHORT).show();
-                super.onFailure(t, errorNo, strMsg);
-            }
-        });
-    }
-
-    public void loginbycode(String safecode) {
-        if(safecode.isEmpty()){
-            Toast.makeText(activity, "委托码不能为空", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        String url = HttpClentLinkNet.BaseAddr + "loginauth.php";
-        AjaxParams params = new AjaxParams();
-        params.put("authcode", safecode);
-        HttpClentLinkNet.getInstance().sendReqFinalHttp_Post(url, params, new AjaxCallBack() {
-            @Override
-            public void onLoading(long count, long current) {
-                super.onLoading(count, current);
-            }
-
-            @Override
-            public void onSuccess(Object t) {
-                String jsStr = "";
-                String success = "";
-
-                if (t != null) {
-                    jsStr = String.valueOf(t);
-                }
-
-                try {
-                    JSONObject jsObj = new JSONObject(jsStr);
-                    if (jsObj.has("success")) {
-                        success = jsObj.getString("success");
-                    }
-                    if(success.equals("1")) {
-                        if (jsObj.has("userid")) {
-                            Constant.userid = jsObj.getString("userid");
-                        }
-                        if (jsObj.has("username")) {
-                            Constant.username = jsObj.getString("username");
-                        }
-                        Constant.isLogin = true;
-                        Constant.isLogByCode = true;
-                        Toast.makeText(activity, "登录成功", Toast.LENGTH_SHORT).show();
-                        river_fragment_login.setVisibility(View.VISIBLE);
-                        river_fragment_unlogin.setVisibility(View.GONE);
-                        activity.onLoginChange();
-                    }else{
-                        Toast.makeText(activity, "登录失败", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (JSONException e) {
-                }
-            }
-
-            @Override
-            public void onFailure(Throwable t, int errorNo, String strMsg) {
-                Toast.makeText(activity, "登录失败", Toast.LENGTH_SHORT).show();
-                super.onFailure(t, errorNo, strMsg);
-            }
-        });
-    }
-
-    TagAliasCallback callback = new TagAliasCallback(){
-        @Override
-        public void gotResult(int responseCode, String alias, Set<String> tags) {
-            if(responseCode == 0){
-                SharePreferenceDataUtil.setSharedBooleanData(activity, "setAliasAndTags", true);
-                //Toast.makeText(activity, "设置标签和别名成功！",Toast.LENGTH_SHORT).show();
-            }else{
-                //Toast.makeText(activity, "设置标签和别名失败！",Toast.LENGTH_SHORT).show();
-            }
-        }
-    };
 
 }

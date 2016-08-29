@@ -11,6 +11,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.TextView;
 
 import com.jsycloud.ir.xiuzhou.Constant;
 import com.jsycloud.ir.xiuzhou.DialogUtils;
@@ -41,7 +42,6 @@ public class WebviewActivity extends Activity{
         super.onCreate(savedInstanceState);
 
         String url = getIntent().getStringExtra("url");
-
         setContentView(R.layout.webview_activity);
         findViewById(R.id.webview_activity_back).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +49,7 @@ public class WebviewActivity extends Activity{
                 WebviewActivity.this.finish();
             }
         });
+        final TextView webview_activity_tittle = (TextView)findViewById(R.id.webview_activity_tittle);
         webview_activity_webview = (WebView)findViewById(R.id.webview_activity_webview);
         WebSettings setting = webview_activity_webview.getSettings();
         // 设置WebView属性，能够执行JavaScript脚本
@@ -77,6 +78,11 @@ public class WebviewActivity extends Activity{
                     handler.sendEmptyMessageDelayed(1069, 500);
                 }
                 super.onProgressChanged(view, progress);
+            }
+
+            public void onReceivedTitle(WebView view, String title) {
+                super.onReceivedTitle(view, title);
+                webview_activity_tittle.setText(title);
             }
         });
         webview_activity_webview.loadUrl(url);
