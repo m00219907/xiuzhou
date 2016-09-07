@@ -421,6 +421,7 @@ public class GroupListActivity extends BaseActivity implements OnClickListener, 
             						intent.putExtra("channelName", channelName);
             						intent.putExtra("channelId", channelId);
             					}
+                                intent.putExtra("deviceId", mDeviceId);
             					intent.setClass(GroupListActivity.this, RealPlayActivity.class);
             					startActivity(intent);
                             break;

@@ -76,7 +76,7 @@
         android:id="@+id/login_activity_login"
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:gravity="center"
@@ -90,8 +90,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="30dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
         android:gravity="center">
 
         <View
@@ -118,17 +118,34 @@
             android:background="#ffffff"/>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/login_activity_logwithcode"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
+        android:orientation="horizontal"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="45dp"
-        android:layout_marginRight="45dp"
-        android:background="#999999"
-        android:gravity="center"
-        android:text="使用授权委托码登录"
-        android:textColor="#ffffff"
-        android:textSize="14sp"/>
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/login_activity_logwithcode"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:background="@drawable/auth_code"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/login_activity_management"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:background="@drawable/management"/>
+    </LinearLayout>
+
 
 </LinearLayout>

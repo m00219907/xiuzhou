@@ -32,7 +32,7 @@ import org.json.JSONObject;
 
 public class TabMapFragment extends Fragment implements AMapLocationListener{
 
-    private View view;
+    private View view, map_load_failed;
     StartActivity activity;
     WebView map_webview;
 
@@ -50,6 +50,20 @@ public class TabMapFragment extends Fragment implements AMapLocationListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.map_webview, null);
+
+        map_load_failed = view.findViewById(R.id.map_load_failed);
+        map_load_failed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                map_webview.setVisibility(View.VISIBLE);
+                if(Constant.isLogin){
+                    map_webview.loadUrl(HttpClentLinkNet.BaseAddr + "pages/map.php" + "?uid=" + Constant.userid);
+                }else{
+                    map_webview.loadUrl(HttpClentLinkNet.BaseAddr + "pages/map.php" + "?uid=0");
+                }
+                map_load_failed.setVisibility(View.GONE);
+            }
+        });
 
         map_webview = (WebView)view.findViewById(R.id.map_webview);
 
@@ -138,10 +152,16 @@ public class TabMapFragment extends Fragment implements AMapLocationListener{
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             if(url.contains("rid=")){
                 Constant.selectRiverId = CommonTools.getRiverId(url);
-                activity.initTopTab(4);
+                //activity.initTopTab(4);
                 return true;
             }
             return false;
+        }
+
+        @Override
+        public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+            map_webview.setVisibility(View.INVISIBLE);
+            map_load_failed.setVisibility(View.VISIBLE);
         }
     }
 

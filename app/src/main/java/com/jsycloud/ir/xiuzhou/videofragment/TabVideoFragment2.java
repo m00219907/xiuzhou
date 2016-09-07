@@ -287,6 +287,7 @@ public class TabVideoFragment2 extends Fragment implements GroupListAdapter2.IOn
                                         intent.putExtra("channelName", channelName);
                                         intent.putExtra("channelId", channelId);
                                     }
+                                    intent.putExtra("deviceId", mDeviceId);
                                     intent.setClass(activity, RealPlayActivity.class);
                                     startActivity(intent);
                                     break;
@@ -369,6 +370,7 @@ public class TabVideoFragment2 extends Fragment implements GroupListAdapter2.IOn
                                         intent.putExtra("channelName", channelName);
                                         intent.putExtra("channelId", channelId);
                                     }
+                                    intent.putExtra("deviceId", mDeviceId);
                                     intent.setClass(activity, RealPlayActivity.class);
                                     startActivity(intent);
                                     break;

@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.dh.DpsdkCore.IDpsdkCore;
 import com.jsycloud.ir.xiuzhou.mapfragment.TabMapFragment;
 import com.jsycloud.ir.xiuzhou.problemfragment.TabProblemFragment;
+import com.jsycloud.ir.xiuzhou.riverfragment.LoginActivity;
 import com.jsycloud.ir.xiuzhou.riverfragment.TabRiverFragment2;
 import com.jsycloud.ir.xiuzhou.riverfragment.WebviewActivity;
 import com.jsycloud.ir.xiuzhou.videofragment.TabVideoFragment2;
@@ -37,6 +38,7 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
     ImageView tab_map_image, tab_video_image, tab_problem_image, tab_me_image;
     TextView tab_map_text, tab_video_text, tab_problem_text, tab_me_text;
     TextView tab_map_toplayout_text, tab_map_tipoff_list;
+    ImageView tab_map_toplayout_search;
     long touchTime = 0;
 
     private String version = "1.0.0";
@@ -58,6 +60,9 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
         tab_me_text = (TextView)findViewById(R.id.tab_me_text);
 
         tab_map_toplayout_text = (TextView)findViewById(R.id.tab_map_toplayout_text);
+
+        tab_map_toplayout_search = (ImageView)findViewById(R.id.tab_map_toplayout_search);
+        tab_map_toplayout_search.setOnClickListener(this);
         tab_map_tipoff_list = (TextView)findViewById(R.id.tab_map_tipoff_list);
         tab_map_tipoff_list.setOnClickListener(this);
 
@@ -66,8 +71,7 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
         findViewById(R.id.tab_problem_layout).setOnClickListener(this);
         findViewById(R.id.tab_me_layout).setOnClickListener(this);
 
-        try
-        {
+        try {
             PackageInfo info = getPackageManager().getPackageInfo(this.getPackageName(), 0);
             version = info.versionName;
         }
@@ -124,16 +128,25 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
                 tab_map_toplayout_text.setText("投诉举报");
                 break;
             case R.id.tab_me_layout:
-                initTopTab(3);
-                tab_map_toplayout_text.setText("河长中心");
+                if(Constant.isLogin) {
+                    initTopTab(3);
+                    tab_map_toplayout_text.setText("河长中心");
+                }else{
+                    Intent intent = new Intent(this, LoginActivity.class);
+                    startActivity(intent);
+                }
                 break;
-            case R.id.tab_map_tipoff_list:
+            case R.id.tab_map_toplayout_search:
                 DialogShow.dialogShow2(this,"请输入投诉举报ID查询", "查询", new DialogShow.IloginClick() {
                     @Override
                     public void OnClick(String passcode) {
                         checkID(passcode);
                     }
                 });
+                break;
+            case R.id.tab_map_tipoff_list:
+                TabProblemFragment tabProblemFragment = (TabProblemFragment)fragments.get(2);
+                tabProblemFragment.patrolupimg(0);
                 break;
             default:
                 break;
@@ -181,24 +194,28 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
             case 0:
                 tab_map_image.setImageResource(R.drawable.ic_home_blue_24dp);
                 tab_map_text.setTextColor(0xff45c01a);
+                tab_map_toplayout_search.setVisibility(View.GONE);
                 tab_map_tipoff_list.setVisibility(View.GONE);
                 initFragmentData(0);
                 break;
             case 1:
                 tab_video_image.setImageResource(R.drawable.ic_videocam_blue_24dp);
                 tab_video_text.setTextColor(0xff45c01a);
+                tab_map_toplayout_search.setVisibility(View.GONE);
                 tab_map_tipoff_list.setVisibility(View.GONE);
                 initFragmentData(1);
                 break;
             case 2:
                 tab_problem_image.setImageResource(R.drawable.tab_problem_image_blue);
                 tab_problem_text.setTextColor(0xff45c01a);
+                tab_map_toplayout_search.setVisibility(View.VISIBLE);
                 tab_map_tipoff_list.setVisibility(View.VISIBLE);
                 initFragmentData(2);
                 break;
             case 3:
                 tab_me_image.setImageResource(R.drawable.ic_person_blue_24dp);
                 tab_me_text.setTextColor(0xff45c01a);
+                tab_map_toplayout_search.setVisibility(View.GONE);
                 tab_map_tipoff_list.setVisibility(View.GONE);
                 initFragmentData(3);
                 break;

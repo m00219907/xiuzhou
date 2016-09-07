@@ -17,8 +17,6 @@ import com.dh.DpsdkCore.fDPSDKRingInfoCallBack;
 import com.dh.DpsdkCore.fDPSDKStatusCallback;
 import com.jsycloud.activity.AutoVtActivity;
 import com.jsycloud.groupTree.GroupListManager;
-import com.videogo.constant.Config;
-import com.videogo.openapi.EZOpenSDK;
 
 import java.util.List;
 
@@ -27,7 +25,7 @@ import cn.jpush.android.api.JPushInterface;
 public class AppApplication extends Application {
 
     private static final String TAG = "AppApplication";
-    private static final String LOG_PATH = Environment.getExternalStorageDirectory().getPath() + "/DPSDKlog.txt";
+    //private static final String LOG_PATH = Environment.getExternalStorageDirectory().getPath() + "/DPSDKlog.txt";
 
     private static AppApplication _instance;
     private int m_loginHandle = 0;   //鏍囪鐧诲綍鏄惁鎴愬姛   1鐧诲綍鎴愬姛   0鐧诲綍澶辫触
@@ -41,9 +39,6 @@ public class AppApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
-        Config.LOGGING = true;
-        EZOpenSDK.initLib(this, "b381f351e99047b89e36676f80d52b0f", "");
 
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
@@ -79,8 +74,7 @@ public class AppApplication extends Application {
         Log.d("DpsdkCreate:",m_nLastError+"");
 
         //set logPath
-        m_nLastError = IDpsdkCore.DPSDK_SetLog(m_ReValue.nReturnValue, LOG_PATH.getBytes());
-        Log.d("DPSDK_SetLog:",m_nLastError+"");
+        //m_nLastError = IDpsdkCore.DPSDK_SetLog(m_ReValue.nReturnValue, LOG_PATH.getBytes());
 
         IDpsdkCore.DPSDK_SetDPSDKStatusCallback(m_ReValue.nReturnValue, new fDPSDKStatusCallback() {
 

@@ -150,7 +150,11 @@ public class TabRiverFragment2 extends Fragment implements View.OnClickListener{
                 break;
             case R.id.river_fragment_history://巡河记录
                 if(Constant.isLogin) {
-                    Intent intent6 = new Intent(activity, CheckRiverHistory.class);
+                    //Intent intent6 = new Intent(activity, CheckRiverHistory.class);
+                    //startActivity(intent6);
+
+                    Intent intent6 = new Intent(activity, WebviewActivity.class);
+                    intent6.putExtra("url", HttpClentLinkNet.BaseAddr + "pages/patrol.php");
                     startActivity(intent6);
                 }else{
                     startLoginActivity();

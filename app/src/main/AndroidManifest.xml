@@ -90,22 +90,6 @@
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"/>
 
-        <receiver
-            android:name="com.jsycloud.ir.xiuzhou.videofragment.EzvizBroadcastReceiver"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.videogo.action.ADD_DEVICE_SUCCESS_ACTION"/>
-                <action android:name="com.videogo.action.OAUTH_SUCCESS_ACTION"/>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-                <action android:name="com.ezviz.push.sdk.android.intent.action.MESSAGE"/>
-            </intent-filter>
-        </receiver>
-
-        <activity
-            android:name="com.jsycloud.ir.xiuzhou.videofragment.EZCameraListActivity"
-            android:theme="@style/transparent_ui_bg">
-        </activity>
-
         <activity
             android:name="com.jsycloud.ir.xiuzhou.mapfragment.AllRiverActivity"
             android:theme="@style/transparent_ui_bg">
@@ -155,14 +139,9 @@
         </activity>
 
         <activity
-            android:name="com.jsycloud.ir.xiuzhou.videofragment.EZRealPlayActivity"
-            android:theme="@style/default_ui_bg">
-        </activity>
-
-        <activity
-            android:name="com.jsycloud.ir.xiuzhou.videofragment.EZRealPlayfullscreenActivity"
+            android:name="com.jsycloud.ir.xiuzhou.riverfragment.ManagementActivity"
             android:theme="@style/default_ui_bg"
-            android:screenOrientation="landscape">
+            android:hardwareAccelerated="false">
         </activity>
 
         <receiver
@@ -203,7 +182,12 @@
 
         <activity
             android:name="com.jsycloud.activity.RealPlayActivity"
-            android:label="@string/title_item_list" >
+            android:theme="@style/default_ui_bg">
+        </activity>
+
+        <activity
+            android:name="com.jsycloud.activity.RealPlayfullscreenActivity"
+            android:theme="@style/default_ui_bg">
         </activity>
 
         <activity

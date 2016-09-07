@@ -41,6 +41,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
 
         findViewById(R.id.login_activity_login).setOnClickListener(this);
         findViewById(R.id.login_activity_logwithcode).setOnClickListener(this);
+        findViewById(R.id.login_activity_management).setOnClickListener(this);
     }
 
     @Override
@@ -56,6 +57,10 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                         loginbycode(passcode);
                     }
                 });
+                break;
+            case R.id.login_activity_management:
+                Intent intent = new Intent(this, ManagementActivity.class);
+                startActivity(intent);
                 break;
         }
     }

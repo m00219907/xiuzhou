@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.text.Html;
+import android.text.TextPaint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +26,6 @@ import com.jsycloud.ir.xiuzhou.CommonTools;
 import com.jsycloud.ir.xiuzhou.Constant;
 import com.jsycloud.ir.xiuzhou.DialogShow;
 import com.jsycloud.ir.xiuzhou.HttpClentLinkNet;
-import com.jsycloud.ir.xiuzhou.MyRectangleView;
 import com.jsycloud.ir.xiuzhou.R;
 import com.jsycloud.ir.xiuzhou.StartActivity;
 
@@ -41,17 +42,15 @@ import java.io.FileOutputStream;
 public class TabProblemFragment extends Fragment implements View.OnClickListener{
 
     private StartActivity activity;
-    TextView problem_fragment_chooseriver;
-    EditText problem_fragment_discribe, problem_fragment_name, problem_fragment_phone;
+    EditText problem_fragment_river, problem_fragment_discribe, problem_fragment_name, problem_fragment_mobile;
     ImageView problem_fragment_photo1,problem_fragment_photo2,problem_fragment_photo3,problem_fragment_photo4,problem_fragment_photo5;
 
-    private final int CHOOSE_RIVER = 109;// 选择河流
+    TextView problem_fragment_spot;
     private final int PHOTO_REQUEST_CAMERA = 120;// 拍照
     private final int PHOTO_REQUEST_GALLERY = 121;// 从相册中选择
 
     private final String PHOTO_FILE_NAME = "temp_photo.jpg";
     int curIndex = 0;
-    int curPhotoIndex = 0;
 
     String base64Str1 = "";
     String base64Str2 = "";
@@ -76,32 +75,31 @@ public class TabProblemFragment extends Fragment implements View.OnClickListener
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.problem_fragment, null);
 
-        problem_fragment_chooseriver = (TextView)view.findViewById(R.id.problem_fragment_chooseriver);
-        problem_fragment_chooseriver.setOnClickListener(this);
+        problem_fragment_river = (EditText)view.findViewById(R.id.problem_fragment_river);
         problem_fragment_discribe = (EditText)view.findViewById(R.id.problem_fragment_discribe);
         problem_fragment_name = (EditText)view.findViewById(R.id.problem_fragment_name);
-        problem_fragment_phone = (EditText)view.findViewById(R.id.problem_fragment_phone);
+        problem_fragment_mobile = (EditText)view.findViewById(R.id.problem_fragment_mobile);
         problem_fragment_photo1 = (ImageView)view.findViewById(R.id.problem_fragment_photo1);
+        problem_fragment_photo1.setOnClickListener(this);
+        problem_fragment_photo1.setTag("1");
         problem_fragment_photo2 = (ImageView)view.findViewById(R.id.problem_fragment_photo2);
+        problem_fragment_photo2.setOnClickListener(this);
+        problem_fragment_photo2.setTag("0");
         problem_fragment_photo3 = (ImageView)view.findViewById(R.id.problem_fragment_photo3);
+        problem_fragment_photo3.setOnClickListener(this);
+        problem_fragment_photo3.setTag("0");
         problem_fragment_photo4 = (ImageView)view.findViewById(R.id.problem_fragment_photo4);
+        problem_fragment_photo4.setOnClickListener(this);
+        problem_fragment_photo4.setTag("0");
         problem_fragment_photo5 = (ImageView)view.findViewById(R.id.problem_fragment_photo5);
+        problem_fragment_photo5.setOnClickListener(this);
+        problem_fragment_photo5.setTag("0");
 
-        MyRectangleView problem_fragment_uploadpic = (MyRectangleView)view.findViewById(R.id.problem_fragment_uploadpic);
-        problem_fragment_uploadpic.setRectangleColor(0xff2196f3);
-        problem_fragment_uploadpic.settextStr("上传照片");
-        problem_fragment_uploadpic.setOnClickListener(this);
-
-        MyRectangleView problem_fragment_commit = (MyRectangleView)view.findViewById(R.id.problem_fragment_commit);
-        problem_fragment_commit.setRectangleColor(0xff2196f3);
-        problem_fragment_commit.settextStr("提交");
-        problem_fragment_commit.setOnClickListener(this);
-
-        if (!Constant.selectRiverId.isEmpty()) {
-            curIndex = CommonTools.getRiverIndexByRiverId(Constant.selectRiverId);
-            problem_fragment_chooseriver.setText(Constant.allriverList.get(curIndex).getName());
-            Constant.selectRiverId = "";
-        }
+        problem_fragment_spot = (TextView)view.findViewById(R.id.problem_fragment_spot);
+        String redText = "<font color= '#ff0000'>"+"问题现场"+"</font>";
+        problem_fragment_spot.setText(Html.fromHtml(redText));
+        TextPaint tp = problem_fragment_spot.getPaint();
+        tp.setFakeBoldText(true);
 
         return view;
     }
@@ -112,7 +110,6 @@ public class TabProblemFragment extends Fragment implements View.OnClickListener
         if(!hidden){
             if (!Constant.selectRiverId.isEmpty()) {
                 curIndex = CommonTools.getRiverIndexByRiverId(Constant.selectRiverId);
-                problem_fragment_chooseriver.setText(Constant.allriverList.get(curIndex).getName());
                 Constant.selectRiverId = "";
             }
         }
@@ -121,14 +118,8 @@ public class TabProblemFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.problem_fragment_chooseriver:
-                Intent intent = new Intent(activity, RiverChooseActivity.class);
-                activity.startActivityForResult(intent, CHOOSE_RIVER);
-                break;
-            case R.id.problem_fragment_uploadpic:
-                if(curPhotoIndex == 5){
-                    Toast.makeText(activity,"最多只能选择5张照片", Toast.LENGTH_SHORT).show();
-                }else {
+            case R.id.problem_fragment_photo1:
+                if(problem_fragment_photo1.getTag().equals("1")){
                     DialogShow.dialogShow3(activity, new DialogShow.ICheckedCallBack() {
                         @Override
                         public void OnCheckedCallBackDispath(boolean bSucceed) {
@@ -145,25 +136,92 @@ public class TabProblemFragment extends Fragment implements View.OnClickListener
                     });
                 }
                 break;
-            case R.id.problem_fragment_commit:
-                if(problem_fragment_discribe.getText().toString().isEmpty()){
-                    Toast.makeText(activity, "问题描述不能为空", Toast.LENGTH_SHORT).show();
-                }else {
-                    patrolupimg(0);
+            case R.id.problem_fragment_photo2:
+                if(problem_fragment_photo2.getTag().equals("1")){
+                    DialogShow.dialogShow3(activity, new DialogShow.ICheckedCallBack() {
+                        @Override
+                        public void OnCheckedCallBackDispath(boolean bSucceed) {
+                            if (bSucceed) {
+                                Intent photoIntent = new Intent(Intent.ACTION_PICK);
+                                photoIntent.setType("image/*");
+                                activity.startActivityForResult(photoIntent, PHOTO_REQUEST_GALLERY);
+                            } else {
+                                Intent cameraIntent = new Intent("android.media.action.IMAGE_CAPTURE");
+                                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), PHOTO_FILE_NAME)));
+                                startActivityForResult(cameraIntent, PHOTO_REQUEST_CAMERA);
+                            }
+                        }
+                    });
                 }
                 break;
+            case R.id.problem_fragment_photo3:
+                if(problem_fragment_photo3.getTag().equals("1")){
+                    DialogShow.dialogShow3(activity, new DialogShow.ICheckedCallBack() {
+                        @Override
+                        public void OnCheckedCallBackDispath(boolean bSucceed) {
+                            if (bSucceed) {
+                                Intent photoIntent = new Intent(Intent.ACTION_PICK);
+                                photoIntent.setType("image/*");
+                                activity.startActivityForResult(photoIntent, PHOTO_REQUEST_GALLERY);
+                            } else {
+                                Intent cameraIntent = new Intent("android.media.action.IMAGE_CAPTURE");
+                                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), PHOTO_FILE_NAME)));
+                                startActivityForResult(cameraIntent, PHOTO_REQUEST_CAMERA);
+                            }
+                        }
+                    });
+                }
+                break;
+            case R.id.problem_fragment_photo4:
+                if(problem_fragment_photo4.getTag().equals("1")){
+                    DialogShow.dialogShow3(activity, new DialogShow.ICheckedCallBack() {
+                        @Override
+                        public void OnCheckedCallBackDispath(boolean bSucceed) {
+                            if (bSucceed) {
+                                Intent photoIntent = new Intent(Intent.ACTION_PICK);
+                                photoIntent.setType("image/*");
+                                activity.startActivityForResult(photoIntent, PHOTO_REQUEST_GALLERY);
+                            } else {
+                                Intent cameraIntent = new Intent("android.media.action.IMAGE_CAPTURE");
+                                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), PHOTO_FILE_NAME)));
+                                startActivityForResult(cameraIntent, PHOTO_REQUEST_CAMERA);
+                            }
+                        }
+                    });
+                }
+                break;
+            case R.id.problem_fragment_photo5:
+                if(problem_fragment_photo5.getTag().equals("1")){
+                    DialogShow.dialogShow3(activity, new DialogShow.ICheckedCallBack() {
+                        @Override
+                        public void OnCheckedCallBackDispath(boolean bSucceed) {
+                            if (bSucceed) {
+                                Intent photoIntent = new Intent(Intent.ACTION_PICK);
+                                photoIntent.setType("image/*");
+                                activity.startActivityForResult(photoIntent, PHOTO_REQUEST_GALLERY);
+                            } else {
+                                Intent cameraIntent = new Intent("android.media.action.IMAGE_CAPTURE");
+                                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), PHOTO_FILE_NAME)));
+                                startActivityForResult(cameraIntent, PHOTO_REQUEST_CAMERA);
+                            }
+                        }
+                    });
+                }
+                break;
+//            case R.id.problem_fragment_commit:
+//                if(problem_fragment_discribe.getText().toString().isEmpty()){
+//                    Toast.makeText(activity, "问题描述不能为空", Toast.LENGTH_SHORT).show();
+//                }else {
+//                    patrolupimg(0);
+//                }
+//                break;
             default:
                 break;
         }
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == CHOOSE_RIVER && resultCode == Activity.RESULT_OK) {
-            if (data != null) {
-                curIndex = data.getExtras().getInt("curIndex", 0);
-                problem_fragment_chooseriver.setText(Constant.allriverList.get(curIndex).getName());
-            }
-        } else if (requestCode == PHOTO_REQUEST_GALLERY && resultCode == Activity.RESULT_OK) {
+        if (requestCode == PHOTO_REQUEST_GALLERY && resultCode == Activity.RESULT_OK) {
             if (data != null) {
                 Uri uri = data.getData();
                 File tempFile = new File(getFilePathFromUrl(uri));
@@ -171,7 +229,6 @@ public class TabProblemFragment extends Fragment implements View.OnClickListener
                 if(uploadFile != null && uploadFile.exists()){
                     Bitmap myBitmap = BitmapFactory.decodeFile(uploadFile.getAbsolutePath());
                     setImageUI(myBitmap);
-                    curPhotoIndex++;
                 }
             }
         }else if(requestCode == PHOTO_REQUEST_CAMERA && resultCode == Activity.RESULT_OK){
@@ -180,7 +237,6 @@ public class TabProblemFragment extends Fragment implements View.OnClickListener
             if(uploadFile.exists()){
                 Bitmap myBitmap = BitmapFactory.decodeFile(uploadFile.getAbsolutePath());
                 setImageUI(myBitmap);
-                curPhotoIndex++;
             }
         }
     }
@@ -201,24 +257,32 @@ public class TabProblemFragment extends Fragment implements View.OnClickListener
     }
 
     public void setImageUI(Bitmap myBitmap){
-        if(curPhotoIndex == 0) {
-            problem_fragment_photo1.setVisibility(View.VISIBLE);
+        if(problem_fragment_photo1.getTag().equals("1")) {
+            problem_fragment_photo1.setTag("2");
             problem_fragment_photo1.setImageBitmap(myBitmap);
+            problem_fragment_photo2.setTag("1");
+            problem_fragment_photo2.setImageResource(R.drawable.add_image);
             base64Str1 = CommonTools.bitmapToBase64(myBitmap);
-        }else if(curPhotoIndex == 1){
-            problem_fragment_photo2.setVisibility(View.VISIBLE);
+        }else if(problem_fragment_photo2.getTag().equals("1")){
+            problem_fragment_photo2.setTag("2");
             problem_fragment_photo2.setImageBitmap(myBitmap);
+            problem_fragment_photo3.setTag("1");
+            problem_fragment_photo3.setImageResource(R.drawable.add_image);
             base64Str2 = CommonTools.bitmapToBase64(myBitmap);
-        }else if(curPhotoIndex == 2){
-            problem_fragment_photo3.setVisibility(View.VISIBLE);
+        }else if(problem_fragment_photo3.getTag().equals("1")){
+            problem_fragment_photo3.setTag("2");
             problem_fragment_photo3.setImageBitmap(myBitmap);
+            problem_fragment_photo4.setTag("1");
+            problem_fragment_photo4.setImageResource(R.drawable.add_image);
             base64Str3 = CommonTools.bitmapToBase64(myBitmap);
-        }else if(curPhotoIndex == 3){
-            problem_fragment_photo4.setVisibility(View.VISIBLE);
+        }else if(problem_fragment_photo4.getTag().equals("1")){
+            problem_fragment_photo4.setTag("2");
             problem_fragment_photo4.setImageBitmap(myBitmap);
+            problem_fragment_photo5.setTag("1");
+            problem_fragment_photo5.setImageResource(R.drawable.add_image);
             base64Str4 = CommonTools.bitmapToBase64(myBitmap);
-        }else if(curPhotoIndex == 4){
-            problem_fragment_photo5.setVisibility(View.VISIBLE);
+        }else if(problem_fragment_photo5.getTag().equals("1")){
+            problem_fragment_photo5.setTag("2");
             problem_fragment_photo5.setImageBitmap(myBitmap);
             base64Str5 = CommonTools.bitmapToBase64(myBitmap);
         }
@@ -305,8 +369,8 @@ public class TabProblemFragment extends Fragment implements View.OnClickListener
         String url = HttpClentLinkNet.BaseAddr + "tipoff.php";
         AjaxParams params = new AjaxParams();
         params.put("user", problem_fragment_name.getText().toString());
-        params.put("mobile", problem_fragment_phone.getText().toString());
-        params.put("riverid", Constant.allriverList.get(curIndex).getId());
+        params.put("mobile", problem_fragment_mobile.getText().toString());
+        params.put("riverid", problem_fragment_river.getText().toString());
         params.put("describe", problem_fragment_discribe.getText().toString());
         if(Constant.curLocation!=null) {
             params.put("coordinate", Constant.curLocation.getLongitude() + "," + Constant.curLocation.getLatitude());
@@ -366,10 +430,8 @@ public class TabProblemFragment extends Fragment implements View.OnClickListener
 
     public void resetUI(){
         curIndex = 0;
-        problem_fragment_chooseriver.setText("");
         problem_fragment_discribe.setText("");
         problem_fragment_name.setText("");
-        problem_fragment_phone.setText("");
     }
 
     public File saveBitmapToFile(File file){

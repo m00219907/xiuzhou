@@ -1,468 +1,162 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/item_detail"
-    style="?android:attr/textAppearanceLarge"
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context="com.dh.Demo.ItemDetailFragment" >
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:layout_height="42dp"
+        android:background="#2196f3">
+
+        <ImageView
+            android:id="@+id/real_play_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:src="@drawable/back_img"/>
 
         <TextView
-            android:id="@+id/tv_excute_result"
-            android:layout_width="wrap_content"
-            android:layout_height="15dp"
-            android:text="" />
-
-        <!--
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="DevIp" />
-
-                <EditText
-                    android:id="@+id/et_dev_ip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxEms="15"
-                    android:minEms="10"
-                    android:singleLine="true" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Port" />
-
-                <EditText
-                    android:id="@+id/et_port"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxEms="7"
-                    android:minEms="5"
-                    android:singleLine="true" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ChnlNo." />
-
-                <EditText
-                    android:id="@+id/et_chnl_no"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxEms="7"
-                    android:minEms="5"
-                    android:singleLine="true" />
-
-                <Button
-                    android:id="@+id/bt_get_tunnel_id"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="获取通道ID" />
-            </LinearLayout>
-        -->
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:layout_weight="0.3"
-                android:gravity="center"
-                android:text="@string/tongdao_mc" />
-
-            <TextView
-                android:id="@+id/et_cam_id"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.7"
-                android:maxEms="15"
-                android:minEms="10"
-                android:singleLine="true" />
-
-            <!--
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="OSD信息" />
-
-                <EditText
-                    android:id="@+id/et_port"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxEms="15"
-                    android:minEms="10"
-                    android:singleLine="true" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="音量" />
-
-                <EditText
-                    android:id="@+id/et_chnl_no"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxEms="7"
-                    android:minEms="5"
-                    android:singleLine="true" />
-            -->
-        </LinearLayout>
-
-        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:layout_centerInParent="true"
+            android:text="实时监控"
+            android:textColor="#ffffff"
+            android:textSize="20sp"/>
+    </RelativeLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-
-                <!--
-                         <Button
-                        android:id="@+id/bt_get_url"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="获取URL" />
-                -->
-            </LinearLayout>
-
-            <!--
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" >
-
-                    <Button
-                        android:id="@+id/bt_close_cam"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="关闭cam" />
-
-                    <Button
-                        android:id="@+id/bt_close_cam"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="抓图 " />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" >
-
-                    <Button
-                        android:id="@+id/bt_start_record"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="开始录像" />
-
-                    <Button
-                        android:id="@+id/bt_stop_record"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="停止录像" />
-
-                    <Button
-                        android:id="@+id/bt_get_audio_d"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="获取音量" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" >
-
-                    <Button
-                        android:id="@+id/bt_set_osd_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="设置osd文本信息" />
-
-                    <Button
-                        android:id="@+id/bt_clear_osd_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="清除osd信息" />
-
-                    <Button
-                        android:id="@+id/bt_set_audio_d"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="设置音量" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" >
-
-                    <Button
-                        android:id="@+id/bt_start_audio"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="开启音频" />
-
-                    <Button
-                        android:id="@+id/bt_close_audio"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="关闭音频" />
-
-                    <Button
-                        android:id="@+id/bt_draw_fun"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="DrawFun" />
-                </LinearLayout>
-            -->
-        </LinearLayout>
-
-        <!--
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="视频属性" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="亮度" />
-
-                <EditText
-                    android:id="@+id/et_light_d"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxEms="5"
-                    android:minEms="5"
-                    android:singleLine="true"
-                    android:text="64" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="对比度" />
-
-                <EditText
-                    android:id="@+id/et_compare_d"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxEms="7"
-                    android:minEms="5"
-                    android:singleLine="true"
-                    android:text="64" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="饱和度" />
-
-                <EditText
-                    android:id="@+id/et_color_fill_d"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxEms="7"
-                    android:minEms="5"
-                    android:singleLine="true"
-                    android:text="64" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="色调" />
-
-                <EditText
-                    android:id="@+id/et_color_style_d"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxEms="7"
-                    android:minEms="5"
-                    android:singleLine="true"
-                    android:text="64" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <Button
-                    android:id="@+id/bt_get_video_attr"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="获取" />
-
-                <Button
-                    android:id="@+id/bt_adjust"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="调整" />
-            </LinearLayout>
-        -->
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <Button
-                android:id="@+id/bt_open_video"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="打开视频" />
-
-            <Button
-                android:id="@+id/bt_close_video"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="关闭视频" />
-        </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="260dp">
 
         <SurfaceView
-            android:id="@+id/sv_player"
-            android:layout_width="315dp"
-            android:layout_height="272dp"
+            android:id="@+id/real_play_surfaceview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center" />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:layout_alignParentBottom="true"
+            android:background="#50000000">
 
-            <Button
-                android:id="@+id/button_top"
-                android:layout_width="0dp"
+            <ImageView
+                android:id="@+id/real_play_play"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="上" />
+                android:padding="10dp"
+                android:src="@drawable/real_play_play"/>
 
-            <!--
-                <Button
-                    android:id="@+id/button_ptz_stop"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.06"
-                    android:text="停止" />
-            -->
-
-            <Button
-                android:id="@+id/button_bottom"
-                android:layout_width="0dp"
+            <ImageView
+                android:id="@+id/real_play_fullscreen"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="下" />
-        </LinearLayout>
+                android:layout_alignParentRight="true"
+                android:padding="10dp"
+                android:src="@drawable/real_play_fullscreen"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/real_play_resolution"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/real_play_fullscreen"
+                android:layout_marginRight="20dp"
+                android:layout_centerVertical="true"
+                android:text="高清"
+                android:textColor="#ffffff"
+                android:textSize="16sp"
+                android:visibility="gone"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/real_play_circle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:layout_centerInParent="true"
+            android:src="@drawable/real_play_circle"/>
 
-            <Button
-                android:id="@+id/button_ptz_left"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="左" />
-
-            <Button
-                android:id="@+id/button_right"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="右" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/real_play_record"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:layout_centerInParent="true"
+            android:layout_margin="8dp"
+            android:src="@drawable/real_play_record"/>
 
-            <Button
-                android:id="@+id/button_add_zoom"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="变倍+" />
-
-            <Button
-                android:id="@+id/button_reduce_zoom"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="变倍-" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/real_play_up"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:layout_above="@id/real_play_record"
+            android:layout_centerHorizontal="true"
+            android:padding="8dp"
+            android:src="@drawable/real_play_up"/>
 
-            <Button
-                android:id="@+id/button_add_focus"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="变焦+" />
-
-            <Button
-                android:id="@+id/button_reduce_focus"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="变焦-" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/real_play_down"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal" >
+            android:layout_below="@id/real_play_record"
+            android:layout_centerHorizontal="true"
+            android:padding="8dp"
+            android:src="@drawable/real_play_down"/>
 
-            <Button
-                android:id="@+id/button_add_aperture"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="光圈+" />
-
-            <Button
-                android:id="@+id/button_reduce_aperture"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="光圈-" />
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/capture_img"
-            android:layout_width="100dp"
+        <ImageView
+            android:id="@+id/real_play_left"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/str_capture_bitmap" />
+            android:layout_toLeftOf="@id/real_play_record"
+            android:layout_centerVertical="true"
+            android:padding="13dp"
+            android:src="@drawable/real_play_left"/>
 
-    
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/real_play_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/real_play_record"
+            android:layout_centerVertical="true"
+            android:padding="13dp"
+            android:src="@drawable/real_play_right"/>
 
-</ScrollView>
+        <ImageView
+            android:id="@+id/real_play_video"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:src="@drawable/real_play_video"/>
+
+        <ImageView
+            android:id="@+id/real_play_capture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:padding="20dp"
+            android:src="@drawable/real_play_capture"/>
+
+        <ImageView
+            android:id="@+id/real_play_decrease"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:padding="20dp"
+            android:src="@drawable/real_play_decrease"/>
+
+        <ImageView
+            android:id="@+id/real_play_increase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:padding="20dp"
+            android:src="@drawable/real_play_increase"/>
+    </RelativeLayout>
+
+</LinearLayout>
