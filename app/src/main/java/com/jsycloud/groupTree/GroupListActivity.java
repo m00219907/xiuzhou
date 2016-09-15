@@ -248,7 +248,6 @@ public class GroupListActivity extends BaseActivity implements OnClickListener, 
                 mGroupListAdapter.clearDate();
                 mGroupListAdapter.addNode(root);
                 // 设置默认展开级别
-                mGroupListAdapter.setExpandLevel(1);
                 mGroupListAdapter.notifyDataSetChanged();
 
             }
@@ -279,7 +278,6 @@ public class GroupListActivity extends BaseActivity implements OnClickListener, 
 		                    mGroupListAdapter.clearDate();
 		                    mGroupListAdapter.addNode(root);
 		                    // 设置默认展开级别
-		                    mGroupListAdapter.setExpandLevel(1);
 		                    mGroupListAdapter.notifyDataSetChanged();
 		                } else {
 		                    mGroupListAdapter.clearDate();
@@ -302,7 +300,6 @@ public class GroupListActivity extends BaseActivity implements OnClickListener, 
         if(mGroupListManager.getRootNode() != null) {
         	mGroupListManager.setRootNode(null);
         }
-        mGroupListAdapter.setAllUnExpanded();
         finish();
     }
 
@@ -319,7 +316,6 @@ public class GroupListActivity extends BaseActivity implements OnClickListener, 
 
 
     private void updateSelectChannels() {
-        selectNnodes = mGroupListAdapter.getSeletedNodes();
         if (selectNnodes.size() > 32) {
             showToast(R.string.select_channel_limit_tv);
         }
@@ -457,9 +453,6 @@ public class GroupListActivity extends BaseActivity implements OnClickListener, 
                 }).show();
         
         } else {
-            if (mGroupListAdapter.ExpandOrCollapse(position)) {
-                mGroupsLv.setSelection(0);
-            }
         }
   
     }

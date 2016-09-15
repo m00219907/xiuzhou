@@ -35,15 +35,19 @@ public class GroupListAdapter2 extends BaseAdapter {
     }
 
     public void addNode(TreeNode node) {
-        if (node == null)
+        if (node == null) {
             return;
-        if (node.getParent() != null && node.getParent().getText().equals("秀洲区治水办")) {
-            if(node.getChildren().size() > 0) {
-                alls.add(node.getChildren().get(0));
+        }
+        if (node.getType() == 3) {
+            TreeNode tempNode = node;
+            while (tempNode.getParent() != null) {
+                if (tempNode.getParent().getText().equals("秀洲区治水办")) {
+                    alls.add(node);
+                    break;
+                }
+                tempNode = tempNode.getParent();
             }
         }
-        if (node.isLeaf())
-            return;
         for (int i = 0; i < node.getChildren().size(); i++) {
             addNode(node.getChildren().get(i));
         }
@@ -70,38 +74,23 @@ public class GroupListAdapter2 extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        View view = this.lif.inflate(R.layout.group_list_item, null);
-
-        RelativeLayout rltItem = (RelativeLayout) view.findViewById(R.id.group_item_rlt);
-        ImageView ivIcon = (ImageView) view.findViewById(R.id.ivIcon);
-        TextView tvText = (TextView) view.findViewById(R.id.tvText);
-        ImageView ivExEc = (ImageView) view.findViewById(R.id.ivExEc);
-        CheckBox chbSelect = (CheckBox) view.findViewById(R.id.chbSelect);
-
+        View  curView = this.lif.inflate(R.layout.cameralist_small_item, null);
+        View camera_item_rl = curView.findViewById(R.id.camera_item_rl);
+        TextView camera_name_tv = (TextView) curView.findViewById(R.id.camera_name_tv);
+        camera_name_tv.setText(alls.get(position).getText());
         // item单击事件
-        rltItem.setOnClickListener(new View.OnClickListener() {
+        camera_item_rl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TreeNode n = (TreeNode) v.getTag();
-                if (n.getType() == 3 && n.getParent().getDeviceInfo() != null && n.getParent().getDeviceInfo().getStatus() != 1) {  //离线状态
-                    return;
-                }
-                //判断通道是否在线
-                if (n.getType() == 3 && n.getChannelInfo().getState() != 1) {
-                    return;
-                }
-
+                TreeNode n = alls.get(position);
                 onItemClickListener.onItemClick(n, !n.isChecked(), position);
             }
         });
 
+        // 得到当前节点
         TreeNode n = alls.get(position);
-        tvText.setText(n.getText() + " ");
-        rltItem.setTag(n);
-        chbSelect.setTag(n);
-        chbSelect.setChecked(n.isChecked());
-        ivExEc.setImageResource(R.drawable.open_content_selector);
-        return view;
+
+        return curView;
     }
 
     public interface IOnItemClickListener {

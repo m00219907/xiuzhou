@@ -1,6 +1,7 @@
 package com.jsycloud.activity;
 
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -30,6 +31,7 @@ public class RealPlayfullscreenActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.video_fullscreen);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         findViewById(R.id.video_fullscreen_back).setOnClickListener(new View.OnClickListener() {
             @Override

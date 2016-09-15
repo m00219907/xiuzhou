@@ -186,6 +186,8 @@ public class TabRiverFragment2 extends Fragment implements View.OnClickListener{
                 }
                 break;
             case R.id.river_fragment_word://更多
+                Intent intent9 = new Intent(activity, MoreActivity.class);
+                startActivity(intent9);
                 break;
             default:
                 break;
