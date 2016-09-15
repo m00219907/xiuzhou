@@ -117,9 +117,6 @@ public class GroupListActivity extends BaseActivity implements OnClickListener, 
     private void findViews() {
         layLogout= (LinearLayout)findViewById(R.id.title_lay);
         mGroupsLv = (ListView) this.findViewById(R.id.group_list);
-
-        // 等待对话框布局
-        mWattingPb = (ProgressBar) findViewById(R.id.grouplist_waitting_pb);
     }
 
     /**

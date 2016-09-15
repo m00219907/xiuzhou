@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/entrust_activity_top"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:background="#2196f3">
+
+        <ImageView
+            android:id="@+id/entrust_activity_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:src="@drawable/back_img"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="委托巡河"
+            android:textColor="#ffffff"
+            android:textSize="20sp"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/entrust_activity_second"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/entrust_activity_top"
+        android:layout_marginTop="36dp"
+        android:layout_marginBottom="36dp"
+        android:gravity="center"
+        android:text="你当前的委托授权码是:"
+        android:textColor="#000000"
+        android:textSize="19sp"/>
+
+    <TextView
+        android:id="@+id/entrust_activity_code"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/entrust_activity_second"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:gravity="center"
+        android:textColor="#666666"
+        android:textSize="18sp"
+        android:background="#e1e1e1"/>
+
+    <ImageView
+        android:id="@+id/entrust_activity_sendcode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/entrust_activity_code"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/send_code"
+        android:scaleType="center"/>
+
+    <ImageView
+        android:id="@+id/entrust_activity_newcode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/entrust_activity_sendcode"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/new_code"
+        android:scaleType="center"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:text="授权委托码在点“重新生成”之前,一直有效"
+        android:textColor="#222222"
+        android:textSize="14sp" />
+
+</RelativeLayout>

@@ -162,7 +162,8 @@ public class TabRiverFragment2 extends Fragment implements View.OnClickListener{
                 break;
             case R.id.river_fragment_entrust://委托巡河
                 if(Constant.isLogin) {
-                    getauthcode(false);
+                    Intent intent6 = new Intent(activity, EntrustActivity.class);
+                    startActivity(intent6);
                 }else{
                     startLoginActivity();
                 }
@@ -197,61 +198,6 @@ public class TabRiverFragment2 extends Fragment implements View.OnClickListener{
     public void startLoginActivity(){
         Intent intent = new Intent(activity, LoginActivity.class);
         startActivity(intent);
-    }
-
-
-    public void getauthcode(final boolean bNew) {
-        String url = HttpClentLinkNet.BaseAddr + "getauthcode.php";
-        AjaxParams params = new AjaxParams();
-        params.put("userid", Constant.userid);
-        if(bNew){
-            params.put("isnew", "1");
-        }
-        HttpClentLinkNet.getInstance().sendReqFinalHttp_Post(url, params, new AjaxCallBack() {
-            @Override
-            public void onLoading(long count, long current) {
-                super.onLoading(count, current);
-            }
-
-            @Override
-            public void onSuccess(Object t) {
-                String jsStr = "";
-                String success = "";
-
-                if (t != null) {
-                    jsStr = String.valueOf(t);
-                }
-
-                try {
-                    JSONObject jsObj = new JSONObject(jsStr);
-                    if (jsObj.has("success")) {
-                        success = jsObj.getString("success");
-                    }
-                    if(success.equals("1")) {
-                        if(bNew){
-                            Toast.makeText(activity, "重新获取到的委托码是：" + jsObj.getString("authcode"), Toast.LENGTH_SHORT).show();
-                        }else {
-                            Intent intent = new Intent(Intent.ACTION_VIEW);
-                            intent.putExtra("sms_body", "巡河委托码：" + jsObj.getString("authcode"));
-                            intent.setType("vnd.android-dir/mms-sms");
-                            activity.startActivity(intent);
-                        }
-                    }else if(success.equals("2")){
-                        if(bNew){
-                            Toast.makeText(activity, "重新获取委托码失败", Toast.LENGTH_SHORT).show();
-                        }else {
-                            Toast.makeText(activity, "当前无委托码", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                } catch (JSONException e) {
-                }
-            }
-
-            @Override
-            public void onFailure(Throwable t, int errorNo, String strMsg) {
-                super.onFailure(t, errorNo, strMsg);
-            }
-        });
     }
 
 }

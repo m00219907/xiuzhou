@@ -1,8 +1,6 @@
 package com.jsycloud.ir.xiuzhou.videofragment;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,15 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dh.DpsdkCore.IDpsdkCore;
 import com.dh.DpsdkCore.Login_Info_t;
-import com.jsycloud.activity.AlarmbuKongActivity;
-import com.jsycloud.activity.BackPlayActivity;
-import com.jsycloud.activity.OperateSoundTalk;
 import com.jsycloud.activity.RealPlayActivity;
 import com.jsycloud.groupTree.GroupListAdapter2;
 import com.jsycloud.groupTree.GroupListAdapter3;
@@ -31,6 +25,7 @@ import com.jsycloud.groupTree.GroupListManager;
 import com.jsycloud.groupTree.bean.ChannelInfoExt;
 import com.jsycloud.groupTree.bean.TreeNode;
 import com.jsycloud.ir.xiuzhou.AppApplication;
+import com.jsycloud.ir.xiuzhou.DialogUtils;
 import com.jsycloud.ir.xiuzhou.R;
 import com.jsycloud.ir.xiuzhou.StartActivity;
 
@@ -40,8 +35,6 @@ public class TabVideoFragment2 extends Fragment implements GroupListAdapter2.IOn
     private StartActivity activity;
 
     private AppApplication mAPP = AppApplication.get();
-
-    private static final String TAG = "GroupListActivity";
 
     TextView tab_guangdian, tab_yidong, tab_xiangzhen;
 
@@ -57,18 +50,8 @@ public class TabVideoFragment2 extends Fragment implements GroupListAdapter2.IOn
     // 获取的树信息
     private TreeNode root = null;
 
-    // 等待对话框
-    private ProgressBar mWattingPb = null;
-
-    // 从哪个页面过来 1： 从实时预览进入组织列表 2：从回放进入组织列:3: 从电子地图进入组织列表
-    private int comeFrom = 0;
-
     public static final int MSG_GROUPLIST_START = 1652;
     public static final int MSG_GROUPLIST_GETLIST = 1653;
-
-    private String deviceName;
-    private String[] dialogList;
-    private String mDeviceId;
 
     @Override
     public void onAttach(Activity activity) {
@@ -91,7 +74,6 @@ public class TabVideoFragment2 extends Fragment implements GroupListAdapter2.IOn
         tab_xiangzhen = (TextView)view.findViewById(R.id.tab_xiangzhen);
         tab_xiangzhen.setTag("0");
         tab_xiangzhen.setOnClickListener(this);
-        mWattingPb = (ProgressBar)view.findViewById(R.id.grouplist_waitting_pb);
 
         mGroupListAdapter = new GroupListAdapter2(activity);
         mGroupListAdapter.setListner(this);
@@ -103,15 +85,13 @@ public class TabVideoFragment2 extends Fragment implements GroupListAdapter2.IOn
 
         mGroupListManager = GroupListManager.getInstance();
         getGroupList();
+        mHandler.sendEmptyMessage(1038);
 
         return view;
     }
 
     private void getGroupList() {
         root = mGroupListManager.getRootNode();
-        if (root == null) {
-            mWattingPb.setVisibility(View.VISIBLE);
-        }
 
         if (mGroupListManager.getTask() != null) {
             mGroupListManager.setGroupListGetListener(mIOnSuccessListener);
@@ -139,12 +119,19 @@ public class TabVideoFragment2 extends Fragment implements GroupListAdapter2.IOn
                     root = mGroupListManager.getRootNode();
                     mGroupListManager.setOnSuccessListener(mIOnSuccessListener);
 
-                    if (mWattingPb != null) {
-                        mWattingPb.setVisibility(View.GONE);
-                    }
-
                     mGroupListAdapter.addNode(root);
                     mGroupListAdapter.notifyDataSetChanged();
+                    break;
+
+                case 1038:
+                    if (!DialogUtils.isShowWaitDialog()) {
+                        DialogUtils.showWaitDialog(activity, "加载中...", -1);
+                    }
+                    break;
+                case 1039:
+                    if (DialogUtils.isShowWaitDialog()) {
+                        DialogUtils.dismissDialog();
+                    }
                     break;
                 default:
                     break;
@@ -163,10 +150,8 @@ public class TabVideoFragment2 extends Fragment implements GroupListAdapter2.IOn
                 public void run() {
                     // 清空任务
                     mGroupListManager.setTask(null);
+                    mHandler.sendEmptyMessage(1039);
 
-                    if (mWattingPb != null) {
-                        mWattingPb.setVisibility(View.GONE);
-                    }
                     if (success) {
                         root = mGroupListManager.getRootNode();
                         if (root != null) {
@@ -201,6 +186,7 @@ public class TabVideoFragment2 extends Fragment implements GroupListAdapter2.IOn
                     mGroupsLv.setVisibility(View.GONE);
                     IDpsdkCore.DPSDK_Logout(mAPP.getDpsdkCreatHandle(), 30000);
                     new LoginTask2().execute();
+                    mHandler.sendEmptyMessage(1038);
                 }
                 break;
             case R.id.tab_yidong:
@@ -217,6 +203,7 @@ public class TabVideoFragment2 extends Fragment implements GroupListAdapter2.IOn
                     group_list3.setVisibility(View.GONE);
                     IDpsdkCore.DPSDK_Logout(mAPP.getDpsdkCreatHandle(), 30000);
                     new LoginTask().execute();
+                    mHandler.sendEmptyMessage(1038);
                 }
                 break;
             case R.id.tab_xiangzhen:
@@ -227,6 +214,7 @@ public class TabVideoFragment2 extends Fragment implements GroupListAdapter2.IOn
                     tab_yidong.setTag("0");
                     tab_xiangzhen.setTextColor(0xff45c01a);
                     tab_xiangzhen.setTag("1");
+                    mHandler.sendEmptyMessage(1038);
                 }
                 break;
             default:
@@ -244,167 +232,34 @@ public class TabVideoFragment2 extends Fragment implements GroupListAdapter2.IOn
 
     @Override
     public void onItemClick(TreeNode treeNode, boolean isChecked, final int position) {
-
-        if (treeNode.getType() == 2) { // 1：组 2：设备 3：通道
-            mDeviceId = treeNode.getDeviceInfo().getDeviceId();
-            deviceName = treeNode.getDeviceInfo().getDeviceName();
-            //判断设备类型是否是报警主机
-            int devType = treeNode.getDeviceInfo().getdeviceType();
-            if(devType == 601) {                                                     //报警主机类型601
-                dialogList = new String[] {"实时","回放", "布控报警", "报警主机"};
-                Log.i("报警类型的设备名称是：", treeNode.getDeviceInfo().getDeviceName());  //如果点击是报警主机dialog 就再加一行
-            } else {
-                dialogList = new String[] {"实时","回放", "布控报警", "语音对讲"};
-            }
-            Log.i(TAG, "选择的设备mc是：" + deviceName + "选择的设备类型是：" + devType);
-            //TODO 获取设备下面的通道
-            //treeNode.getChannelInfo()
-        }
-
-        if (treeNode.getType() == 3) {                     //通道
-            if (dialogList == null) {                  //没有设备的业务树
-                dialogList = new String[] {"实时","回放", "布控报警", "语音对讲"};
-            }
-            Log.i(TAG, "tongdao is clicked");
-
-            new AlertDialog.Builder(activity).setTitle("请选择")
-                    .setItems(dialogList, new DialogInterface.OnClickListener() {
-                        ChannelInfoExt chnlInfoExt = ((TreeNode)mGroupListAdapter.getItem(position)).getChannelInfo();
-                        String channelName =  chnlInfoExt.getSzName();
-                        String channelId = chnlInfoExt.getSzId();
-                        String deviceId = chnlInfoExt.getDeviceId();
-                        Intent intent = new Intent();
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            switch (which) {
-
-                                case 0:
-                                    Log.i(TAG, "channelName channelId" + channelName + channelId);
-                                    //跳转到实时
-                                    //把通道名称传到RealPlayActivity显示
-                                    if(chnlInfoExt != null)
-                                    {
-                                        intent.putExtra("channelName", channelName);
-                                        intent.putExtra("channelId", channelId);
-                                    }
-                                    intent.putExtra("deviceId", mDeviceId);
-                                    intent.setClass(activity, RealPlayActivity.class);
-                                    startActivity(intent);
-                                    break;
-                                case 1:
-                                    //跳转到回放
-                                    if(chnlInfoExt != null) {
-                                        intent.putExtra("channelName", channelName);
-                                        intent.putExtra("channelId", channelId);
-                                    }
-                                    intent.setClass(activity, BackPlayActivity.class);
-                                    startActivity(intent);
-                                    break;
-                                case 2:
-                                    Log.i(TAG, "channelName deviceName" + channelName + deviceName);
-                                    intent.putExtra("deviceName", deviceName);
-                                    intent.putExtra("channelName", channelName);
-                                    intent.putExtra("deviceId", deviceId);
-                                    intent.setClass(activity, AlarmbuKongActivity.class);
-                                    startActivity(intent);
-                                    break;
-                                case 3:
-                                    Log.i("", "mDeviceId = " + mDeviceId);
-                                    intent.putExtra("channelId", channelId);
-                                    intent.putExtra("channelName", channelName);
-                                    intent.putExtra("deviceId", mDeviceId);
-                                    intent.setClass(activity, OperateSoundTalk.class);
-                                    startActivity(intent);
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    }).show();
-
+        if (treeNode.getType() == 3) {
+            ChannelInfoExt chnlInfoExt = ((TreeNode)mGroupListAdapter.getItem(position)).getChannelInfo();
+            String channelName =  chnlInfoExt.getSzName();
+            String channelId = chnlInfoExt.getSzId();
+            String deviceId = chnlInfoExt.getDeviceId();
+            Intent intent = new Intent();
+            intent.putExtra("channelName", channelName);
+            intent.putExtra("channelId", channelId);
+            intent.putExtra("deviceId", deviceId);
+            intent.setClass(activity, RealPlayActivity.class);
+            startActivity(intent);
         }
     }
 
     @Override
     public void onItemClick3(TreeNode treeNode, boolean isChecked, final int position) {
 
-        if (treeNode.getType() == 2) { // 1：组 2：设备 3：通道
-            mDeviceId = treeNode.getDeviceInfo().getDeviceId();
-            deviceName = treeNode.getDeviceInfo().getDeviceName();
-            //判断设备类型是否是报警主机
-            int devType = treeNode.getDeviceInfo().getdeviceType();
-            if(devType == 601) {                                                     //报警主机类型601
-                dialogList = new String[] {"实时","回放", "布控报警", "报警主机"};
-                Log.i("报警类型的设备名称是：", treeNode.getDeviceInfo().getDeviceName());  //如果点击是报警主机dialog 就再加一行
-            } else {
-                dialogList = new String[] {"实时","回放", "布控报警", "语音对讲"};
-            }
-            Log.i(TAG, "选择的设备mc是：" + deviceName + "选择的设备类型是：" + devType);
-            //TODO 获取设备下面的通道
-            //treeNode.getChannelInfo()
-        }
-
-        if (treeNode.getType() == 3) {                     //通道
-            if (dialogList == null) {                  //没有设备的业务树
-                dialogList = new String[] {"实时","回放", "布控报警", "语音对讲"};
-            }
-            Log.i(TAG, "tongdao is clicked");
-
-            new AlertDialog.Builder(activity).setTitle("请选择")
-                    .setItems(dialogList, new DialogInterface.OnClickListener() {
-                        ChannelInfoExt chnlInfoExt = ((TreeNode)mGroupListAdapter3.getItem(position)).getChannelInfo();
-                        String channelName =  chnlInfoExt.getSzName();
-                        String channelId = chnlInfoExt.getSzId();
-                        String deviceId = chnlInfoExt.getDeviceId();
-                        Intent intent = new Intent();
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            switch (which) {
-
-                                case 0:
-                                    Log.i(TAG, "channelName channelId" + channelName + channelId);
-                                    //跳转到实时
-                                    //把通道名称传到RealPlayActivity显示
-                                    if(chnlInfoExt != null)
-                                    {
-                                        intent.putExtra("channelName", channelName);
-                                        intent.putExtra("channelId", channelId);
-                                    }
-                                    intent.putExtra("deviceId", mDeviceId);
-                                    intent.setClass(activity, RealPlayActivity.class);
-                                    startActivity(intent);
-                                    break;
-                                case 1:
-                                    //跳转到回放
-                                    if(chnlInfoExt != null) {
-                                        intent.putExtra("channelName", channelName);
-                                        intent.putExtra("channelId", channelId);
-                                    }
-                                    intent.setClass(activity, BackPlayActivity.class);
-                                    startActivity(intent);
-                                    break;
-                                case 2:
-                                    Log.i(TAG, "channelName deviceName" + channelName + deviceName);
-                                    intent.putExtra("deviceName", deviceName);
-                                    intent.putExtra("channelName", channelName);
-                                    intent.putExtra("deviceId", deviceId);
-                                    intent.setClass(activity, AlarmbuKongActivity.class);
-                                    startActivity(intent);
-                                    break;
-                                case 3:
-                                    Log.i("", "mDeviceId = " + mDeviceId);
-                                    intent.putExtra("channelId", channelId);
-                                    intent.putExtra("channelName", channelName);
-                                    intent.putExtra("deviceId", mDeviceId);
-                                    intent.setClass(activity, OperateSoundTalk.class);
-                                    startActivity(intent);
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    }).show();
-
+        if (treeNode.getType() == 3) {
+            ChannelInfoExt chnlInfoExt = ((TreeNode)mGroupListAdapter3.getItem(position)).getChannelInfo();
+            String channelName =  chnlInfoExt.getSzName();
+            String channelId = chnlInfoExt.getSzId();
+            String deviceId = chnlInfoExt.getDeviceId();
+            Intent intent = new Intent();
+            intent.putExtra("channelName", channelName);
+            intent.putExtra("channelId", channelId);
+            intent.putExtra("deviceId", deviceId);
+            intent.setClass(activity, RealPlayActivity.class);
+            startActivity(intent);
         }
     }
 
