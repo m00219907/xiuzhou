@@ -1,6 +1,7 @@
 package com.jsycloud.ir.xiuzhou.riverfragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -157,6 +158,14 @@ public class WebviewActivity extends Activity implements View.OnClickListener{
     public class GeoWebViewClient extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            if(url.contains("assign_deal.php?asid=")){
+                String assignid = url.substring(url.lastIndexOf('=')+1);
+                Intent intent7 = new Intent(WebviewActivity.this, AssignActivity.class);
+                intent7.putExtra("assignid", assignid);
+                startActivity(intent7);
+                WebviewActivity.this.finish();
+                return true;
+            }
             return false;
         }
 

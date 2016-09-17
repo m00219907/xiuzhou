@@ -3,7 +3,6 @@ package com.jsycloud.ir.xiuzhou;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -256,7 +255,7 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
     }
 
     public void sendVersionReq() {
-        File curFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath() + "//秀洲智慧河道.apk");
+        File curFile = new File(Constant.appFolder + "//秀洲智慧河道.apk");
         if(curFile.exists()){
             curFile.delete();
         }

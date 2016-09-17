@@ -11,6 +11,9 @@ import android.os.Bundle;
 
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -48,7 +51,6 @@ public class CheckRiverActivity extends Activity implements View.OnClickListener
     EditText check_river_item1_desc,check_river_item2_desc,check_river_item3_desc,check_river_item4_desc;
     EditText check_river_item5_desc,check_river_item6_desc,check_river_item7_desc,check_river_item8_desc, check_river_item9_desc;
     ImageView check_river_todown, check_river_toup, check_river_togerther;
-    View check_river_photo;
     ImageView check_river_photo1,check_river_photo2,check_river_photo3,check_river_photo4,check_river_photo5;
     View check_river_todownlayout, check_river_touplayout, check_river_togertherlayout;
 
@@ -57,7 +59,6 @@ public class CheckRiverActivity extends Activity implements View.OnClickListener
     private final int PHOTO_REQUEST_GALLERY = 121;// 从相册中选择
     private final String PHOTO_FILE_NAME = "temp_photo.jpg";
     int curIndex = -1;
-    int curPhotoIndex = 0;
     String base64Str1 = "";
     String base64Str2 = "";
     String base64Str3 = "";
@@ -96,12 +97,21 @@ public class CheckRiverActivity extends Activity implements View.OnClickListener
         check_river_touptext = (TextView)findViewById(R.id.check_river_touptext);
         check_river_todowntext = (TextView)findViewById(R.id.check_river_todowntext);
 
-        check_river_photo = findViewById(R.id.check_river_photo);
         check_river_photo1 = (ImageView)findViewById(R.id.check_river_photo1);
+        check_river_photo1.setOnClickListener(this);
+        check_river_photo1.setTag("1");
         check_river_photo2 = (ImageView)findViewById(R.id.check_river_photo2);
+        check_river_photo2.setOnClickListener(this);
+        check_river_photo2.setTag("0");
         check_river_photo3 = (ImageView)findViewById(R.id.check_river_photo3);
+        check_river_photo3.setOnClickListener(this);
+        check_river_photo3.setTag("0");
         check_river_photo4 = (ImageView)findViewById(R.id.check_river_photo4);
+        check_river_photo4.setOnClickListener(this);
+        check_river_photo4.setTag("0");
         check_river_photo5 = (ImageView)findViewById(R.id.check_river_photo5);
+        check_river_photo5.setOnClickListener(this);
+        check_river_photo5.setTag("0");
 
         check_river_item1_image = (RadioButton)findViewById(R.id.check_river_item1_image);
         check_river_item2_image = (RadioButton)findViewById(R.id.check_river_item2_image);
@@ -130,13 +140,6 @@ public class CheckRiverActivity extends Activity implements View.OnClickListener
         findViewById(R.id.check_river_back).setOnClickListener(this);
         findViewById(R.id.check_river_commit).setOnClickListener(this);
 
-        //check_river_uploadpic = (MyRectangleView)findViewById(R.id.check_river_uploadpic);
-        //check_river_uploadpic.setRectangleColor(0xff2196f3);
-        //check_river_uploadpic.settextStr("上传照片");
-        //check_river_uploadpic.setOnClickListener(this);
-        //check_river_uploadpic.invalidate();
-        findViewById(R.id.check_river_uploadpic).setOnClickListener(this);
-
 //        if(Constant.isLogByCode){
 //            check_river_todownlayout.setVisibility(View.GONE);
 //            check_river_touplayout.setVisibility(View.GONE);
@@ -146,6 +149,12 @@ public class CheckRiverActivity extends Activity implements View.OnClickListener
 //            check_river_touplayout.setVisibility(View.VISIBLE);
 //            check_river_togertherlayout.setVisibility(View.VISIBLE);
 //        }
+
+        TextView check_river_colortext = (TextView) findViewById(R.id.check_river_colortext);
+        SpannableStringBuilder builder = new SpannableStringBuilder(check_river_colortext.getText().toString());
+        ForegroundColorSpan greenSpan = new ForegroundColorSpan(0xff2196f3);
+        builder.setSpan(greenSpan, 1, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        check_river_colortext.setText(builder);
 
         getriverpatrol();
     }
@@ -179,7 +188,6 @@ public class CheckRiverActivity extends Activity implements View.OnClickListener
                 if(uploadFile!= null && uploadFile.exists()){
                     Bitmap myBitmap = BitmapFactory.decodeFile(uploadFile.getAbsolutePath());
                     setImageUI(myBitmap);
-                    curPhotoIndex++;
                 }
             }
         }else if(requestCode == PHOTO_REQUEST_CAMERA && resultCode == Activity.RESULT_OK){
@@ -188,27 +196,38 @@ public class CheckRiverActivity extends Activity implements View.OnClickListener
             if(uploadFile.exists()){
                 Bitmap myBitmap = BitmapFactory.decodeFile(uploadFile.getAbsolutePath());
                 setImageUI(myBitmap);
-                curPhotoIndex++;
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
     public void setImageUI(Bitmap myBitmap){
-        check_river_photo.setVisibility(View.VISIBLE);
-        if(curPhotoIndex == 0) {
+        if(check_river_photo1.getTag().equals("1")) {
+            check_river_photo1.setTag("2");
             check_river_photo1.setImageBitmap(myBitmap);
+            check_river_photo2.setTag("1");
+            check_river_photo2.setImageResource(R.drawable.add_image);
             base64Str1 = CommonTools.bitmapToBase64(myBitmap);
-        }else if(curPhotoIndex == 1){
+        }else if(check_river_photo2.getTag().equals("1")){
+            check_river_photo2.setTag("2");
             check_river_photo2.setImageBitmap(myBitmap);
+            check_river_photo3.setTag("1");
+            check_river_photo3.setImageResource(R.drawable.add_image);
             base64Str2 = CommonTools.bitmapToBase64(myBitmap);
-        }else if(curPhotoIndex == 2){
+        }else if(check_river_photo3.getTag().equals("1")){
+            check_river_photo3.setTag("2");
             check_river_photo3.setImageBitmap(myBitmap);
+            check_river_photo4.setTag("1");
+            check_river_photo4.setImageResource(R.drawable.add_image);
             base64Str3 = CommonTools.bitmapToBase64(myBitmap);
-        }else if(curPhotoIndex == 3){
+        }else if(check_river_photo4.getTag().equals("1")){
+            check_river_photo4.setTag("2");
             check_river_photo4.setImageBitmap(myBitmap);
+            check_river_photo5.setTag("1");
+            check_river_photo5.setImageResource(R.drawable.add_image);
             base64Str4 = CommonTools.bitmapToBase64(myBitmap);
-        }else if(curPhotoIndex == 4){
+        }else if(check_river_photo5.getTag().equals("1")){
+            check_river_photo5.setTag("2");
             check_river_photo5.setImageBitmap(myBitmap);
             base64Str5 = CommonTools.bitmapToBase64(myBitmap);
         }
@@ -291,21 +310,95 @@ public class CheckRiverActivity extends Activity implements View.OnClickListener
                     check_river_togerther.setTag("0");
                 }
                 break;
-            case R.id.check_river_uploadpic:
-                DialogShow.dialogShow3(this, new DialogShow.ICheckedCallBack() {
-                    @Override
-                    public void OnCheckedCallBackDispath(boolean bSucceed) {
-                        if (bSucceed) {
-                            Intent photoIntent = new Intent(Intent.ACTION_PICK);
-                            photoIntent.setType("image/*");
-                            CheckRiverActivity.this.startActivityForResult(photoIntent, PHOTO_REQUEST_GALLERY);
-                        } else {
-                            Intent cameraIntent = new Intent("android.media.action.IMAGE_CAPTURE");
-                            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), PHOTO_FILE_NAME)));
-                            startActivityForResult(cameraIntent, PHOTO_REQUEST_CAMERA);
+            case R.id.check_river_photo1:
+                if(check_river_photo1.getTag().equals("1")) {
+                    DialogShow.dialogShow3(this, new DialogShow.ICheckedCallBack() {
+                        @Override
+                        public void OnCheckedCallBackDispath(boolean bSucceed) {
+                            if (bSucceed) {
+                                Intent photoIntent = new Intent(Intent.ACTION_PICK);
+                                photoIntent.setType("image/*");
+                                CheckRiverActivity.this.startActivityForResult(photoIntent, PHOTO_REQUEST_GALLERY);
+                            } else {
+                                Intent cameraIntent = new Intent("android.media.action.IMAGE_CAPTURE");
+                                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), PHOTO_FILE_NAME)));
+                                startActivityForResult(cameraIntent, PHOTO_REQUEST_CAMERA);
+                            }
                         }
-                    }
-                });
+                    });
+                }
+                break;
+            case R.id.check_river_photo2:
+                if(check_river_photo2.getTag().equals("1")) {
+                    DialogShow.dialogShow3(this, new DialogShow.ICheckedCallBack() {
+                        @Override
+                        public void OnCheckedCallBackDispath(boolean bSucceed) {
+                            if (bSucceed) {
+                                Intent photoIntent = new Intent(Intent.ACTION_PICK);
+                                photoIntent.setType("image/*");
+                                CheckRiverActivity.this.startActivityForResult(photoIntent, PHOTO_REQUEST_GALLERY);
+                            } else {
+                                Intent cameraIntent = new Intent("android.media.action.IMAGE_CAPTURE");
+                                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), PHOTO_FILE_NAME)));
+                                startActivityForResult(cameraIntent, PHOTO_REQUEST_CAMERA);
+                            }
+                        }
+                    });
+                }
+                break;
+            case R.id.check_river_photo3:
+                if(check_river_photo3.getTag().equals("1")) {
+                    DialogShow.dialogShow3(this, new DialogShow.ICheckedCallBack() {
+                        @Override
+                        public void OnCheckedCallBackDispath(boolean bSucceed) {
+                            if (bSucceed) {
+                                Intent photoIntent = new Intent(Intent.ACTION_PICK);
+                                photoIntent.setType("image/*");
+                                CheckRiverActivity.this.startActivityForResult(photoIntent, PHOTO_REQUEST_GALLERY);
+                            } else {
+                                Intent cameraIntent = new Intent("android.media.action.IMAGE_CAPTURE");
+                                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), PHOTO_FILE_NAME)));
+                                startActivityForResult(cameraIntent, PHOTO_REQUEST_CAMERA);
+                            }
+                        }
+                    });
+                }
+                break;
+            case R.id.check_river_photo4:
+                if(check_river_photo4.getTag().equals("1")) {
+                    DialogShow.dialogShow3(this, new DialogShow.ICheckedCallBack() {
+                        @Override
+                        public void OnCheckedCallBackDispath(boolean bSucceed) {
+                            if (bSucceed) {
+                                Intent photoIntent = new Intent(Intent.ACTION_PICK);
+                                photoIntent.setType("image/*");
+                                CheckRiverActivity.this.startActivityForResult(photoIntent, PHOTO_REQUEST_GALLERY);
+                            } else {
+                                Intent cameraIntent = new Intent("android.media.action.IMAGE_CAPTURE");
+                                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), PHOTO_FILE_NAME)));
+                                startActivityForResult(cameraIntent, PHOTO_REQUEST_CAMERA);
+                            }
+                        }
+                    });
+                }
+                break;
+            case R.id.check_river_photo5:
+                if(check_river_photo5.getTag().equals("1")) {
+                    DialogShow.dialogShow3(this, new DialogShow.ICheckedCallBack() {
+                        @Override
+                        public void OnCheckedCallBackDispath(boolean bSucceed) {
+                            if (bSucceed) {
+                                Intent photoIntent = new Intent(Intent.ACTION_PICK);
+                                photoIntent.setType("image/*");
+                                CheckRiverActivity.this.startActivityForResult(photoIntent, PHOTO_REQUEST_GALLERY);
+                            } else {
+                                Intent cameraIntent = new Intent("android.media.action.IMAGE_CAPTURE");
+                                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), PHOTO_FILE_NAME)));
+                                startActivityForResult(cameraIntent, PHOTO_REQUEST_CAMERA);
+                            }
+                        }
+                    });
+                }
                 break;
             case R.id.check_river_commit:
                 if(Constant.curLocation == null){
@@ -584,7 +677,7 @@ public class CheckRiverActivity extends Activity implements View.OnClickListener
         try {
             Bitmap selectedBitmap = CommonTools.decodeBitmap(file.getAbsolutePath());
 
-            File uploadImage = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "/1.jpg");
+            File uploadImage = new File(Constant.appFolder, "/1.jpg");
             FileOutputStream outputStream = new FileOutputStream(uploadImage);
             selectedBitmap.compress(Bitmap.CompressFormat.JPEG, 100 , outputStream);
             return uploadImage;

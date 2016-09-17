@@ -21,6 +21,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -75,6 +76,7 @@ public class StartActivity01 extends Activity{
 
         //new LoginTask().execute();
         new LoginTask2().execute();
+        new File(Constant.appFolder).mkdirs();
     }
 
     public void login(String username, String userpassword) {

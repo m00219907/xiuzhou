@@ -1,6 +1,8 @@
 package com.jsycloud.ir.xiuzhou;
 
 
+import android.os.Environment;
+
 import com.amap.api.location.AMapLocation;
 import com.jsycloud.ir.xiuzhou.mapfragment.riverInfo;
 
@@ -24,4 +26,6 @@ public class Constant {
     public static String selectRiverId ="";
 
     public static ArrayList<riverInfo> allriverList = new ArrayList<riverInfo>();
+
+    public static String appFolder =  Environment.getExternalStorageDirectory().getPath() + "/jsycloud/iriverxz";
 }

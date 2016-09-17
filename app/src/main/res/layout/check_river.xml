@@ -13,6 +13,7 @@
             android:id="@+id/check_river_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:padding="10dp"
             android:src="@drawable/back_img"/>
 
@@ -444,11 +445,12 @@
             android:background="#666666"/>
 
         <TextView
+            android:id="@+id/check_river_colortext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="20dp"
-            android:text="（防汛应急响应期间报告）河堤目前安全，未发现安全隐患"
+            android:text="（仅防汛应急响应期间报告）河堤目前安全，未发现安全隐患"
             android:textSize="14sp"
             android:textColor="#666666"/>
 
@@ -482,63 +484,76 @@
             android:layout_marginLeft="20dp"
             android:hint="请输入详情" />
 
-        <TextView
-            android:id="@+id/check_river_uploadpic"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/button_height"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
-            android:gravity="center"
-            android:text="上传照片"
-            android:textSize="16sp"
-            android:textColor="#ffffff"
-            android:background="@drawable/select_pic_background"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="30dp"
+                android:background="#666666"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:text="照片上传："
+                android:textSize="15sp"
+                android:textColor="#666666"/>
 
         <LinearLayout
-            android:id="@+id/check_river_photo"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:visibility="gone">
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/check_river_photo1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:scaleType="fitXY"/>
+                android:scaleType="fitXY"
+                android:src="@drawable/add_image"/>
 
             <ImageView
                 android:id="@+id/check_river_photo2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:scaleType="fitXY"/>
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/check_river_photo3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:scaleType="fitXY"/>
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/check_river_photo4"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:scaleType="fitXY"/>
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/check_river_photo5"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:scaleType="fitXY"/>
+                android:scaleType="fitXY" />
         </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="最多可上传五张照片"
+                android:textSize="12sp"
+                android:textColor="#666666"/>
 
         <LinearLayout
             android:id="@+id/check_river_todownlayout"

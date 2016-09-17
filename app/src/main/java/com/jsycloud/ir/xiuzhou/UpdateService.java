@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
-import android.os.Environment;
 
 import java.io.File;
 
@@ -41,7 +40,7 @@ public class UpdateService implements Runnable {
         req.setAllowedOverRoaming(false)
            .setDescription("秀洲智慧河道.apk")
            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
-           .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "秀洲智慧河道.apk");
+           .setDestinationInExternalPublicDir(Constant.appFolder, "秀洲智慧河道.apk");
 
         DownloadManager mgr = (DownloadManager)activity.getSystemService(Context.DOWNLOAD_SERVICE);
         curdwnId = mgr.enqueue(req);
@@ -54,7 +53,7 @@ public class UpdateService implements Runnable {
             Long dwnId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, 0);
             if(dwnId == curdwnId) {
 
-                File installFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath() + "//秀洲智慧河道.apk");
+                File installFile = new File(Constant.appFolder + "//秀洲智慧河道.apk");
                 Intent installIntent = new Intent(Intent.ACTION_VIEW);
                 installIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 installIntent.setAction(android.content.Intent.ACTION_VIEW);

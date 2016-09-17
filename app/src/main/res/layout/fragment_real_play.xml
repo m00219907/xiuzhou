@@ -96,7 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_above="@id/real_play_record"
             android:layout_centerHorizontal="true"
-            android:padding="8dp"
+            android:padding="16dp"
             android:src="@drawable/real_play_up"/>
 
         <ImageView
@@ -105,7 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/real_play_record"
             android:layout_centerHorizontal="true"
-            android:padding="8dp"
+            android:padding="16dp"
             android:src="@drawable/real_play_down"/>
 
         <ImageView
@@ -114,7 +114,7 @@
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/real_play_record"
             android:layout_centerVertical="true"
-            android:padding="13dp"
+            android:padding="25dp"
             android:src="@drawable/real_play_left"/>
 
         <ImageView
@@ -123,14 +123,14 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/real_play_record"
             android:layout_centerVertical="true"
-            android:padding="13dp"
+            android:padding="25dp"
             android:src="@drawable/real_play_right"/>
 
         <ImageView
             android:id="@+id/real_play_video"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="20dp"
+            android:padding="5dp"
             android:src="@drawable/real_play_video"/>
 
         <ImageView
@@ -138,7 +138,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:padding="20dp"
+            android:padding="5dp"
             android:src="@drawable/real_play_capture"/>
 
         <ImageView
@@ -146,7 +146,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:padding="20dp"
+            android:padding="5dp"
             android:src="@drawable/real_play_decrease"/>
 
         <ImageView
@@ -155,7 +155,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:padding="20dp"
+            android:padding="5dp"
             android:src="@drawable/real_play_increase"/>
     </RelativeLayout>
 

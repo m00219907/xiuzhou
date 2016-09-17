@@ -8,7 +8,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -32,7 +31,7 @@ import com.dh.DpsdkCore.dpsdk_talk_bits_e;
 import com.dh.DpsdkCore.dpsdk_talk_type_e;
 import com.dh.DpsdkCore.dpsdk_trans_type_e;
 import com.dh.DpsdkCore.fDPSDKTalkParamCallback;
-import com.jsycloud.Player.Err;
+import com.jsycloud.ir.xiuzhou.Constant;
 import com.jsycloud.ir.xiuzhou.R;
 import com.dh.DpsdkCore.Enc_Channel_Info_Ex_t;
 import com.dh.DpsdkCore.Get_RealStream_Info_t;
@@ -45,7 +44,8 @@ import com.jsycloud.ir.xiuzhou.AppApplication;
 
 public class RealPlayActivity extends Activity implements View.OnClickListener{
 
-    public final static String IMAGE_PATH = Environment.getExternalStorageDirectory().getPath() + "/snapshot/";
+    public final static String RECORD_PATH = Constant.appFolder + "/record/";
+    public final static String IMAGE_PATH = Constant.appFolder + "/snapshot/";
     public final static String IMGSTR = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + ".jpg";
     public final static String MP4STR = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + ".mp4";
     private static final int PicFormat_JPEG = 1;
@@ -121,6 +121,7 @@ public class RealPlayActivity extends Activity implements View.OnClickListener{
         };
 
         setListener();
+        new File(RECORD_PATH).mkdirs();
     }
 
     @Override
@@ -146,11 +147,11 @@ public class RealPlayActivity extends Activity implements View.OnClickListener{
                     real_play_video.setTag("1");
                     real_play_video.setImageResource(R.drawable.real_play_recording);
                     Toast.makeText(this, "正在录制，再次点击停止录制", Toast.LENGTH_LONG).show();
-                    IPlaySDK.PLAYStartDataRecord(m_nPort, IMAGE_PATH + MP4STR, 0, null, 0);
+                    IPlaySDK.PLAYStartDataRecord(m_nPort, RECORD_PATH + MP4STR, 0, null, 0);
                 }else{
                     real_play_video.setTag("0");
                     real_play_video.setImageResource(R.drawable.real_play_video);
-                    Toast.makeText(this, "录制完毕，视频保存在"+ IMAGE_PATH, Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "录制完毕，视频保存在"+ RECORD_PATH, Toast.LENGTH_LONG).show();
                     IPlaySDK.PLAYStopDataRecord(m_nPort);
                 }
                 break;
