@@ -1,27 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/camera_item_rl"
-    android:layout_width="fill_parent"
-    android:layout_height="73dp"
-    android:background="@drawable/display_frame"
-    android:clickable="true"
-    android:orientation="horizontal"
-    android:gravity="center_vertical">
+    android:layout_width="match_parent"
+    android:layout_height="60dp">
 
     <ImageView
         android:id="@+id/item_icon"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_margin="5dp"
         android:src="@drawable/player"
         android:scaleType="fitXY" />
 
-    <TextView
-        android:id="@+id/camera_name_tv"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/item_icon"
         android:layout_marginLeft="5dp"
-        android:textSize="@dimen/sixteen_text_size"
-        android:textColor="#000000"/>
+        android:layout_centerVertical="true">
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/camera_river_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#333333"/>
+
+        <TextView
+            android:id="@+id/camera_town_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/camera_river_name"
+            android:layout_marginTop="5dp"
+            android:textSize="15sp"
+            android:textColor="#333333"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_alignParentBottom="true"
+        android:background="#666666"/>
+
+</RelativeLayout>

@@ -100,8 +100,14 @@ public class WebviewActivity extends Activity implements View.OnClickListener{
                 webview_activity_tittle.setText(title);
             }
         });
+
+    }
+
+    @Override
+    protected void onResume() {
         webview_activity_webview.loadUrl(url);
         handler.sendEmptyMessage(1068);
+        super.onResume();
     }
 
     @Override
@@ -163,7 +169,6 @@ public class WebviewActivity extends Activity implements View.OnClickListener{
                 Intent intent7 = new Intent(WebviewActivity.this, AssignActivity.class);
                 intent7.putExtra("assignid", assignid);
                 startActivity(intent7);
-                WebviewActivity.this.finish();
                 return true;
             }
             return false;

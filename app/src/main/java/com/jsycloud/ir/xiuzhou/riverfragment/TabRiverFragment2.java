@@ -110,6 +110,7 @@ public class TabRiverFragment2 extends Fragment implements View.OnClickListener{
                 SharePreferenceDataUtil.setSharedStringData(activity, "username", "");
                 SharePreferenceDataUtil.setSharedStringData(activity, "userpassword", "");
                 Constant.bReloadUrl = true;
+                activity.initTopTab(0);
                 startLoginActivity();
                 break;
             case R.id.change_password:

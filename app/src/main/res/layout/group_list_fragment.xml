@@ -55,13 +55,17 @@
                 android:id="@+id/group_list3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:cacheColorHint="#00000000" />
+                android:cacheColorHint="#00000000"
+                android:divider="@null"
+                android:dividerHeight="0dp"/>
 
             <ListView
                 android:id="@+id/group_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:cacheColorHint="#00000000"
+                android:divider="@null"
+                android:dividerHeight="0dp"
                 android:visibility="gone"/>
         </RelativeLayout>
 </LinearLayout>

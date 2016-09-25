@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.dh.DpsdkCore.IDpsdkCore;
 import com.jsycloud.ir.xiuzhou.mapfragment.TabMapFragment;
 import com.jsycloud.ir.xiuzhou.problemfragment.TabProblemFragment;
+import com.jsycloud.ir.xiuzhou.riverfragment.CheckRiverActivity;
 import com.jsycloud.ir.xiuzhou.riverfragment.LoginActivity;
 import com.jsycloud.ir.xiuzhou.riverfragment.TabRiverFragment2;
 import com.jsycloud.ir.xiuzhou.riverfragment.WebviewActivity;
@@ -116,20 +117,21 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.tab_map_layout:
                 initTopTab(0);
-                tab_map_toplayout_text.setText("秀洲智慧河道");
                 break;
             case R.id.tab_video_layout:
                 initTopTab(1);
-                tab_map_toplayout_text.setText("河道在线");
                 break;
             case R.id.tab_problem_layout:
                 initTopTab(2);
-                tab_map_toplayout_text.setText("投诉举报");
                 break;
             case R.id.tab_me_layout:
                 if(Constant.isLogin) {
-                    initTopTab(3);
-                    tab_map_toplayout_text.setText("河长中心");
+                    if(Constant.isLogByCode){
+                        Intent intent = new Intent(this, CheckRiverActivity.class);
+                        startActivity(intent);
+                    }else {
+                        initTopTab(3);
+                    }
                 }else{
                     Intent intent = new Intent(this, LoginActivity.class);
                     startActivity(intent);
@@ -191,6 +193,7 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
 
         switch (selectIndex) {
             case 0:
+                tab_map_toplayout_text.setText("秀洲智慧河道");
                 tab_map_image.setImageResource(R.drawable.ic_home_blue_24dp);
                 tab_map_text.setTextColor(0xff45c01a);
                 tab_map_toplayout_search.setVisibility(View.GONE);
@@ -198,6 +201,7 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
                 initFragmentData(0);
                 break;
             case 1:
+                tab_map_toplayout_text.setText("河道在线");
                 tab_video_image.setImageResource(R.drawable.ic_videocam_blue_24dp);
                 tab_video_text.setTextColor(0xff45c01a);
                 tab_map_toplayout_search.setVisibility(View.GONE);
@@ -205,6 +209,7 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
                 initFragmentData(1);
                 break;
             case 2:
+                tab_map_toplayout_text.setText("投诉举报");
                 tab_problem_image.setImageResource(R.drawable.tab_problem_image_blue);
                 tab_problem_text.setTextColor(0xff45c01a);
                 tab_map_toplayout_search.setVisibility(View.VISIBLE);
@@ -212,6 +217,7 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
                 initFragmentData(2);
                 break;
             case 3:
+                tab_map_toplayout_text.setText("河长中心");
                 tab_me_image.setImageResource(R.drawable.ic_person_blue_24dp);
                 tab_me_text.setTextColor(0xff45c01a);
                 tab_map_toplayout_search.setVisibility(View.GONE);

@@ -80,11 +80,17 @@ public class GroupListAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View view, ViewGroup parent) {
-        View  curView = this.lif.inflate(R.layout.cameralist_small_item, null);
+        View curView = this.lif.inflate(R.layout.cameralist_small_item, null);
         View camera_item_rl = curView.findViewById(R.id.camera_item_rl);
-        TextView camera_name_tv = (TextView) curView.findViewById(R.id.camera_name_tv);
-        camera_name_tv.setText(alls.get(position).getText());
-        // item单击事件
+        TextView camera_river_name = (TextView) curView.findViewById(R.id.camera_river_name);
+        TextView camera_town_name = (TextView) curView.findViewById(R.id.camera_town_name);
+        String[] names = alls.get(position).getText().split("-");
+        camera_river_name.setText(names[0]);
+        if(names.length > 1){
+            camera_town_name.setText(names[1].split("_")[0]);
+        }else {
+            camera_town_name.setVisibility(View.GONE);
+        }
         camera_item_rl.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -17,6 +17,7 @@ import com.dh.DpsdkCore.fDPSDKStatusCallback;
 import com.jsycloud.activity.AutoVtActivity;
 import com.jsycloud.groupTree.GroupListManager;
 
+import java.io.File;
 import java.util.List;
 
 import cn.jpush.android.api.JPushInterface;
@@ -74,7 +75,8 @@ public class AppApplication extends Application {
 
         //set logPath
         //m_nLastError = IDpsdkCore.DPSDK_SetLog(m_ReValue.nReturnValue, LOG_PATH.getBytes());
-
+        new File(Constant.appFolder+ "/dhsdk").mkdirs();
+        IDpsdkCore.DPSDK_SetSaveGroupFilePath(m_ReValue.nReturnValue, (Constant.appFolder + "/dhsdk").getBytes());
         IDpsdkCore.DPSDK_SetDPSDKStatusCallback(m_ReValue.nReturnValue, new fDPSDKStatusCallback() {
 
             @Override

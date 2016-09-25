@@ -31,6 +31,12 @@ public class MoreActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.more_activity);
+        findViewById(R.id.more_activity_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MoreActivity.this.finish();
+            }
+        });
 
         more_activity_image1 = (ImageView)findViewById(R.id.more_activity_image1);
         more_activity_image2 = (ImageView)findViewById(R.id.more_activity_image2);

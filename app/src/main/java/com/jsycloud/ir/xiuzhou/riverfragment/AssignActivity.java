@@ -63,6 +63,7 @@ public class AssignActivity extends Activity implements View.OnClickListener{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.assign_activity);
+        findViewById(R.id.assign_activity_back).setOnClickListener(this);
         findViewById(R.id.assign_activity_commit).setOnClickListener(this);
 
         assign_activity_river = (TextView)findViewById(R.id.assign_activity_river);
@@ -99,6 +100,9 @@ public class AssignActivity extends Activity implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.assign_activity_back:
+                finish();
+                break;
             case R.id.assign_activity_commit:
                 if(assign_activity_discribe.getText().toString().isEmpty()){
                     Toast.makeText(AssignActivity.this, "处理过程不能为空!",Toast.LENGTH_SHORT).show();
