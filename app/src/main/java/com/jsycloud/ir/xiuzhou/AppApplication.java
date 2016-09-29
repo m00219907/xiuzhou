@@ -75,6 +75,7 @@ public class AppApplication extends Application {
 
         //set logPath
         //m_nLastError = IDpsdkCore.DPSDK_SetLog(m_ReValue.nReturnValue, LOG_PATH.getBytes());
+        CommonTools.deleteDir(new File(Constant.appFolder+ "/dhsdk"));
         new File(Constant.appFolder+ "/dhsdk").mkdirs();
         IDpsdkCore.DPSDK_SetSaveGroupFilePath(m_ReValue.nReturnValue, (Constant.appFolder + "/dhsdk").getBytes());
         IDpsdkCore.DPSDK_SetDPSDKStatusCallback(m_ReValue.nReturnValue, new fDPSDKStatusCallback() {

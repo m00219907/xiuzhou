@@ -2,6 +2,7 @@ package com.jsycloud.groupTree;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.jsycloud.activity.RealPlayActivity;
+import com.jsycloud.groupTree.bean.ChannelInfoExt;
 import com.jsycloud.groupTree.bean.TreeNode;
 import com.jsycloud.ir.xiuzhou.R;
 
@@ -23,15 +26,9 @@ public class GroupListAdapter2 extends BaseAdapter {
     private final LayoutInflater lif;
     private final List<TreeNode> alls = new ArrayList<TreeNode>();
 
-    private IOnItemClickListener onItemClickListener;
-
     public GroupListAdapter2(Context context) {
         this.con = context;
         this.lif = (LayoutInflater) con.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    }
-
-    public void setListner( IOnItemClickListener onItemClickListener) {
-        this.onItemClickListener = onItemClickListener;
     }
 
     public void addNode(TreeNode node) {
@@ -88,18 +85,22 @@ public class GroupListAdapter2 extends BaseAdapter {
         camera_item_rl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TreeNode n = alls.get(position);
-                onItemClickListener.onItemClick(n, !n.isChecked(), position);
+                TreeNode curNode = alls.get(position);
+
+                ChannelInfoExt chnlInfoExt = curNode.getChannelInfo();
+                String channelName =  chnlInfoExt.getSzName();
+                String channelId = chnlInfoExt.getSzId();
+                String deviceId = chnlInfoExt.getDeviceId();
+                Intent intent = new Intent();
+                intent.putExtra("channelName", channelName);
+                intent.putExtra("channelId", channelId);
+                intent.putExtra("deviceId", deviceId);
+                intent.setClass(con, RealPlayActivity.class);
+                con.startActivity(intent);
             }
         });
-
-        // 得到当前节点
-        TreeNode n = alls.get(position);
 
         return curView;
     }
 
-    public interface IOnItemClickListener {
-        public void onItemClick(final TreeNode treeNode, final boolean isChecked, final int position);
-    }
 }

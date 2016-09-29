@@ -219,6 +219,27 @@ public class DialogShow {
         }
     }
 
+    public static void dialogShow6(Context context, String tipoffCode) {
+
+        try {
+            final AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+            alertDialog.setCancelable(false);
+            alertDialog.show();
+            Window window = alertDialog.getWindow();
+            window.setContentView(R.layout.tipoff_layout);
+            TextView tipoff_code = (TextView)window.findViewById(R.id.tipoff_code);
+            tipoff_code.setText(tipoffCode);
+            window.findViewById(R.id.tipoff_iknow).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    alertDialog.dismiss();
+                }
+            });
+
+        } catch (Exception e) {
+        }
+    }
+
 
     public interface ICheckedCallBack {
         public void OnCheckedCallBackDispath(boolean bSucceed);

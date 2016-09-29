@@ -129,7 +129,11 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
                     if(Constant.isLogByCode){
                         Intent intent = new Intent(this, CheckRiverActivity.class);
                         startActivity(intent);
-                    }else {
+                    }else if(Constant.usergroup.equals("59")){
+                        Intent intent4 = new Intent(this, WebviewActivity.class);
+                        intent4.putExtra("url", HttpClentLinkNet.BaseAddr + "pages/assign.php");
+                        startActivity(intent4);
+                    } else {
                         initTopTab(3);
                     }
                 }else{
@@ -390,7 +394,8 @@ public class StartActivity extends FragmentActivity implements View.OnClickListe
                     JSONObject jsObj = new JSONObject(jsStr);
                     if(jsObj.getString("success").equals("1")) {
                         Intent intent = new Intent(StartActivity.this, WebviewActivity.class);
-                        intent.putExtra("url", HttpClentLinkNet.BaseAddr + "page_tipofflogshow.php?tipid=" + safecode);
+                        String cururl = HttpClentLinkNet.BaseAddr + "pages/tipoffs_show.php"  + "?tid=" + safecode;
+                        intent.putExtra("url", cururl);
                         startActivity(intent);
                     }else{
                         Toast.makeText(StartActivity.this, "投诉举报ID输入有误", Toast.LENGTH_SHORT).show();

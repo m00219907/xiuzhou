@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jsycloud.ir.xiuzhou"
-    android:versionCode="200"
-    android:versionName="2.0.0">
+    android:versionCode="210"
+    android:versionName="2.1.0">
 
     <permission
         android:name="com.jsycloud.ir.xiuzhou.permission.JPUSH_MESSAGE"

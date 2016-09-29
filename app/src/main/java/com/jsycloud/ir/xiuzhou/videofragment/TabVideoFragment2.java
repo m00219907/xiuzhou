@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.dh.DpsdkCore.IDpsdkCore;
 import com.dh.DpsdkCore.Login_Info_t;
 import com.jsycloud.activity.RealPlayActivity;
+import com.jsycloud.groupTree.GroupListAdapter;
 import com.jsycloud.groupTree.GroupListAdapter2;
 import com.jsycloud.groupTree.GroupListAdapter3;
 import com.jsycloud.groupTree.GroupListGetTask;
@@ -25,12 +26,16 @@ import com.jsycloud.groupTree.GroupListManager;
 import com.jsycloud.groupTree.bean.ChannelInfoExt;
 import com.jsycloud.groupTree.bean.TreeNode;
 import com.jsycloud.ir.xiuzhou.AppApplication;
+import com.jsycloud.ir.xiuzhou.CommonTools;
+import com.jsycloud.ir.xiuzhou.Constant;
 import com.jsycloud.ir.xiuzhou.DialogUtils;
 import com.jsycloud.ir.xiuzhou.R;
 import com.jsycloud.ir.xiuzhou.StartActivity;
 
+import java.io.File;
 
-public class TabVideoFragment2 extends Fragment implements GroupListAdapter2.IOnItemClickListener, GroupListAdapter3.IOnItemClickListener, View.OnClickListener {
+
+public class TabVideoFragment2 extends Fragment implements View.OnClickListener {
 
     private StartActivity activity;
 
@@ -38,11 +43,12 @@ public class TabVideoFragment2 extends Fragment implements GroupListAdapter2.IOn
 
     TextView tab_guangdian, tab_yidong, tab_xiangzhen;
 
-    private ListView mGroupsLv, group_list3;
+    private ListView list_guangdian, list_yidong, list_xiangzhen;
 
     // 搜索框adapter
-    private GroupListAdapter2 mGroupListAdapter = null;
-    private GroupListAdapter3 mGroupListAdapter3 = null;
+    private GroupListAdapter adapter_guangdian;
+    private GroupListAdapter2 adapter_yidong;
+    private GroupListAdapter3 adapter_xiangzhen;
 
     // 获取实例
     private GroupListManager mGroupListManager = null;
@@ -51,7 +57,6 @@ public class TabVideoFragment2 extends Fragment implements GroupListAdapter2.IOn
     private TreeNode root = null;
 
     public static final int MSG_GROUPLIST_START = 1652;
-    public static final int MSG_GROUPLIST_GETLIST = 1653;
 
     @Override
     public void onAttach(Activity activity) {
@@ -62,8 +67,9 @@ public class TabVideoFragment2 extends Fragment implements GroupListAdapter2.IOn
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.group_list_fragment, null);
-        mGroupsLv = (ListView) view.findViewById(R.id.group_list);
-        group_list3 = (ListView) view.findViewById(R.id.group_list3);
+        list_guangdian = (ListView) view.findViewById(R.id.list_guangdian);
+        list_yidong = (ListView) view.findViewById(R.id.list_yidong);
+        list_xiangzhen = (ListView) view.findViewById(R.id.list_xiangzhen);
 
         tab_guangdian = (TextView)view.findViewById(R.id.tab_guangdian);
         tab_guangdian.setTag("1");
@@ -75,13 +81,14 @@ public class TabVideoFragment2 extends Fragment implements GroupListAdapter2.IOn
         tab_xiangzhen.setTag("0");
         tab_xiangzhen.setOnClickListener(this);
 
-        mGroupListAdapter = new GroupListAdapter2(activity);
-        mGroupListAdapter.setListner(this);
-        mGroupsLv.setAdapter(mGroupListAdapter);
+        adapter_guangdian = new GroupListAdapter(activity);
+        list_guangdian.setAdapter(adapter_guangdian);
 
-        mGroupListAdapter3 = new GroupListAdapter3(activity);
-        mGroupListAdapter3.setListner(this);
-        group_list3.setAdapter(mGroupListAdapter3);
+        adapter_yidong = new GroupListAdapter2(activity);
+        list_yidong.setAdapter(adapter_yidong);
+
+        adapter_xiangzhen = new GroupListAdapter3(activity);
+        list_xiangzhen.setAdapter(adapter_xiangzhen);
 
         mGroupListManager = GroupListManager.getInstance();
         getGroupList();
@@ -115,14 +122,6 @@ public class TabVideoFragment2 extends Fragment implements GroupListAdapter2.IOn
                 case MSG_GROUPLIST_START:
                     getGroupList();
                     break;
-                case MSG_GROUPLIST_GETLIST:
-                    root = mGroupListManager.getRootNode();
-                    mGroupListManager.setOnSuccessListener(mIOnSuccessListener);
-
-                    mGroupListAdapter.addNode(root);
-                    mGroupListAdapter.notifyDataSetChanged();
-                    break;
-
                 case 1038:
                     if (!DialogUtils.isShowWaitDialog()) {
                         DialogUtils.showWaitDialog(activity, "加载中...", -1);
@@ -156,11 +155,14 @@ public class TabVideoFragment2 extends Fragment implements GroupListAdapter2.IOn
                         root = mGroupListManager.getRootNode();
                         if (root != null) {
                             if(tab_guangdian.getTag().equals("1")) {
-                                mGroupListAdapter3.addNode(root);
-                                mGroupListAdapter3.notifyDataSetChanged();
+                                adapter_guangdian.addNode(root);
+                                adapter_guangdian.notifyDataSetChanged();
                             }else if(tab_yidong.getTag().equals("1")){
-                                mGroupListAdapter.addNode(root);
-                                mGroupListAdapter.notifyDataSetChanged();
+                                adapter_yidong.addNode(root);
+                                adapter_yidong.notifyDataSetChanged();
+                            }else {
+                                adapter_xiangzhen.addNode(root);
+                                adapter_xiangzhen.notifyDataSetChanged();
                             }
                         }
                     }
@@ -174,24 +176,36 @@ public class TabVideoFragment2 extends Fragment implements GroupListAdapter2.IOn
         switch (v.getId()){
             case R.id.tab_guangdian:
                 if(tab_guangdian.getTag().equals("0")) {
-                    mGroupListAdapter3.clearNode();
-                    mGroupListManager.setRootNode(null);
+                    adapter_guangdian.clearNode();
+                    if(tab_yidong.getTag().equals("1")) {
+                        CommonTools.deleteDir(new File(Constant.appFolder+ "/dhsdk"));
+                        new File(Constant.appFolder+ "/dhsdk").mkdirs();
+                        IDpsdkCore.DPSDK_Logout(mAPP.getDpsdkCreatHandle(), 30000);
+                        new LoginTask_guangdian().execute();
+                        mGroupListManager.setRootNode(null);
+                        mHandler.sendEmptyMessage(1038);
+                    }else{
+                        adapter_guangdian.addNode(root);
+                        adapter_guangdian.notifyDataSetChanged();
+                    }
                     tab_guangdian.setTextColor(0xff45c01a);
                     tab_guangdian.setTag("1");
                     tab_yidong.setTextColor(0xff9a9a9a);
                     tab_yidong.setTag("0");
                     tab_xiangzhen.setTextColor(0xff9a9a9a);
                     tab_xiangzhen.setTag("0");
-                    group_list3.setVisibility(View.VISIBLE);
-                    mGroupsLv.setVisibility(View.GONE);
-                    IDpsdkCore.DPSDK_Logout(mAPP.getDpsdkCreatHandle(), 30000);
-                    new LoginTask2().execute();
-                    mHandler.sendEmptyMessage(1038);
+                    list_guangdian.setVisibility(View.VISIBLE);
+                    list_yidong.setVisibility(View.GONE);
+                    list_xiangzhen.setVisibility(View.GONE);
                 }
                 break;
             case R.id.tab_yidong:
                 if(tab_yidong.getTag().equals("0")) {
-                    mGroupListAdapter.clearNode();
+                    CommonTools.deleteDir(new File(Constant.appFolder+ "/dhsdk"));
+                    new File(Constant.appFolder+ "/dhsdk").mkdirs();
+                    IDpsdkCore.DPSDK_Logout(mAPP.getDpsdkCreatHandle(), 30000);
+                    new LoginTask_yidong().execute();
+                    adapter_yidong.clearNode();
                     mGroupListManager.setRootNode(null);
                     tab_guangdian.setTextColor(0xff9a9a9a);
                     tab_guangdian.setTag("0");
@@ -199,22 +213,35 @@ public class TabVideoFragment2 extends Fragment implements GroupListAdapter2.IOn
                     tab_yidong.setTag("1");
                     tab_xiangzhen.setTextColor(0xff9a9a9a);
                     tab_xiangzhen.setTag("0");
-                    mGroupsLv.setVisibility(View.VISIBLE);
-                    group_list3.setVisibility(View.GONE);
-                    IDpsdkCore.DPSDK_Logout(mAPP.getDpsdkCreatHandle(), 30000);
-                    new LoginTask().execute();
+                    list_guangdian.setVisibility(View.GONE);
+                    list_yidong.setVisibility(View.VISIBLE);
+                    list_xiangzhen.setVisibility(View.GONE);
                     mHandler.sendEmptyMessage(1038);
                 }
                 break;
             case R.id.tab_xiangzhen:
                 if(tab_xiangzhen.getTag().equals("0")) {
+                    adapter_xiangzhen.clearNode();
+                    if(tab_yidong.getTag().equals("1")) {
+                        CommonTools.deleteDir(new File(Constant.appFolder+ "/dhsdk"));
+                        new File(Constant.appFolder+ "/dhsdk").mkdirs();
+                        IDpsdkCore.DPSDK_Logout(mAPP.getDpsdkCreatHandle(), 30000);
+                        new LoginTask_guangdian().execute();
+                        mGroupListManager.setRootNode(null);
+                        mHandler.sendEmptyMessage(1038);
+                    }else{
+                        adapter_xiangzhen.addNode(root);
+                        adapter_xiangzhen.notifyDataSetChanged();
+                    }
                     tab_guangdian.setTextColor(0xff9a9a9a);
                     tab_guangdian.setTag("0");
                     tab_yidong.setTextColor(0xff9a9a9a);
                     tab_yidong.setTag("0");
                     tab_xiangzhen.setTextColor(0xff45c01a);
                     tab_xiangzhen.setTag("1");
-                    mHandler.sendEmptyMessage(1038);
+                    list_guangdian.setVisibility(View.GONE);
+                    list_yidong.setVisibility(View.GONE);
+                    list_xiangzhen.setVisibility(View.VISIBLE);
                 }
                 break;
             default:
@@ -230,40 +257,7 @@ public class TabVideoFragment2 extends Fragment implements GroupListAdapter2.IOn
         }
     }
 
-    @Override
-    public void onItemClick(TreeNode treeNode, boolean isChecked, final int position) {
-        if (treeNode.getType() == 3) {
-            ChannelInfoExt chnlInfoExt = ((TreeNode)mGroupListAdapter.getItem(position)).getChannelInfo();
-            String channelName =  chnlInfoExt.getSzName();
-            String channelId = chnlInfoExt.getSzId();
-            String deviceId = chnlInfoExt.getDeviceId();
-            Intent intent = new Intent();
-            intent.putExtra("channelName", channelName);
-            intent.putExtra("channelId", channelId);
-            intent.putExtra("deviceId", deviceId);
-            intent.setClass(activity, RealPlayActivity.class);
-            startActivity(intent);
-        }
-    }
-
-    @Override
-    public void onItemClick3(TreeNode treeNode, boolean isChecked, final int position) {
-
-        if (treeNode.getType() == 3) {
-            ChannelInfoExt chnlInfoExt = ((TreeNode)mGroupListAdapter3.getItem(position)).getChannelInfo();
-            String channelName =  chnlInfoExt.getSzName();
-            String channelId = chnlInfoExt.getSzId();
-            String deviceId = chnlInfoExt.getDeviceId();
-            Intent intent = new Intent();
-            intent.putExtra("channelName", channelName);
-            intent.putExtra("channelId", channelId);
-            intent.putExtra("deviceId", deviceId);
-            intent.setClass(activity, RealPlayActivity.class);
-            startActivity(intent);
-        }
-    }
-
-    class LoginTask extends AsyncTask<Void, Integer, Integer> {
+    class LoginTask_yidong extends AsyncTask<Void, Integer, Integer> {
 
         @Override
         protected Integer doInBackground(Void... arg0) {
@@ -295,7 +289,7 @@ public class TabVideoFragment2 extends Fragment implements GroupListAdapter2.IOn
 
     }
 
-    class LoginTask2 extends AsyncTask<Void, Integer, Integer> {
+    class LoginTask_guangdian extends AsyncTask<Void, Integer, Integer> {
 
         @Override
         protected Integer doInBackground(Void... arg0) {
@@ -303,8 +297,8 @@ public class TabVideoFragment2 extends Fragment implements GroupListAdapter2.IOn
             loginInfo.szIp = "122.225.61.100".getBytes();
             String strPort = "8001";
             loginInfo.nPort = Integer.parseInt(strPort);
-            loginInfo.szUsername = "admin".getBytes();
-            loginInfo.szPassword = "jsy2016.2".getBytes();
+            loginInfo.szUsername = "iriver".getBytes();
+            loginInfo.szPassword = "ir123456".getBytes();
             loginInfo.nProtocol = 2;
             return IDpsdkCore.DPSDK_Login(mAPP.getDpsdkCreatHandle(), loginInfo, 30000);
         }

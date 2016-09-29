@@ -13,7 +13,7 @@
             android:id="@+id/management_activity_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:padding="15dp"
             android:src="@drawable/web_back"/>
 
         <ImageView
@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/management_activity_back"
-            android:padding="10dp"
+            android:padding="15dp"
             android:src="@drawable/web_forward"/>
 
         <TextView
@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:padding="10dp"
+            android:padding="15dp"
             android:src="@drawable/web_close"/>
     </RelativeLayout>
 

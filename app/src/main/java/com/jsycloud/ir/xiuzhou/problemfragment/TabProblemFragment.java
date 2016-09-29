@@ -412,6 +412,7 @@ public class TabProblemFragment extends Fragment implements View.OnClickListener
                         if(success.equals("1")){
                             Toast.makeText(activity,"问题上报成功",Toast.LENGTH_SHORT).show();
                             resetUI();
+                            DialogShow.dialogShow6(activity, jsObj.getString("tipoffid"));
                         }else{
                             Toast.makeText(activity,"问题上报失败",Toast.LENGTH_SHORT).show();
                         }

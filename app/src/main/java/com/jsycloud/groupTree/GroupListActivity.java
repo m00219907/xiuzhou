@@ -34,8 +34,6 @@ import com.jsycloud.activity.OperateSoundTalk;
 import com.jsycloud.activity.RealPlayActivity;
 import com.jsycloud.ir.xiuzhou.AppApplication;
 import com.jsycloud.baseclass.BaseActivity;
-import com.jsycloud.groupTree.GroupListAdapter.IOnCheckBoxClick;
-import com.jsycloud.groupTree.GroupListAdapter.IOnItemClickListener;
 import com.jsycloud.groupTree.GroupListGetTask.IOnSuccessListener;
 import com.jsycloud.groupTree.SearchChannelsAdapter.IOnSearchChannelsClick;
 import com.jsycloud.groupTree.bean.ChannelInfoExt;
@@ -44,8 +42,8 @@ import com.jsycloud.util.AppDefine;
 import com.jsycloud.view.PullDownListView;
 
 
-public class GroupListActivity extends BaseActivity implements OnClickListener, IOnItemClickListener,
-         PullDownListView.OnRefreshListioner, IOnCheckBoxClick,
+public class GroupListActivity extends BaseActivity implements OnClickListener,
+         PullDownListView.OnRefreshListioner,
         IOnSearchChannelsClick {
 
     // 打印标签
@@ -116,7 +114,6 @@ public class GroupListActivity extends BaseActivity implements OnClickListener, 
      */
     private void findViews() {
         layLogout= (LinearLayout)findViewById(R.id.title_lay);
-        mGroupsLv = (ListView) this.findViewById(R.id.group_list);
     }
 
     /**
@@ -164,8 +161,6 @@ public class GroupListActivity extends BaseActivity implements OnClickListener, 
         mGroupsLv = mPullDownView.mListView;
         mGroupListManager = GroupListManager.getInstance();
         mGroupListAdapter = new GroupListAdapter(this);
-        
-        mGroupListAdapter.setListner(this, this);
         updateSelectChannels();
         
         mGroupsLv.setAdapter(mGroupListAdapter);
@@ -318,143 +313,6 @@ public class GroupListActivity extends BaseActivity implements OnClickListener, 
         }
     }
 
- 
-
-    @Override
-    public void onItemClick(TreeNode treeNode, boolean isChecked, final int position) {
-    	
-    	 if (treeNode.getType() == 2) { // 1：组 2：设备 3：通道
-    		 mDeviceId = treeNode.getDeviceInfo().getDeviceId();
-    		 deviceName = treeNode.getDeviceInfo().getDeviceName();
-             //判断设备类型是否是报警主机
-             int devType = treeNode.getDeviceInfo().getdeviceType();
-             if(devType == 601) {                                                     //报警主机类型601
-            	 dialogList = new String[] {"实时","回放", "布控报警", "报警主机"}; 
-            	 Log.i("报警类型的设备名称是：", treeNode.getDeviceInfo().getDeviceName());  //如果点击是报警主机dialog 就再加一行
-              } else {
-            	 dialogList = new String[] {"实时","回放", "布控报警", "语音对讲"};
-              }
-             Log.i(TAG, "选择的设备mc是：" + deviceName + "选择的设备类型是：" + devType);
-             //TODO 获取设备下面的通道
-             //treeNode.getChannelInfo()
-          }
-    	 
-        if (treeNode.getType() == 3) {                     //通道
-        	if (dialogList == null) {                  //没有设备的业务树   
-        		dialogList = new String[] {"实时","回放", "布控报警", "语音对讲"};
-        	}
-        	Log.i(TAG, "tongdao is clicked");
-        	/*
-        	LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        	View vPopWindow =  inflater.inflate(R.layout.popwindow_lay, null, false);
-        	final PopupWindow popWindow = new PopupWindow(vPopWindow, android.view.ViewGroup.LayoutParams.MATCH_PARENT, 
-        			android.view.ViewGroup.LayoutParams.MATCH_PARENT);
-        	final ChannelInfoExt chnlInfoExt = ((TreeNode)mGroupListAdapter.getItem(position)).getChannelInfo();
-			final String channelName =  chnlInfoExt.getSzName();
-			final String channelId = chnlInfoExt.getSzId();
-        	vPopWindow.findViewById(R.id.play_real).setOnClickListener(new OnClickListener() {
-        		
-				@Override
-				public void onClick(View arg0) {
-					//跳转到实时
-					Intent intent = new Intent();
-					//把通道名称传到RealPlayActivity显示
-//					String channelName = mGroupListManager.getChannelList().get(position).getDeviceName();
-//					Log.i(TAG, AppDefine.SELECTED_CHANNEL + AppDefine.NEED_PLAY + AppDefine.FROM_GROUPLIST + channelName);
-					String channelName = mGroupListManager.getRootNode().getChannelInfo().getDeviceName();
-				
-					Log.i(TAG, "channelName channelId" + channelName + channelId);
-					if(chnlInfoExt != null)
-					{
-						intent.putExtra("channelName", channelName);
-						intent.putExtra("channelId", channelId);
-					}
-					intent.setClass(GroupListActivity.this, RealPlayActivity.class);
-					startActivity(intent);
-					popWindow.dismiss();
-				}
-			});
-        	vPopWindow.findViewById(R.id.play_back).setOnClickListener(new OnClickListener() {
-				
-				@Override
-				public void onClick(View arg0) {
-					//跳转到回放
-					Intent intent = new Intent();
-					Log.i(TAG, "channelName channelId" + channelName + channelId);
-					if(chnlInfoExt != null)
-					{
-						intent.putExtra("channelName", channelName);
-						intent.putExtra("channelId", channelId);
-					}
-					intent.setClass(GroupListActivity.this, BackPlayActivity.class);
-					startActivity(intent);
-					popWindow.dismiss();
-				}
-			});
-        	popWindow.showAtLocation(mRootLlt, Gravity.CENTER, 0, 0);
-     	*/
-        	
-        	new AlertDialog.Builder(GroupListActivity.this).setTitle("请选择")
-        		.setItems(dialogList, new DialogInterface.OnClickListener() {
-        			 ChannelInfoExt chnlInfoExt = ((TreeNode)mGroupListAdapter.getItem(position)).getChannelInfo();
-        			 String channelName =  chnlInfoExt.getSzName();
-        			 String channelId = chnlInfoExt.getSzId();
-        			 String deviceId = chnlInfoExt.getDeviceId();
-        			 Intent intent = new Intent();
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        switch (which) {
-                        
-                            case 0:
-                            	Log.i(TAG, "channelName channelId" + channelName + channelId);
-                            	//跳转到实时
-            					//把通道名称传到RealPlayActivity显示
-            					if(chnlInfoExt != null)
-            					{
-            						intent.putExtra("channelName", channelName);
-            						intent.putExtra("channelId", channelId);
-            					}
-                                intent.putExtra("deviceId", mDeviceId);
-            					intent.setClass(GroupListActivity.this, RealPlayActivity.class);
-            					startActivity(intent);
-                            break;
-                            case 1: 
-                            	//跳转到回放
-            					if(chnlInfoExt != null) {
-            						intent.putExtra("channelName", channelName);
-            						intent.putExtra("channelId", channelId);
-            					}
-            					intent.setClass(GroupListActivity.this, BackPlayActivity.class);
-            					startActivity(intent);
-                            break;
-                            case 2:
-                            	Log.i(TAG, "channelName deviceName" + channelName + deviceName);
-                            	intent.putExtra("deviceName", deviceName);
-                            	intent.putExtra("channelName", channelName);
-                            	intent.putExtra("deviceId", deviceId);
-                            	intent.setClass(GroupListActivity.this, AlarmbuKongActivity.class);
-            					startActivity(intent);
-                            	break;
-                            case 3:
-                            	Log.i("", "mDeviceId = " + mDeviceId);
-                            	intent.putExtra("channelId", channelId);
-                            	intent.putExtra("channelName", channelName);
-                            	intent.putExtra("deviceId", mDeviceId);
-                            	intent.setClass(GroupListActivity.this, OperateSoundTalk.class);
-                            	startActivity(intent);
-            				break;
-                            default:
-                            break;
-                        }
-                    }
-                }).show();
-        
-        } else {
-        }
-  
-    }
-
-
     @Override
     public void onRefresh() {
         getGroupList();
@@ -520,12 +378,6 @@ public class GroupListActivity extends BaseActivity implements OnClickListener, 
                 break;
         }
     }
-
-	@Override
-	public void onCheckBoxClick(TreeNode treeNode, boolean isChecked,
-			int position) {
-		
-	}
 
 	@Override
 	public void onClick(View arg0) {

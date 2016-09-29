@@ -42,7 +42,8 @@ public class EntrustActivity extends Activity implements View.OnClickListener{
                 break;
             case R.id.entrust_activity_sendcode:
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.putExtra("sms_body", "巡河委托码：" + entrust_activity_code.getText().toString());
+                intent.putExtra("sms_body", "请帮我巡河，我的委托码是：" + entrust_activity_code.getText().toString()
+                + "，软件下载：http://t.cn/RcuWjcm");
                 intent.setType("vnd.android-dir/mms-sms");
                 startActivity(intent);
                 break;

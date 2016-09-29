@@ -9,6 +9,7 @@ import android.telephony.TelephonyManager;
 import android.util.Base64;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 
 public class CommonTools {
@@ -114,5 +115,16 @@ public class CommonTools {
         options.inJustDecodeBounds = false;
         bitmap = BitmapFactory.decodeFile(path, options);
         return bitmap;
+    }
+
+    public static void deleteDir(File dir) {
+        if (dir.isDirectory()) {
+            String[] children = dir.list();
+            for (int i=0; i<children.length; i++) {
+                deleteDir(new File(dir, children[i]));
+            }
+        }
+
+        dir.delete();
     }
 }
